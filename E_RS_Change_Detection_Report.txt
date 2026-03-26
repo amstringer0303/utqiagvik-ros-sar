@@ -1,0 +1,160 @@
+
+================================================================================
+UTQIAGVIK EXTREME WEATHER EVENT CATALOG + REMOTE SENSING CHANGE DETECTION
+1980-2024 (Events)  |  2015-2024 (Sentinel-2 RS Analysis)
+NOAA GHCN-Daily USW00027502  x  Sentinel-2 L2A (Planetary Computer STAC)
+================================================================================
+
+PART A: EXTREME EVENT CATALOG  (1980-2024)
+--------------------------------------------------------------------------------
+
+DETECTION METHODOLOGY
+  Each extreme event-day is detected from the GHCN-Daily station record using
+  the thresholds below.  A single calendar day may be flagged for more than one
+  event type.  Severity is scored 0.5-3.0 based on the quantitative intensity
+  of the primary meteorological variable.
+
+  Event Type      | Threshold                                  | Mode Affected
+  --------------- | ------------------------------------------ | --------------
+  Rain-on-Snow    | PRCP > 0 mm + TMAX > 0°C, Oct-May         | SM / 4WD
+  Rapid Thaw      | 3-day mean TMAX rises >10°C in 3 days,    | All modes
+                  | Mar-May or Oct-Nov                         |
+  Blizzard        | AWND >= 15.6 m/s (35 mph) + WT09 flag     | SM / 4WD
+  Extreme Cold    | TMAX < -40°C                               | Snowmachine
+  Glaze/Ice       | WT06 flag                                  | All modes
+  High Wind       | AWND >= 12.9 m/s, May-Oct                  | Boat
+
+EVENT COUNTS (1980-2024, 44 years)
+  Rain-on-Snow  :   215 days total  (4.9/yr)
+  Rapid Thaw    :   124 days total  (2.8/yr)
+  Blizzard      :    15 days total  (0.3/yr)
+  Extreme Cold  :     9 days total  (0.2/yr)
+  Glaze/Ice     :   587 days total  (13.3/yr)
+  High Wind     :    37 days total  (0.8/yr)
+  Total         :   987 days total  (22.4/yr)
+
+TRENDS (1980-2024, Sen's slope via OLS)
+  Rain-on-Snow  : +1.80 days/decade  ***
+  Rapid Thaw    : +0.05 days/decade  p=0.867
+  Blizzard      : +0.02 days/decade  p=0.779
+  Extreme Cold  : -0.18 days/decade  * p<0.05
+  High Wind     : -0.12 days/decade  p=0.335
+
+SEASONAL PATTERN
+  Winter (Dec-Feb): Blizzard and Extreme Cold dominate.  Peak disruption for
+    snowmachine routes.  Polar night prevents optical satellite observation.
+  Spring (Mar-May): Rapid Thaw and Rain-on-Snow peak — the highest-hazard
+    transition period.  Sentinel-2 optical data starts becoming available in
+    April.  This is the KEY WINDOW for RS-based change detection.
+  Summer (Jun-Sep): High Wind and coastal fog dominate boat route disruption.
+    Best optical data availability.  Sentinel-2 cloud-free probability 40-55%.
+  Fall (Sep-Nov):  Rain-on-Snow and Rapid Thaw return.  October is the last
+    reliable month for optical imagery before polar night.
+
+PART B: RS OBSERVABILITY ANALYSIS
+--------------------------------------------------------------------------------
+
+SENSOR CAPABILITIES AT 71°N
+  Sensor          Coverage    Resolution  Key Limitation at Utqiagvik
+  --------------- ----------- ----------- ----------------------------------
+  Sentinel-2 L2A  Optical     10m         Polar night Nov-Feb; cloud cover
+                                           avg 60-80%; ~40-55% cloud-free prob
+                                           in June-Aug, declining to <25% by Oct
+  Sentinel-1 SAR  All-weather 10-20m      No polar night gap; 6-12 day revisit;
+                                           detects surface roughness / wetness;
+                                           complex processing required
+  MODIS MOD10A1   Optical     500m        Daily revisit; good for snow extent;
+                                           resolution too coarse for trail-level
+  Landsat 8/9     Optical     30m         16-day revisit; poor for rapid events
+
+OBSERVABILITY GAP
+  The most disruptive events (Blizzard: 0/yr; Extreme Cold: 0/yr)
+  occur almost entirely in November-March, during or near polar night.  These
+  events are NOT observable by optical satellite.  Rain-on-Snow events peak in
+  November and March — the shoulder season with marginal optical coverage.
+
+  Only ~66% of detected extreme event-days fall in months with any
+  meaningful optical satellite observability (April-October).
+
+  SENTINEL-1 SAR is the ONLY sensor capable of detecting the trail-surface
+  changes caused by the highest-impact events:
+    - Blizzard:     wind-packed snow → surface roughness change in VV/VH
+    - Rain-on-Snow: wet snow → ice crust → sharp backscatter signal (dB change
+                    typically -3 to -8 dB at C-band)
+    - Rapid Thaw:   standing water on tundra → low VV backscatter (<-15 dB)
+
+PART C: SENTINEL-2 CHANGE DETECTION RESULTS
+--------------------------------------------------------------------------------
+
+TARGET EVENTS ANALYZED (2015-2024, spring/summer window)
+
+  2015-05-25  [Rain-on-Snow]  PRE: no scene found  |  POST: no scene found
+  2019-05-29  [Rain-on-Snow]  pre=?  cloud=0%  |  post=?  cloud=0%
+  2015-05-08  [Glaze/Ice]  PRE: no scene found  |  POST: no scene found
+  2016-04-26  [Glaze/Ice]  pre=?  cloud=0%  |  post=?  cloud=0%
+  2022-10-16  [Glaze/Ice]  pre=?  cloud=0%  |  post=?  cloud=0%
+  2023-05-30  [Glaze/Ice]  pre=?  cloud=0%  |  post=?  cloud=0%
+
+NDSI CHANGE DETECTION
+  NDSI (Normalized Difference Snow Index) = (Green - SWIR1) / (Green + SWIR1)
+  Values > 0.4 indicate snow/ice cover.  Negative ΔNDSI = snow/ice loss.
+  Positive ΔNDSI = new snow/ice accumulation.
+
+  Key observable change signatures by event type:
+    Rapid Thaw (Apr-May): NDSI drops sharply along trail corridors as snow
+      melts and standing water / exposed tundra replaces snowpack.  Expected
+      ΔNDSI: -0.3 to -0.7 within 2 weeks post-event.
+    Rain-on-Snow (Apr-May): NDSI change is SUBTLE in optical imagery because
+      an ice crust (from refreezing) has similar spectral reflectance to snow.
+      Optical RS is a poor detector for this hazard — SAR is preferred.
+    High Wind (Jun-Aug): No snow signal.  Coastal erosion and wave scouring
+      may be visible in RGB and in NDWI (water index) along shorelines.
+
+  RS ANALYSIS SUMMARY
+    Target events selected:  6
+    Events with imagery:     4
+    Events without imagery:  2  (cloud cover or polar night)
+
+PART D: RECOMMENDATIONS FOR OPERATIONAL RS MONITORING PROGRAM
+--------------------------------------------------------------------------------
+
+  1. DEPLOY SENTINEL-1 SAR AS PRIMARY SENSOR
+     C-band SAR is the only tool that can observe year-round, including the
+     winter and fall seasons when the most dangerous events occur.  The
+     rain-on-snow signal (wet snow → ice crust) is a well-established SAR
+     target (Barber et al. 1994; Nghiem et al. 2012).  Recommended: monitor
+     VV backscatter change along trail corridors following every detected
+     RoS event from the weather station.
+
+  2. USE SENTINEL-2 FOR SPRING TRANSITION MONITORING (APR-MAY)
+     The spring thaw season coincides with good optical coverage and the
+     highest trail-disruption frequency.  Establish NDSI time series
+     (every available scene, cloud-filtered) along major snowmachine
+     corridors to map the snow-free date for each trail segment each year.
+
+  3. COMBINE WEATHER STATION TRIGGERS WITH AUTOMATED RS QUERIES
+     Build an automated pipeline: when GHCN-Daily flags an extreme event,
+     query Planetary Computer for the next available cloud-free Sentinel-2
+     or Sentinel-1 scene.  This closes the observation gap automatically.
+
+  4. ESTABLISH A TRAIL-BUFFER PIXEL EXTRACTION PIPELINE
+     Buffer all 670 routes by 100m.  Extract NDSI/SAR statistics inside
+     vs. outside the buffer to separate trail-surface change from
+     background tundra/coastal change.  This distinguishes trail impacts
+     from landscape-wide climate signals.
+
+  5. MODIS AS DAILY MONITORING (REGIONAL CONTEXT)
+     MODIS MOD10A1 (500m, daily) provides continuous snow cover context.
+     Even at coarse resolution, it captures the snow-free date and sea ice
+     extent changes that constrain the travel window.
+
+OUTPUT FILES
+--------------------------------------------------------------------------------
+  E1_Event_Catalog.png            -- 44-yr event timeline, severity, seasonality
+  E2_Event_Trends.png             -- Per-type trend analysis with significance
+  E3_RS_Observability.png         -- Observability gap: events vs. satellite data
+  E4_NDSI_Change_Detection.png    -- Pre/post Sentinel-2 NDSI imagery
+  E5_Change_Statistics.png        -- ΔNDSI trail vs. background statistics
+  E_event_catalog.csv             -- Full event catalog (date, type, severity)
+  E_RS_Change_Detection_Report.txt -- This report
+================================================================================

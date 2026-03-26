@@ -1,0 +1,78 @@
+================================================================================
+RIGOROUS TRAIL DISRUPTION MODEL v2 — Utqiagvik Travel Routes
+Methodological Improvements Over v1  |  2026-03-25
+================================================================================
+
+WHAT CHANGED AND WHY
+----------------------------------------
+
+  v1 PROBLEMS IDENTIFIED:
+  1. Single station (USW00027502) applied to all 670 routes, including routes
+     300+ km from Utqiagvik with fundamentally different weather conditions.
+  2. Fog flag WT01 drove 69% boat disruption rate — this flag appears on
+     nearly every summer day at Utqiagvik airport, including days when
+     experienced boat travellers routinely make journeys. It conflated light
+     coastal ice fog with genuinely navigation-impairing conditions.
+  3. Binary 0/1 flags hid severity: a 13 m/s wind day (just above threshold)
+     counted the same as a 25 m/s storm.
+  4. No spatial differentiation between Elson Lagoon (sheltered, 15 m/s
+     threshold appropriate) and Chukchi open coast (10 m/s appropriate).
+  5. No sea ice constraint: boat disruption not linked to ice access.
+
+  v2 IMPROVEMENTS:
+  1. ERA5 spatial weather at 8 grid points (Open-Meteo API, free, no auth).
+     Each route assigned to its nearest grid point by centroid distance.
+  2. Fog completely removed from boat disruption — replaced by wind-only
+     model with corridor-specific thresholds. Fog may be added back
+     as a separate, sensitivity-tested layer once visibility data is available.
+  3. Continuous severity scoring (0–3) for each event type, scaled by
+     how far the weather variable exceeds the threshold.
+  4. Corridor-specific wind thresholds:
+     - Elson Lagoon / Dease Inlet:    15.0 m/s (sheltered)
+     - Open Coast:                    12.0 m/s
+     - Chukchi / Peard Bay:           10.0 m/s (fully exposed open sea)
+     - Default (NWS small craft):     12.9 m/s
+  5. Sea ice access gate: NSIDC G02135 monthly extent used to add an
+     ice-blocking penalty for boat routes in months where ice historically
+     present (>70% of years → score = 3.0; 30-70% → partial penalty).
+
+RESULTS SUMMARY
+----------------------------------------
+  Routes processed:          605
+  Overall disruption rate:   9.4% (v1: 29.9%)
+  Mean severity score:       1.65 / 3.0
+  Mean disrupted days/year:  9.3
+
+  Mode comparison:
+  Mode               v1 rate    v2 rate   v2 severity   v2 days/yr
+  --------------------------------------------------------------
+  Snowmachine           8.4%      14.2%          1.73         14.5
+  Boat                 68.7%       3.5%          1.51          2.9
+  Four_wheeler          6.2%       4.0%          2.06          4.8
+
+REMAINING LIMITATIONS
+----------------------------------------
+
+  1. ERA5 is 0.25-degree (~25 km) resolution — still cannot capture local
+     terrain effects (e.g. Barrier Island shelter for Elson Lagoon, valley
+     channeling on river routes). Next step: WRF downscaling or AROME-Arctic.
+  2. Fog removed entirely as a boat disruptor — this under-estimates fog impact.
+     Better approach: use MODIS MOD35 cloud/fog mask or ERA5 relative humidity
+     + low wind + low temperature as a fog proxy.
+  3. No permafrost/active-layer data included — tundra trafficability for
+     snowmachine/4-wheeler routes is not captured.
+  4. Monthly route flags are coarse — a route active 'in July' could be early
+     or late July, with different weather exposure. Day-level knowledge of
+     travel timing would improve precision.
+  5. Thresholds still require validation against known disruption events or
+     community expert review of when travel is actually halted.
+
+================================================================================
+OUTPUT FILES
+----------------------------------------
+  C:\Users\as1612\Desktop\Utqiagvik_Weather_Mobility_Assessment
+  R1_Rigorous_Comparison.png    -- Method comparison: rates, severity, causes, spatial wind
+  R2_Severity_Calendar.png      -- Severity-weighted disruption calendar
+  Map4_Rigorous_Disruption.html -- Interactive map with ERA5 points, severity coloring
+  R_Rigorous_Methods_Report.txt -- This report
+================================================================================

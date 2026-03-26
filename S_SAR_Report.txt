@@ -1,0 +1,161 @@
+
+================================================================================
+SENTINEL-1 SAR CHANGE DETECTION: UTQIAGVIK TRAIL NETWORK
+Extreme Winter Events  |  2015-2024
+Sentinel-1A/B RTC (10m) via Microsoft Planetary Computer
+================================================================================
+
+WHY SAR?
+--------
+  Optical satellite data (Sentinel-2, Landsat) is unusable at 71°N during:
+    - Polar night (November-February)
+    - High cloud cover (avg 60-80%; only 40-55% cloud-free days Jun-Aug)
+  The most dangerous trail-disruption events — Blizzard and Extreme Cold —
+  occur overwhelmingly in November-March and are INVISIBLE to optical sensors.
+  Rain-on-Snow ice-crust formation is a poor optical target even when imagery
+  exists, because the ice crust is spectrally similar to dry snow.
+
+  C-band SAR (Sentinel-1, 5.4 GHz) penetrates clouds, rain, and operates
+  day/night, providing near-daily acquisitions at 71°N due to overlapping
+  polar orbits. It detects liquid water presence, surface roughness, and
+  dielectric changes — exactly the signals associated with extreme events.
+
+PHYSICAL BASIS
+--------------
+  Rain-on-Snow (RoS):
+    During rainfall: liquid water fills snow pores → dielectric constant
+    increases sharply → C-band absorbed/scattered specularly → VV sigma0 drops
+    -5 to -10 dB. After refreezing: ice crust has smooth surface → lower
+    backscatter than original dry snow. This RoS-refreeze signature is
+    well-documented (Barber et al. 1994, Nghiem et al. 2012).
+
+  Rapid Thaw (Apr-May):
+    Snow/permafrost thaw front advances → surface water pools → very low VV
+    (open water < -18 dB). Wet unfrozen tundra also shows decreased backscatter
+    relative to frozen state. Expected: -3 to -8 dB over thaw corridors.
+
+  Blizzard:
+    Wind compacts snow surface → changes density and roughness. Signal is more
+    variable (-3 to +2 dB) and depends on whether wind increases or decreases
+    surface roughness. In Beaufort Sea / coastal contexts, wind-roughened sea
+    surface shows strong VV increase; overland signal is weaker.
+
+  Extreme Cold:
+    Very cold dry snow (-40 to -50°C) has low dielectric constant (nearly
+    transparent to microwaves). Volume scatter reduced relative to warmer
+    transitional periods. Signal is weak (-2 to +1 dB). More useful as a
+    contextual indicator than a direct surface-change detector.
+
+DATA SUMMARY
+------------
+  Collection:    Sentinel-1 RTC (Radiometrically Terrain Corrected)
+  Platform:      Sentinel-1A (and 1B until 2021)
+  Mode:          IW (Interferometric Wide Swath), 250km swath
+  Resolution:    10m (ground range)
+  Bands:         VV, VH polarization
+  Pre-event window:  5-20 days before event date
+  Post-event window: 1-15 days after event date
+  Target events:  6 selected; 5 with paired pre/post chips
+
+EVENT RESULTS
+-------------
+
+  Rapid Thaw — 2020-03-14
+    Pre-event SAR:  2020-03-04 | Post-event SAR: 2020-03-28
+    Trail corridor delta_VV: -0.43 ± 2.50 dB
+    Background delta_VV:     -0.48 ± 3.97 dB
+    Trail-background difference significance: ***
+    Expected signal: (-6, -2) dB
+    Detectability:   GOOD
+    Mechanism: Thaw front: standing water (low dB) + wet soil replaces frozen substrate
+
+  Rain-on-Snow — 2017-01-01
+    Pre-event SAR:  2016-12-26 | Post-event SAR: 2017-01-09
+    Trail corridor delta_VV: +1.07 ± 3.23 dB
+    Background delta_VV:     +1.72 ± 3.50 dB
+    Trail-background difference significance: ***
+    Expected signal: (-8, -3) dB
+    Detectability:   EXCELLENT
+    Mechanism: Liquid water in snowpack absorbs C-band → specular, low backscatter
+
+  Rapid Thaw — 2023-03-07
+    Pre-event SAR:  2023-02-25 | Post-event SAR: 2023-03-21
+    Trail corridor delta_VV: +0.07 ± 2.21 dB
+    Background delta_VV:     +0.12 ± 3.60 dB
+    Trail-background difference significance: ***
+    Expected signal: (-6, -2) dB
+    Detectability:   GOOD
+    Mechanism: Thaw front: standing water (low dB) + wet soil replaces frozen substrate
+
+  Blizzard — 2024-01-16
+    Pre-event SAR:  2024-01-03 | Post-event SAR: 2024-01-27
+    Trail corridor delta_VV: +0.27 ± 2.60 dB
+    Background delta_VV:     -4.09 ± 3.95 dB
+    Trail-background difference significance: ***
+    Expected signal: (-3, 2) dB
+    Detectability:   MODERATE
+    Mechanism: Wind-packing increases snow density + surface roughness; dB change variable
+
+  Blizzard — 2020-03-13
+    Pre-event SAR:  2020-03-04 | Post-event SAR: 2020-03-28
+    Trail corridor delta_VV: -0.43 ± 2.50 dB
+    Background delta_VV:     -0.48 ± 3.97 dB
+    Trail-background difference significance: ***
+    Expected signal: (-3, 2) dB
+    Detectability:   MODERATE
+    Mechanism: Wind-packing increases snow density + surface roughness; dB change variable
+
+  Rain-on-Snow — 2015-05-25:  No paired SAR scenes found in search windows.
+
+SEASONAL SAR CLIMATOLOGY
+--------------------------
+  Months with seasonal S1 data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]
+  Mean trail VV by month:
+    Jan: trail=-16.7 dB  bg=-16.6 dB  [2022-01-13]
+    Feb: trail=-16.6 dB  bg=-15.4 dB  [2022-02-18]
+    Mar: trail=-16.7 dB  bg=-15.9 dB  [2022-03-14]
+    Apr: trail=-16.9 dB  bg=-18.6 dB  [2022-04-19]
+    May: trail=-17.4 dB  bg=-17.2 dB  [2022-05-13]
+    Jun: trail=-14.3 dB  bg=-17.9 dB  [2022-06-18]
+    Jul: trail=-16.7 dB  bg=-20.0 dB  [2022-07-12]
+    Aug: trail=-15.0 dB  bg=-17.2 dB  [2022-08-17]
+    Sep: trail=-16.2 dB  bg=-17.5 dB  [2022-09-22]
+    Nov: trail=-15.9 dB  bg=-13.8 dB  [2022-11-21]
+    Dec: trail=-15.5 dB  bg=-14.1 dB  [2022-12-15]
+
+LIMITATIONS
+-----------
+  1. Single SAR orbit: Not all acquisition geometries are equally sensitive
+     to surface changes. Ascending vs. descending pass geometry affects the
+     look-angle relative to terrain/snow surface.
+  2. Atmospheric effects: Heavy rain can affect C-band signal slightly over
+     open water/coast but is minimal over land.
+  3. Temporal mismatch: Pre/post windows (5-20 days before, 1-15 days after)
+     may miss rapid surface changes that recover before the next overpass.
+  4. Single polarization: VV shown here. VH/VV cross-ratio provides additional
+     information on surface roughness and could improve event discrimination.
+  5. No ground truth: These results are not validated against in-situ snow/
+     ice observations. Validation against Utqiagvik GHCN daily record is
+     indirect (we use the weather data to identify candidate events).
+
+RECOMMENDATIONS
+---------------
+  1. Implement automated SAR monitoring: trigger S1 chip download within
+     48h of any GHCN-flagged extreme event (RoS, Rapid Thaw, Blizzard).
+  2. Combine VV and VH: the cross-ratio (VH-VV) is more sensitive to
+     volume scattering changes in snow, improving RoS detection accuracy.
+  3. Validate with community knowledge: ground-truthing SAR change pixels
+     against local traveler records of impassable trail sections would
+     improve the trail-impact attribution.
+  4. Extend to trail-level: with 10m SAR and 670 trail routes, it is
+     feasible to assign a per-route SAR severity score for each event.
+
+OUTPUT FILES
+------------
+  S1_SAR_Event_Overview.png      -- Event calendar, sensor availability comparison
+  S2_SAR_Before_After.png        -- Before/after VV + trail overlay for target events
+  S3_SAR_Change_Statistics.png   -- Delta_VV statistics + detectability table
+  S4_SAR_Seasonal_Climatology.png -- Monthly VV along trail vs. background
+  S5_SAR_Change_Map.png          -- Composite change magnitude map + trail ranking
+  S_SAR_Report.txt               -- This report
+================================================================================

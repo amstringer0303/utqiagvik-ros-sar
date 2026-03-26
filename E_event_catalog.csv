@@ -1,0 +1,988 @@
+DATE,year,month,doy,TMAX_C,TMIN_C,PRCP_mm,AWND_ms,WSF5_ms,event_type,severity,key_value,key_label,mode,rs_viable
+1980-05-24,1980,5,145,-1.7,-5.6,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-05-25,1980,5,146,0.0,-3.9,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-05-30,1980,5,151,-3.3,-5.6,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-06-01,1980,6,153,-0.6,-3.9,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1980-06-02,1980,6,154,-1.7,-3.9,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1980-07-27,1980,7,209,2.2,-2.2,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1980-07-28,1980,7,210,0.6,-2.2,0.8,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1980-09-09,1980,9,253,1.1,-2.2,1.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-10,1980,9,254,-1.1,-3.9,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-11,1980,9,255,1.1,-2.2,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-12,1980,9,256,-1.1,-1.7,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-13,1980,9,257,0.0,-1.7,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-15,1980,9,259,-0.6,-3.9,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-17,1980,9,261,3.9,-1.1,4.8,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-18,1980,9,262,-1.1,-5.0,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-20,1980,9,264,-5.0,-6.7,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1980-09-25,1980,9,269,-2.8,-7.8,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-04-29,1981,4,119,0.6,-10.6,0.5,,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1981-04-30,1981,4,120,1.7,-7.8,0.3,,,Rapid Thaw,1.3041666666666667,10.433333333333334,Temp jump (°C/3d),All modes,True
+1981-04-30,1981,4,120,1.7,-7.8,0.3,,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1981-05-01,1981,5,121,-1.1,-6.1,0.0,,,Rapid Thaw,1.3916666666666666,11.133333333333333,Temp jump (°C/3d),All modes,True
+1981-09-01,1981,9,244,-0.6,-3.3,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-09-11,1981,9,254,0.0,-1.7,1.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-09-12,1981,9,255,1.7,-2.2,0.8,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-09-15,1981,9,258,-1.1,-3.3,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-09-16,1981,9,259,-2.2,-5.0,2.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-09-21,1981,9,264,-2.8,-7.2,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-09-23,1981,9,266,-1.1,-3.9,1.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-10-07,1981,10,280,-7.2,-9.4,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-10-14,1981,10,287,-3.3,-7.8,2.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1981-11-19,1981,11,323,-6.7,-16.1,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1982-02-03,1982,2,34,0.0,-11.7,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1982-02-06,1982,2,37,0.6,-15.0,3.3,,,Rain-on-Snow,1.0999999999999999,3.3,Precip (mm),Snowmachine / Four-Wheeler,False
+1982-02-12,1982,2,43,-5.6,-17.2,1.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1982-02-17,1982,2,48,-40.6,-42.8,0.0,,,Extreme Cold,1.1200000000000003,-40.6,TMAX (°C),Snowmachine,False
+1982-04-05,1982,4,95,-0.6,-18.9,2.0,,,Rapid Thaw,1.5458333333333332,12.366666666666665,Temp jump (°C/3d),All modes,True
+1982-04-06,1982,4,96,1.1,-6.7,1.8,,,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1982-04-06,1982,4,96,1.1,-6.7,1.8,,,Rapid Thaw,1.4333333333333331,11.466666666666665,Temp jump (°C/3d),All modes,True
+1982-04-07,1982,4,97,-0.6,-10.6,0.8,,,Rapid Thaw,2.0541666666666667,16.433333333333334,Temp jump (°C/3d),All modes,True
+1982-05-22,1982,5,142,-5.6,-7.8,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-05-28,1982,5,148,3.9,-5.6,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-05-28,1982,5,148,3.9,-5.6,0.3,,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1982-05-30,1982,5,150,3.3,0.0,0.5,,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1982-06-09,1982,6,160,3.9,-1.7,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1982-06-10,1982,6,161,0.6,-2.2,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1982-09-10,1982,9,253,0.0,-1.1,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-09-11,1982,9,254,0.6,-1.7,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-09-28,1982,9,271,-2.2,-4.4,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-09-29,1982,9,272,-2.8,-4.4,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-09-30,1982,9,273,-3.9,-6.7,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-10-02,1982,10,275,-4.4,-7.2,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-10-03,1982,10,276,-4.4,-8.3,0.8,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-10-04,1982,10,277,-2.2,-6.1,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1982-10-18,1982,10,291,1.7,-9.4,8.4,,,Rain-on-Snow,2.8000000000000003,8.4,Precip (mm),Snowmachine / Four-Wheeler,True
+1982-10-19,1982,10,292,1.1,-12.2,0.8,,,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1982-10-19,1982,10,292,1.1,-12.2,0.8,,,Rapid Thaw,1.4833333333333332,11.866666666666665,Temp jump (°C/3d),All modes,False
+1983-04-23,1983,4,113,-3.9,-12.8,0.8,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-04-24,1983,4,114,1.7,-6.1,0.5,,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1983-04-24,1983,4,114,1.7,-6.1,0.5,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-04-25,1983,4,115,-3.3,-7.2,0.8,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-05-30,1983,5,150,4.4,-2.8,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-08-01,1983,8,213,7.2,-0.6,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1983-08-19,1983,8,231,0.6,-2.2,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1983-08-22,1983,8,234,1.7,-1.1,4.1,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1983-08-23,1983,8,235,0.6,-1.1,1.5,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1983-08-24,1983,8,236,1.1,-0.6,0.5,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1983-08-26,1983,8,238,5.0,-1.1,3.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1983-09-12,1983,9,255,-1.7,-3.3,0.5,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-09-13,1983,9,256,0.0,-2.8,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-09-14,1983,9,257,-1.1,-4.4,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-09-21,1983,9,264,-1.1,-9.4,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-09-28,1983,9,271,-2.8,-11.1,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-09-29,1983,9,272,-2.2,-8.3,0.5,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-09-30,1983,9,273,0.0,-2.2,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-10-01,1983,10,274,1.7,0.0,1.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-10-01,1983,10,274,1.7,0.0,1.0,,,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+1983-10-03,1983,10,276,-1.1,-4.4,0.3,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1983-10-05,1983,10,278,1.7,-3.9,0.3,,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1983-12-22,1983,12,356,-2.2,-15.6,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1983-12-27,1983,12,361,-2.8,-10.6,0.0,,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1984-01-30,1984,1,30,-42.8,-44.4,0.0,3.0,,Extreme Cold,1.5599999999999994,-42.8,TMAX (°C),Snowmachine,False
+1984-01-31,1984,1,31,-41.1,-44.4,0.0,2.9,,Extreme Cold,1.2200000000000002,-41.1,TMAX (°C),Snowmachine,False
+1984-02-01,1984,2,32,-41.7,-44.4,0.0,1.8,,Extreme Cold,1.3400000000000005,-41.7,TMAX (°C),Snowmachine,False
+1984-05-08,1984,5,129,-1.1,-7.8,0.3,4.0,,Rapid Thaw,1.345833333333333,10.766666666666664,Temp jump (°C/3d),All modes,True
+1984-05-09,1984,5,130,1.1,-7.8,0.5,6.8,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1984-05-09,1984,5,130,1.1,-7.8,0.5,6.8,,Rapid Thaw,1.275,10.2,Temp jump (°C/3d),All modes,True
+1984-05-16,1984,5,137,0.6,-11.1,0.0,5.7,,Rapid Thaw,1.5791666666666666,12.633333333333333,Temp jump (°C/3d),All modes,True
+1984-08-28,1984,8,241,0.6,-3.3,0.0,4.3,,Glaze/Ice,2.0,4.3,Wind speed (m/s),All modes,False
+1984-08-29,1984,8,242,5.6,-2.8,0.3,4.8,,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,False
+1984-09-08,1984,9,252,0.6,-1.1,0.5,7.7,,Glaze/Ice,2.0,7.7,Wind speed (m/s),All modes,True
+1984-09-09,1984,9,253,0.6,-1.7,0.0,6.3,,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,True
+1984-09-15,1984,9,259,-0.6,-1.7,0.0,5.2,,Glaze/Ice,2.0,5.2,Wind speed (m/s),All modes,True
+1984-10-06,1984,10,280,-5.6,-7.2,0.3,8.8,,Glaze/Ice,2.0,8.8,Wind speed (m/s),All modes,True
+1984-10-07,1984,10,281,-3.3,-7.8,0.0,8.9,,Glaze/Ice,2.0,8.9,Wind speed (m/s),All modes,True
+1984-10-08,1984,10,282,-6.7,-7.8,0.0,8.0,,Glaze/Ice,2.0,8.0,Wind speed (m/s),All modes,True
+1984-10-14,1984,10,288,-3.9,-10.6,0.0,6.7,,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+1984-10-15,1984,10,289,0.0,-6.1,0.8,8.7,,Glaze/Ice,2.0,8.7,Wind speed (m/s),All modes,True
+1984-10-16,1984,10,290,3.3,-7.2,0.8,7.4,,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,True
+1984-10-16,1984,10,290,3.3,-7.2,0.8,7.4,,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1984-10-17,1984,10,291,3.3,0.6,0.5,9.2,,Glaze/Ice,2.0,9.2,Wind speed (m/s),All modes,True
+1984-10-17,1984,10,291,3.3,0.6,0.5,9.2,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1984-10-18,1984,10,292,1.1,-6.7,0.0,7.9,,Glaze/Ice,2.0,7.9,Wind speed (m/s),All modes,True
+1984-10-19,1984,10,293,-6.1,-10.0,0.0,6.6,,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,True
+1985-03-01,1985,3,60,-18.3,-28.9,0.0,3.8,,Rapid Thaw,1.3833333333333337,11.06666666666667,Temp jump (°C/3d),All modes,False
+1985-03-02,1985,3,61,-16.1,-28.9,0.0,5.7,,Rapid Thaw,2.0125,16.1,Temp jump (°C/3d),All modes,False
+1985-03-03,1985,3,62,-20.6,-28.3,0.3,5.2,,Rapid Thaw,1.2958333333333325,10.36666666666666,Temp jump (°C/3d),All modes,False
+1985-05-11,1985,5,131,-5.6,-12.2,0.0,4.9,,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,True
+1985-05-12,1985,5,132,-6.1,-14.4,0.0,4.8,,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,True
+1985-05-18,1985,5,138,2.8,-2.8,1.0,6.4,,Glaze/Ice,2.0,6.4,Wind speed (m/s),All modes,True
+1985-05-18,1985,5,138,2.8,-2.8,1.0,6.4,,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+1985-05-21,1985,5,141,3.9,-1.1,0.5,5.5,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1985-05-28,1985,5,148,-2.2,-5.0,0.0,6.2,,Glaze/Ice,2.0,6.2,Wind speed (m/s),All modes,True
+1985-05-29,1985,5,149,3.3,-5.0,3.8,4.4,,Rain-on-Snow,1.2666666666666666,3.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1985-10-04,1985,10,277,2.8,-5.0,0.0,5.6,,Glaze/Ice,2.0,5.6,Wind speed (m/s),All modes,True
+1985-10-06,1985,10,279,2.2,0.6,0.5,6.3,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1985-10-07,1985,10,280,2.8,-7.2,0.5,7.0,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1985-11-10,1985,11,314,0.0,-11.1,0.5,8.4,,Rapid Thaw,1.8708333333333336,14.966666666666669,Temp jump (°C/3d),All modes,False
+1985-11-11,1985,11,315,-1.7,-5.6,3.3,10.5,,Rapid Thaw,1.8250000000000002,14.600000000000001,Temp jump (°C/3d),All modes,False
+1985-11-12,1985,11,316,-5.6,-21.7,0.3,10.1,,Rapid Thaw,1.4333333333333336,11.466666666666669,Temp jump (°C/3d),All modes,False
+1985-11-19,1985,11,323,-7.2,-13.9,0.0,3.9,,Rapid Thaw,1.4124999999999996,11.299999999999997,Temp jump (°C/3d),All modes,False
+1986-03-03,1986,3,62,-7.8,-25.6,1.8,8.9,,Rapid Thaw,2.079166666666667,16.633333333333336,Temp jump (°C/3d),All modes,False
+1986-03-04,1986,3,63,-25.0,-28.9,0.0,6.9,,Rapid Thaw,2.3583333333333334,18.866666666666667,Temp jump (°C/3d),All modes,False
+1986-05-22,1986,5,142,-5.0,-6.7,0.0,3.7,,Glaze/Ice,2.0,3.7,Wind speed (m/s),All modes,True
+1986-05-23,1986,5,143,-3.3,-6.7,0.0,3.5,,Glaze/Ice,2.0,3.5,Wind speed (m/s),All modes,True
+1986-06-04,1986,6,155,0.6,-3.9,0.0,4.9,,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,False
+1986-06-05,1986,6,156,0.0,-5.0,0.0,4.9,,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,False
+1986-09-21,1986,9,264,2.8,0.6,1.0,13.9,,High Wind,1.2857142857142856,13.9,Wind speed (m/s),Boat,True
+1986-09-22,1986,9,265,1.7,-1.7,0.0,9.3,,Glaze/Ice,2.0,9.3,Wind speed (m/s),All modes,True
+1986-09-23,1986,9,266,-0.6,-2.8,0.3,9.7,,Glaze/Ice,2.0,9.7,Wind speed (m/s),All modes,True
+1986-09-24,1986,9,267,-0.6,-3.3,0.0,6.8,,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,True
+1986-11-11,1986,11,315,-3.9,-15.6,0.0,2.9,,Glaze/Ice,2.0,2.9,Wind speed (m/s),All modes,False
+1986-11-13,1986,11,317,-5.0,-11.7,0.3,6.6,,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,False
+1987-02-16,1987,2,47,-40.6,-43.9,0.0,2.5,,Extreme Cold,1.1200000000000003,-40.6,TMAX (°C),Snowmachine,False
+1987-02-17,1987,2,48,-40.6,-45.6,0.0,2.5,,Extreme Cold,1.1200000000000003,-40.6,TMAX (°C),Snowmachine,False
+1987-03-07,1987,3,66,-17.8,-22.8,0.0,4.3,,Rapid Thaw,1.6875,13.5,Temp jump (°C/3d),All modes,False
+1987-03-11,1987,3,70,-3.3,-22.8,0.0,7.2,,Rapid Thaw,1.3916666666666666,11.133333333333333,Temp jump (°C/3d),All modes,False
+1987-03-24,1987,3,83,-13.3,-23.9,0.0,3.4,,Rapid Thaw,1.4375,11.5,Temp jump (°C/3d),All modes,False
+1987-03-25,1987,3,84,-12.8,-16.1,0.0,2.9,,Rapid Thaw,1.6416666666666664,13.133333333333331,Temp jump (°C/3d),All modes,False
+1987-05-23,1987,5,143,-3.9,-6.1,0.0,7.2,,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,True
+1987-05-24,1987,5,144,-5.0,-6.7,0.0,6.7,,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+1987-05-25,1987,5,145,-3.3,-6.7,0.3,6.7,,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+1987-05-26,1987,5,146,-3.3,-6.1,0.0,6.8,,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,True
+1987-05-28,1987,5,148,-1.7,-4.4,0.0,6.1,,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,True
+1987-05-29,1987,5,149,-0.6,-3.3,2.5,5.3,,Glaze/Ice,2.0,5.3,Wind speed (m/s),All modes,True
+1987-06-01,1987,6,152,1.7,-0.6,0.0,6.4,,Glaze/Ice,2.0,6.4,Wind speed (m/s),All modes,False
+1987-06-10,1987,6,161,0.0,-3.9,0.0,9.1,,Glaze/Ice,2.0,9.1,Wind speed (m/s),All modes,False
+1987-06-11,1987,6,162,0.6,-2.8,0.5,7.5,,Glaze/Ice,2.0,7.5,Wind speed (m/s),All modes,False
+1987-06-12,1987,6,163,0.0,-2.2,0.5,6.4,,Glaze/Ice,2.0,6.4,Wind speed (m/s),All modes,False
+1987-09-03,1987,9,246,-0.6,-2.8,0.8,7.6,,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,True
+1987-09-21,1987,9,264,-0.6,-4.4,0.5,5.6,,Glaze/Ice,2.0,5.6,Wind speed (m/s),All modes,True
+1987-09-23,1987,9,266,0.0,-3.3,0.0,13.3,,High Wind,1.1142857142857143,13.3,Wind speed (m/s),Boat,True
+1987-10-01,1987,10,274,-4.4,-6.7,0.0,8.7,,Glaze/Ice,2.0,8.7,Wind speed (m/s),All modes,True
+1987-10-04,1987,10,277,0.0,-2.2,0.0,7.1,,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,True
+1987-10-08,1987,10,281,-2.2,-5.0,0.0,3.4,,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,True
+1987-10-19,1987,10,292,-2.2,-5.0,0.3,5.3,,Glaze/Ice,2.0,5.3,Wind speed (m/s),All modes,True
+1987-10-21,1987,10,294,-1.1,-3.9,0.0,4.5,,Glaze/Ice,2.0,4.5,Wind speed (m/s),All modes,True
+1987-10-22,1987,10,295,-1.7,-3.3,0.0,5.9,,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,True
+1987-10-23,1987,10,296,-1.1,-3.9,0.0,5.0,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1988-01-01,1988,1,1,-14.4,-20.6,0.0,16.3,,Blizzard,1.2000000000000004,16.3,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+1988-01-02,1988,1,2,-1.7,-14.4,0.5,7.2,,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+1988-04-15,1988,4,106,-6.1,-18.3,0.0,4.4,,Rapid Thaw,1.5041666666666667,12.033333333333333,Temp jump (°C/3d),All modes,True
+1988-04-16,1988,4,107,-0.6,-10.0,0.0,6.4,,Rapid Thaw,1.6625,13.3,Temp jump (°C/3d),All modes,True
+1988-04-17,1988,4,108,-1.1,-13.9,0.0,3.8,,Rapid Thaw,1.4333333333333336,11.466666666666669,Temp jump (°C/3d),All modes,True
+1988-04-22,1988,4,113,-6.1,-10.0,0.0,3.3,,Glaze/Ice,2.0,3.3,Wind speed (m/s),All modes,True
+1988-04-26,1988,4,117,-4.4,-9.4,0.0,8.4,,Glaze/Ice,2.0,8.4,Wind speed (m/s),All modes,True
+1988-05-22,1988,5,143,-1.1,-5.0,0.0,6.8,,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,True
+1988-05-25,1988,5,146,0.0,-2.8,0.0,5.9,,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,True
+1988-05-26,1988,5,147,1.7,-2.8,0.3,5.4,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1988-05-26,1988,5,147,1.7,-2.8,0.3,5.4,,Glaze/Ice,2.0,5.4,Wind speed (m/s),All modes,True
+1988-05-27,1988,5,148,-1.1,-2.8,0.0,6.4,,Glaze/Ice,2.0,6.4,Wind speed (m/s),All modes,True
+1988-05-29,1988,5,150,0.0,-3.9,0.0,7.4,,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,True
+1988-05-30,1988,5,151,0.0,-2.2,0.0,7.6,,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,True
+1988-06-02,1988,6,154,-1.1,-3.9,0.0,5.0,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1988-06-05,1988,6,157,1.7,-3.3,0.0,4.0,,Glaze/Ice,2.0,4.0,Wind speed (m/s),All modes,False
+1988-06-16,1988,6,168,0.6,-2.2,0.0,6.3,,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,False
+1988-06-17,1988,6,169,2.2,-1.1,0.0,7.6,,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,False
+1988-08-22,1988,8,235,0.6,-1.1,0.0,6.3,,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,False
+1988-08-23,1988,8,236,0.6,-1.1,0.0,4.5,,Glaze/Ice,2.0,4.5,Wind speed (m/s),All modes,False
+1988-08-28,1988,8,241,-0.6,-2.2,0.0,7.2,,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+1988-08-29,1988,8,242,-2.2,-5.0,0.0,7.7,,Glaze/Ice,2.0,7.7,Wind speed (m/s),All modes,False
+1988-09-01,1988,9,245,-0.6,-2.8,0.0,5.9,,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,True
+1988-09-02,1988,9,246,0.0,-1.7,0.0,5.6,,Glaze/Ice,2.0,5.6,Wind speed (m/s),All modes,True
+1988-09-07,1988,9,251,1.1,-1.7,0.0,7.2,,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,True
+1988-09-08,1988,9,252,3.3,-1.1,0.0,5.1,,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,True
+1988-09-09,1988,9,253,0.6,-1.7,0.0,4.0,,Glaze/Ice,2.0,4.0,Wind speed (m/s),All modes,True
+1988-09-10,1988,9,254,1.1,-2.2,0.0,4.8,,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,True
+1988-09-18,1988,9,262,2.2,-6.7,0.0,6.8,,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,True
+1988-10-15,1988,10,289,-5.0,-23.3,0.3,4.2,,Rapid Thaw,1.5083333333333333,12.066666666666666,Temp jump (°C/3d),All modes,False
+1989-01-25,1989,1,25,-41.1,-45.0,0.0,4.2,,Extreme Cold,1.2200000000000002,-41.1,TMAX (°C),Snowmachine,False
+1989-01-26,1989,1,26,-40.6,-45.0,0.0,4.3,,Extreme Cold,1.1200000000000003,-40.6,TMAX (°C),Snowmachine,False
+1989-02-04,1989,2,35,-1.1,-5.0,0.3,11.0,,Glaze/Ice,2.0,11.0,Wind speed (m/s),All modes,False
+1989-02-05,1989,2,36,-1.7,-6.1,0.0,7.8,,Glaze/Ice,2.0,7.8,Wind speed (m/s),All modes,False
+1989-02-07,1989,2,38,-3.9,-13.3,0.3,8.6,,Glaze/Ice,2.0,8.6,Wind speed (m/s),All modes,False
+1989-02-08,1989,2,39,-2.8,-13.9,0.0,7.7,,Glaze/Ice,2.0,7.7,Wind speed (m/s),All modes,False
+1989-02-09,1989,2,40,-3.3,-19.4,0.3,6.3,,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,False
+1989-02-25,1989,2,56,-0.6,-18.9,0.0,16.0,,Blizzard,1.1142857142857143,16.0,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+1989-02-25,1989,2,56,-0.6,-18.9,0.0,16.0,,Glaze/Ice,2.0,16.0,Wind speed (m/s),All modes,False
+1989-03-10,1989,3,69,-0.6,-7.2,0.0,7.2,,Rapid Thaw,1.7125,13.7,Temp jump (°C/3d),All modes,False
+1989-03-10,1989,3,69,-0.6,-7.2,0.0,7.2,,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+1989-03-11,1989,3,70,-3.3,-11.1,0.0,5.0,,Rapid Thaw,3.0,25.9,Temp jump (°C/3d),All modes,False
+1989-03-11,1989,3,70,-3.3,-11.1,0.0,5.0,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1989-03-12,1989,3,71,-5.0,-15.0,0.0,4.0,,Rapid Thaw,2.404166666666667,19.233333333333334,Temp jump (°C/3d),All modes,False
+1989-03-13,1989,3,72,-3.9,-13.3,0.0,2.0,,Glaze/Ice,2.0,2.0,Wind speed (m/s),All modes,False
+1989-03-14,1989,3,73,-6.7,-14.4,0.3,1.7,,Glaze/Ice,2.0,1.7,Wind speed (m/s),All modes,False
+1989-04-08,1989,4,98,-0.6,-8.3,0.5,3.6,,Rapid Thaw,1.7125,13.7,Temp jump (°C/3d),All modes,True
+1989-04-13,1989,4,103,2.2,-7.8,4.6,7.0,,Rain-on-Snow,1.5333333333333332,4.6,Precip (mm),Snowmachine / Four-Wheeler,True
+1989-04-15,1989,4,105,-5.0,-13.3,0.0,7.6,,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,True
+1989-05-21,1989,5,141,-0.6,-5.6,0.0,9.9,,Glaze/Ice,2.0,9.9,Wind speed (m/s),All modes,True
+1989-05-22,1989,5,142,-1.7,-5.0,0.3,8.4,,Glaze/Ice,2.0,8.4,Wind speed (m/s),All modes,True
+1989-10-06,1989,10,279,0.6,-2.2,0.0,5.1,,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,True
+1989-10-07,1989,10,280,0.6,-1.1,0.5,9.3,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1989-10-08,1989,10,281,-0.6,-2.2,0.0,13.1,,High Wind,1.057142857142857,13.1,Wind speed (m/s),Boat,True
+1989-10-16,1989,10,289,-0.6,-8.9,0.0,6.7,,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+1990-03-17,1990,3,76,-16.7,-23.9,0.0,8.4,,Rapid Thaw,1.9458333333333335,15.566666666666668,Temp jump (°C/3d),All modes,False
+1990-04-26,1990,4,116,-0.6,-17.2,0.0,7.7,,Glaze/Ice,2.0,7.7,Wind speed (m/s),All modes,True
+1990-05-15,1990,5,135,2.8,-2.8,0.0,4.9,,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,True
+1990-05-22,1990,5,142,0.6,-3.9,0.0,6.5,,Glaze/Ice,2.0,6.5,Wind speed (m/s),All modes,True
+1990-05-23,1990,5,143,4.4,-1.7,3.3,4.6,,Rain-on-Snow,1.0999999999999999,3.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1990-05-28,1990,5,148,1.1,-1.1,0.0,5.8,,Glaze/Ice,2.0,5.8,Wind speed (m/s),All modes,True
+1990-06-01,1990,6,152,1.1,-1.1,0.0,4.6,,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,False
+1990-06-02,1990,6,153,0.0,-1.7,0.0,4.9,,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,False
+1990-06-04,1990,6,155,2.2,-2.2,0.0,5.7,,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,False
+1990-07-07,1990,7,188,1.7,0.0,3.3,5.8,,Glaze/Ice,2.0,5.8,Wind speed (m/s),All modes,False
+1990-08-04,1990,8,216,3.3,-0.6,0.0,7.2,,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+1990-08-05,1990,8,217,3.9,-0.6,0.0,9.3,,Glaze/Ice,2.0,9.3,Wind speed (m/s),All modes,False
+1990-08-07,1990,8,219,1.7,-1.1,0.0,7.2,,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+1990-08-09,1990,8,221,1.7,-1.1,0.0,3.4,,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,False
+1990-08-20,1990,8,232,2.2,-2.2,0.0,5.7,,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,False
+1990-08-21,1990,8,233,5.6,-1.7,0.0,5.5,,Glaze/Ice,2.0,5.5,Wind speed (m/s),All modes,False
+1990-09-20,1990,9,263,-1.7,-4.4,0.0,5.4,,Glaze/Ice,2.0,5.4,Wind speed (m/s),All modes,True
+1990-09-27,1990,9,270,-0.6,-3.9,0.0,7.1,,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,True
+1990-09-28,1990,9,271,-2.2,-6.1,0.0,5.1,,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,True
+1990-09-29,1990,9,272,-3.3,-4.4,0.0,6.3,,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,True
+1990-10-01,1990,10,274,-2.2,-12.2,0.5,4.0,,Glaze/Ice,2.0,4.0,Wind speed (m/s),All modes,True
+1990-10-02,1990,10,275,-3.3,-13.9,1.3,3.4,,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,True
+1990-10-08,1990,10,281,-0.6,-3.3,1.0,7.6,,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,True
+1990-10-09,1990,10,282,-0.6,-7.8,0.0,6.6,,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,True
+1990-10-10,1990,10,283,-0.6,-9.4,0.0,7.4,,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,True
+1990-10-12,1990,10,285,-1.7,-3.9,0.0,3.8,,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+1990-10-13,1990,10,286,-1.7,-4.4,0.8,4.3,,Glaze/Ice,2.0,4.3,Wind speed (m/s),All modes,True
+1990-10-23,1990,10,296,-11.7,-13.9,0.8,13.0,,High Wind,1.0285714285714285,13.0,Wind speed (m/s),Boat,True
+1990-10-24,1990,10,297,-10.0,-12.2,0.0,14.2,,High Wind,1.371428571428571,14.2,Wind speed (m/s),Boat,True
+1990-11-12,1990,11,316,-4.4,-8.9,0.3,4.6,,Rapid Thaw,1.6,12.8,Temp jump (°C/3d),All modes,False
+1990-11-13,1990,11,317,-8.9,-20.0,0.0,8.3,,Rapid Thaw,1.2541666666666664,10.033333333333331,Temp jump (°C/3d),All modes,False
+1991-04-12,1991,4,102,-6.7,-11.7,0.0,5.3,,Rapid Thaw,1.6208333333333333,12.966666666666667,Temp jump (°C/3d),All modes,True
+1991-04-13,1991,4,103,-5.0,-15.6,0.0,6.2,,Rapid Thaw,1.7791666666666668,14.233333333333334,Temp jump (°C/3d),All modes,True
+1991-05-21,1991,5,141,1.7,0.0,0.3,9.0,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1991-05-24,1991,5,144,2.2,-3.3,3.6,6.2,,Rain-on-Snow,1.2,3.6,Precip (mm),Snowmachine / Four-Wheeler,True
+1991-05-25,1991,5,145,-1.7,-5.0,0.0,4.1,,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,True
+1991-05-27,1991,5,147,0.0,-3.9,0.3,7.0,,Glaze/Ice,2.0,7.0,Wind speed (m/s),All modes,True
+1991-05-29,1991,5,149,1.7,-0.6,0.0,5.1,,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,True
+1991-06-01,1991,6,152,1.1,-1.7,0.0,5.1,,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,False
+1991-07-04,1991,7,185,3.9,-1.7,0.0,5.8,,Glaze/Ice,2.0,5.8,Wind speed (m/s),All modes,False
+1991-08-20,1991,8,232,7.8,-2.2,0.0,4.1,,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,False
+1991-09-05,1991,9,248,2.2,-0.6,0.0,13.5,,High Wind,1.1714285714285713,13.5,Wind speed (m/s),Boat,True
+1991-09-08,1991,9,251,-0.6,-3.3,0.3,9.3,,Glaze/Ice,2.0,9.3,Wind speed (m/s),All modes,True
+1991-09-09,1991,9,252,-0.6,-2.8,0.8,9.5,,Glaze/Ice,2.0,9.5,Wind speed (m/s),All modes,True
+1991-09-10,1991,9,253,0.0,-2.8,0.0,11.0,,Glaze/Ice,2.0,11.0,Wind speed (m/s),All modes,True
+1991-09-15,1991,9,258,-1.1,-2.8,0.0,11.5,,Glaze/Ice,2.0,11.5,Wind speed (m/s),All modes,True
+1991-09-16,1991,9,259,0.0,-2.8,1.5,6.6,,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,True
+1991-09-17,1991,9,260,10.6,0.0,1.8,3.8,,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+1991-09-18,1991,9,261,3.9,-1.7,0.5,3.8,,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+1991-09-25,1991,9,268,-1.1,-4.4,1.0,6.7,,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+1991-09-26,1991,9,269,-0.6,-2.8,0.0,3.6,,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,True
+1991-09-27,1991,9,270,-1.7,-4.4,0.3,3.6,,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,True
+1991-09-30,1991,9,273,-1.7,-5.6,0.3,8.1,,Glaze/Ice,2.0,8.1,Wind speed (m/s),All modes,True
+1991-10-01,1991,10,274,1.1,-5.6,0.0,3.2,,Glaze/Ice,2.0,3.2,Wind speed (m/s),All modes,True
+1991-10-04,1991,10,277,1.7,-6.1,0.0,6.8,,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,True
+1991-11-05,1991,11,309,-7.2,-12.2,0.0,5.7,,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,False
+1992-05-11,1992,5,132,0.6,-10.6,0.8,9.0,,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1992-05-21,1992,5,142,1.1,0.6,0.3,6.0,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1992-05-28,1992,5,149,2.2,-3.9,0.3,6.2,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1992-06-15,1992,6,167,3.9,-1.1,0.0,7.4,,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,False
+1992-07-29,1992,7,211,12.8,-1.7,0.0,3.7,,Glaze/Ice,2.0,3.7,Wind speed (m/s),All modes,False
+1992-08-02,1992,8,215,4.4,-1.1,0.5,5.4,,Glaze/Ice,2.0,5.4,Wind speed (m/s),All modes,False
+1992-09-05,1992,9,249,1.7,-1.1,0.0,7.9,,Glaze/Ice,2.0,7.9,Wind speed (m/s),All modes,True
+1992-09-06,1992,9,250,0.0,-1.7,0.0,4.1,,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,True
+1992-09-09,1992,9,253,0.6,-5.6,0.0,13.6,,High Wind,1.1999999999999997,13.6,Wind speed (m/s),Boat,True
+1992-09-16,1992,9,260,-3.3,-6.7,0.0,6.5,,Glaze/Ice,2.0,6.5,Wind speed (m/s),All modes,True
+1992-09-17,1992,9,261,-5.0,-10.0,0.0,3.6,,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,True
+1992-09-18,1992,9,262,-4.4,-7.2,0.0,5.6,,Glaze/Ice,2.0,5.6,Wind speed (m/s),All modes,True
+1992-11-27,1992,11,332,-15.6,-18.3,1.3,4.6,,Rapid Thaw,1.4375000000000002,11.500000000000002,Temp jump (°C/3d),All modes,False
+1993-01-05,1993,1,5,-2.2,-16.1,1.5,10.0,,Glaze/Ice,2.0,10.0,Wind speed (m/s),All modes,False
+1993-05-15,1993,5,135,-1.1,-7.8,0.0,7.2,,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,True
+1993-05-27,1993,5,147,3.3,-1.7,0.3,3.4,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1993-05-28,1993,5,148,4.4,0.0,0.5,3.3,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1993-06-03,1993,6,154,1.1,-2.2,0.0,4.1,,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,False
+1993-06-05,1993,6,156,0.0,-3.9,0.0,7.5,,Glaze/Ice,2.0,7.5,Wind speed (m/s),All modes,False
+1993-06-10,1993,6,161,2.8,0.6,5.8,4.0,,Glaze/Ice,2.0,4.0,Wind speed (m/s),All modes,False
+1993-06-24,1993,6,175,2.8,0.0,0.0,5.0,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,False
+1993-10-01,1993,10,274,0.6,-2.2,1.5,12.1,,Rain-on-Snow,0.5,1.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1993-10-03,1993,10,276,1.7,-1.7,0.5,11.9,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1993-10-06,1993,10,279,0.0,-3.9,0.0,9.4,,Glaze/Ice,2.0,9.4,Wind speed (m/s),All modes,True
+1993-10-07,1993,10,280,3.3,-1.1,0.3,6.1,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1993-10-07,1993,10,280,3.3,-1.1,0.3,6.1,,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,True
+1993-10-09,1993,10,282,0.6,-7.8,0.5,8.4,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1993-10-10,1993,10,283,2.2,0.0,3.6,8.5,,Rain-on-Snow,1.2,3.6,Precip (mm),Snowmachine / Four-Wheeler,True
+1993-10-11,1993,10,284,1.1,-3.9,0.0,16.0,,Glaze/Ice,2.0,16.0,Wind speed (m/s),All modes,True
+1993-10-11,1993,10,284,1.1,-3.9,0.0,16.0,,High Wind,1.8857142857142857,16.0,Wind speed (m/s),Boat,True
+1993-10-11,1993,10,284,1.1,-3.9,0.0,16.0,,Blizzard,1.1142857142857143,16.0,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+1993-10-29,1993,10,302,-10.0,-12.2,0.3,13.5,,High Wind,1.1714285714285713,13.5,Wind speed (m/s),Boat,True
+1993-10-30,1993,10,303,-11.1,-12.8,0.0,13.6,,High Wind,1.1999999999999997,13.6,Wind speed (m/s),Boat,True
+1994-03-30,1994,3,89,-8.9,-23.3,0.0,6.2,,Rapid Thaw,1.3666666666666667,10.933333333333334,Temp jump (°C/3d),All modes,False
+1994-03-31,1994,3,90,-17.8,-30.0,0.0,4.2,,Rapid Thaw,1.295833333333333,10.366666666666664,Temp jump (°C/3d),All modes,False
+1994-05-05,1994,5,125,-5.6,-7.2,0.0,6.2,,Glaze/Ice,2.0,6.2,Wind speed (m/s),All modes,True
+1994-05-19,1994,5,139,1.1,-5.6,0.0,8.2,,Glaze/Ice,2.0,8.2,Wind speed (m/s),All modes,True
+1994-05-23,1994,5,143,-2.2,-3.9,6.4,9.3,,Glaze/Ice,2.0,9.3,Wind speed (m/s),All modes,True
+1994-05-24,1994,5,144,-1.7,-3.9,0.0,8.8,,Glaze/Ice,2.0,8.8,Wind speed (m/s),All modes,True
+1994-06-03,1994,6,154,-0.6,-5.6,0.0,5.1,,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,False
+1994-06-15,1994,6,166,1.7,-1.1,0.5,4.6,,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,False
+1994-09-07,1994,9,250,-1.1,-2.8,0.0,5.0,,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+1994-09-24,1994,9,267,-1.7,-6.7,0.3,5.3,,Glaze/Ice,2.0,5.3,Wind speed (m/s),All modes,True
+1994-09-26,1994,9,269,0.6,-6.7,0.5,10.2,,Glaze/Ice,2.0,10.2,Wind speed (m/s),All modes,True
+1994-11-03,1994,11,307,-8.9,-16.7,0.5,16.9,,Blizzard,1.371428571428571,16.9,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+1995-02-01,1995,2,32,-41.1,-46.1,0.0,3.0,,Extreme Cold,1.2200000000000002,-41.1,TMAX (°C),Snowmachine,False
+1995-03-01,1995,3,60,-20.6,-23.9,1.0,10.8,,Rapid Thaw,1.545833333333333,12.366666666666664,Temp jump (°C/3d),All modes,False
+1995-03-02,1995,3,61,-21.1,-23.3,0.0,11.0,,Rapid Thaw,1.2708333333333335,10.166666666666668,Temp jump (°C/3d),All modes,False
+1995-03-03,1995,3,62,-2.2,-22.2,0.8,12.6,,Rapid Thaw,1.55,12.4,Temp jump (°C/3d),All modes,False
+1995-03-04,1995,3,63,-2.8,-16.7,0.5,7.6,,Rapid Thaw,1.7625,14.1,Temp jump (°C/3d),All modes,False
+1995-03-05,1995,3,64,-16.7,-22.8,0.0,7.8,,Rapid Thaw,1.7125,13.7,Temp jump (°C/3d),All modes,False
+1995-04-26,1995,4,116,1.7,-4.4,0.0,8.4,,Glaze/Ice,2.0,8.4,Wind speed (m/s),All modes,True
+1995-04-29,1995,4,119,1.7,-4.4,0.8,6.4,,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1995-05-08,1995,5,128,0.6,-1.7,0.0,6.6,,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,True
+1995-05-19,1995,5,139,-3.9,-7.2,0.0,5.5,,Glaze/Ice,2.0,5.5,Wind speed (m/s),All modes,True
+1995-05-22,1995,5,142,-2.8,-7.8,0.0,5.7,,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,True
+1995-05-26,1995,5,146,0.6,-1.7,0.0,8.6,,Glaze/Ice,2.0,8.6,Wind speed (m/s),All modes,True
+1995-05-27,1995,5,147,1.7,-1.1,0.0,5.3,,Glaze/Ice,2.0,5.3,Wind speed (m/s),All modes,True
+1995-05-28,1995,5,148,1.7,-1.1,0.0,2.8,,Glaze/Ice,2.0,2.8,Wind speed (m/s),All modes,True
+1995-06-05,1995,6,156,3.3,-2.8,0.0,4.3,,Glaze/Ice,2.0,4.3,Wind speed (m/s),All modes,False
+1995-07-25,1995,7,206,2.8,-1.1,0.0,6.3,,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,False
+1995-09-08,1995,9,251,0.6,0.0,0.0,10.2,,Glaze/Ice,2.0,10.2,Wind speed (m/s),All modes,True
+1995-09-09,1995,9,252,0.6,0.0,2.3,7.4,,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,True
+1995-09-11,1995,9,254,0.6,-0.6,0.0,3.1,,Glaze/Ice,2.0,3.1,Wind speed (m/s),All modes,True
+1995-09-30,1995,9,273,-0.6,-3.9,0.0,9.0,,Glaze/Ice,2.0,9.0,Wind speed (m/s),All modes,True
+1995-10-02,1995,10,275,-1.7,-3.9,0.0,7.9,,Glaze/Ice,2.0,7.9,Wind speed (m/s),All modes,True
+1995-10-03,1995,10,276,-1.7,-4.4,0.0,7.6,,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,True
+1995-10-05,1995,10,278,-1.7,-3.9,0.3,8.0,,Glaze/Ice,2.0,8.0,Wind speed (m/s),All modes,True
+1995-10-06,1995,10,279,-2.2,-3.9,0.0,8.8,,Glaze/Ice,2.0,8.8,Wind speed (m/s),All modes,True
+1995-10-08,1995,10,281,-1.7,-4.4,0.0,14.1,,High Wind,1.3428571428571425,14.1,Wind speed (m/s),Boat,True
+1995-10-30,1995,10,303,-0.6,-5.0,0.0,7.1,,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,True
+1995-11-09,1995,11,313,-13.3,-20.6,0.0,4.6,,Rapid Thaw,1.5791666666666666,12.633333333333333,Temp jump (°C/3d),All modes,False
+1995-11-10,1995,11,314,-3.3,-15.6,2.3,4.2,,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,False
+1995-11-26,1995,11,330,-4.4,-20.6,0.0,6.3,,Rapid Thaw,1.8125000000000004,14.500000000000004,Temp jump (°C/3d),All modes,False
+1996-03-20,1996,3,80,-14.4,-26.1,0.0,5.3,,Rapid Thaw,1.3416666666666668,10.733333333333334,Temp jump (°C/3d),All modes,False
+1996-03-21,1996,3,81,-15.6,-22.2,0.0,6.0,,Rapid Thaw,1.7791666666666663,14.23333333333333,Temp jump (°C/3d),All modes,False
+1996-03-22,1996,3,82,-7.2,-21.7,0.0,3.4,,Rapid Thaw,1.8958333333333333,15.166666666666666,Temp jump (°C/3d),All modes,False
+1996-03-23,1996,3,83,-6.1,-20.6,0.0,5.3,,Rapid Thaw,1.4541666666666664,11.633333333333331,Temp jump (°C/3d),All modes,False
+1996-03-24,1996,3,84,-8.3,-19.4,0.0,5.6,,Rapid Thaw,1.2750000000000004,10.200000000000003,Temp jump (°C/3d),All modes,False
+1996-03-28,1996,3,88,-6.1,-15.6,0.0,2.6,,Glaze/Ice,2.0,2.6,Wind speed (m/s),All modes,False
+1996-03-29,1996,3,89,-9.4,-22.2,0.0,4.2,,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,False
+1996-05-05,1996,5,126,-6.1,-13.3,0.3,7.0,,Glaze/Ice,2.0,7.0,Wind speed (m/s),All modes,True
+1996-05-06,1996,5,127,-1.7,-6.7,0.0,6.9,,Glaze/Ice,2.0,6.9,Wind speed (m/s),All modes,True
+1996-05-07,1996,5,128,-2.8,-9.4,0.0,7.0,,Glaze/Ice,2.0,7.0,Wind speed (m/s),All modes,True
+1996-05-08,1996,5,129,1.1,-3.3,1.0,6.2,,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+1996-05-09,1996,5,130,2.2,-2.2,1.5,5.8,,Rain-on-Snow,0.5,1.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1996-05-10,1996,5,131,2.2,0.0,1.5,6.9,,Rain-on-Snow,0.5,1.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1996-05-11,1996,5,132,1.7,-0.6,0.0,5.1,,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,True
+1996-05-15,1996,5,136,1.1,-4.4,0.0,6.6,,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,True
+1996-05-16,1996,5,137,-3.9,-7.2,0.0,3.8,,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+1996-05-17,1996,5,138,-3.3,-6.1,0.3,3.1,,Glaze/Ice,2.0,3.1,Wind speed (m/s),All modes,True
+1996-05-29,1996,5,150,7.8,-1.1,0.8,4.9,,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1996-05-30,1996,5,151,5.0,0.6,0.3,5.4,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1996-05-31,1996,5,152,6.7,-0.6,0.5,4.8,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1996-08-24,1996,8,237,4.4,-2.8,3.3,5.9,,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,False
+1996-08-26,1996,8,239,-0.6,-2.2,0.0,9.3,,Glaze/Ice,2.0,9.3,Wind speed (m/s),All modes,False
+1996-09-04,1996,9,248,1.7,-1.1,0.0,6.8,,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,True
+1996-09-09,1996,9,253,-0.6,-2.2,0.0,7.5,,Glaze/Ice,2.0,7.5,Wind speed (m/s),All modes,True
+1996-09-10,1996,9,254,-0.6,-3.3,0.0,3.3,,Glaze/Ice,2.0,3.3,Wind speed (m/s),All modes,True
+1996-09-13,1996,9,257,-1.7,-2.8,1.0,2.6,,Glaze/Ice,2.0,2.6,Wind speed (m/s),All modes,True
+1996-09-14,1996,9,258,-1.7,-3.3,0.0,4.3,,Glaze/Ice,2.0,4.3,Wind speed (m/s),All modes,True
+1996-09-15,1996,9,259,-2.8,-3.9,0.8,6.8,,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,True
+1996-09-22,1996,9,266,-2.8,-3.9,0.0,8.8,,Glaze/Ice,2.0,8.8,Wind speed (m/s),All modes,True
+1996-09-23,1996,9,267,-3.9,-7.2,0.0,8.8,,Glaze/Ice,2.0,8.8,Wind speed (m/s),All modes,True
+1996-09-24,1996,9,268,-2.2,-7.2,0.0,7.3,,Glaze/Ice,2.0,7.3,Wind speed (m/s),All modes,True
+1996-10-02,1996,10,276,0.0,-11.1,0.5,9.6,,Glaze/Ice,2.0,9.6,Wind speed (m/s),All modes,True
+1996-10-03,1996,10,277,0.6,-3.9,0.8,8.0,,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1996-10-03,1996,10,277,0.6,-3.9,0.8,8.0,,Glaze/Ice,2.0,8.0,Wind speed (m/s),All modes,True
+1996-10-04,1996,10,278,0.6,-4.4,0.0,7.0,,Glaze/Ice,2.0,7.0,Wind speed (m/s),All modes,True
+1996-10-28,1996,10,302,1.1,-21.7,0.0,13.2,,High Wind,1.0857142857142854,13.2,Wind speed (m/s),Boat,True
+1996-10-29,1996,10,303,1.1,-3.3,2.0,12.0,,Rapid Thaw,1.3916666666666666,11.133333333333333,Temp jump (°C/3d),All modes,False
+1996-10-29,1996,10,303,1.1,-3.3,2.0,12.0,,Rain-on-Snow,0.6666666666666666,2.0,Precip (mm),Snowmachine / Four-Wheeler,True
+1996-10-30,1996,10,304,-3.3,-10.0,0.5,12.9,,Rapid Thaw,2.225,17.8,Temp jump (°C/3d),All modes,False
+1996-10-30,1996,10,304,-3.3,-10.0,0.5,12.9,,High Wind,1.0,12.9,Wind speed (m/s),Boat,True
+1996-11-11,1996,11,316,-1.7,-7.8,0.0,10.4,,Glaze/Ice,2.0,10.4,Wind speed (m/s),All modes,False
+1996-12-18,1996,12,353,-15.6,-19.4,0.0,15.7,,Blizzard,1.0285714285714285,15.7,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+1996-12-21,1996,12,356,-6.7,-18.9,0.0,7.1,,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,False
+1997-03-12,1997,3,71,-3.3,-6.7,0.0,10.3,,Rapid Thaw,1.3166666666666662,10.53333333333333,Temp jump (°C/3d),All modes,False
+1997-03-13,1997,3,72,-5.0,-11.7,0.0,7.9,,Rapid Thaw,1.8499999999999996,14.799999999999997,Temp jump (°C/3d),All modes,False
+1997-04-06,1997,4,96,-7.2,-18.3,0.0,4.9,,Rapid Thaw,1.5083333333333333,12.066666666666666,Temp jump (°C/3d),All modes,True
+1997-04-07,1997,4,97,-4.4,-13.3,0.0,7.4,,Rapid Thaw,1.6500000000000004,13.200000000000003,Temp jump (°C/3d),All modes,True
+1997-04-08,1997,4,98,-5.6,-9.4,0.3,4.6,,Rapid Thaw,1.3458333333333332,10.766666666666666,Temp jump (°C/3d),All modes,True
+1997-04-11,1997,4,101,-8.9,-12.2,0.0,3.8,,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+1997-05-14,1997,5,134,-1.7,-5.6,0.0,2.2,,Glaze/Ice,2.0,2.2,Wind speed (m/s),All modes,True
+1997-05-15,1997,5,135,-0.6,-3.9,0.0,4.1,,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,True
+1997-05-27,1997,5,147,1.1,-1.7,0.0,6.2,,Glaze/Ice,2.0,6.2,Wind speed (m/s),All modes,True
+1997-05-28,1997,5,148,-1.7,-2.8,0.0,4.6,,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,True
+1997-05-29,1997,5,149,0.6,-2.2,0.5,4.3,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1997-06-07,1997,6,158,1.1,-2.2,0.0,5.2,,Glaze/Ice,2.0,5.2,Wind speed (m/s),All modes,False
+1997-09-05,1997,9,248,2.2,0.0,0.0,4.2,,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,True
+1997-09-06,1997,9,249,5.0,-0.6,0.0,5.4,,Glaze/Ice,2.0,5.4,Wind speed (m/s),All modes,True
+1997-10-04,1997,10,277,1.1,-0.6,0.5,7.6,,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1997-10-08,1997,10,281,1.7,-2.2,2.3,9.9,,Rain-on-Snow,0.7666666666666666,2.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1997-11-04,1997,11,308,-3.9,-6.7,0.0,12.6,,Glaze/Ice,2.0,12.6,Wind speed (m/s),All modes,False
+1997-11-05,1997,11,309,-6.7,-9.4,0.0,8.6,,Glaze/Ice,2.0,8.6,Wind speed (m/s),All modes,False
+1997-11-09,1997,11,313,-2.8,-5.6,0.0,6.8,,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,False
+1997-11-10,1997,11,314,-0.6,-7.8,0.0,4.8,,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,False
+1997-11-11,1997,11,315,0.6,-10.0,0.0,7.3,,Glaze/Ice,2.0,7.3,Wind speed (m/s),All modes,False
+1997-11-12,1997,11,316,-2.2,-13.3,0.0,4.0,,Glaze/Ice,2.0,4.0,Wind speed (m/s),All modes,False
+1997-11-14,1997,11,318,-1.7,-16.7,0.0,5.1,,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,False
+1998-03-21,1998,3,80,1.1,-15.0,0.3,6.3,,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,False
+1998-03-21,1998,3,80,1.1,-15.0,0.3,6.3,,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,False
+1998-03-22,1998,3,81,-5.0,-12.2,0.0,5.8,,Rapid Thaw,1.2958333333333334,10.366666666666667,Temp jump (°C/3d),All modes,False
+1998-04-08,1998,4,98,-8.3,-18.3,0.0,3.1,5.7,Glaze/Ice,2.0,3.1,Wind speed (m/s),All modes,True
+1998-05-16,1998,5,136,0.0,-2.2,0.0,8.0,14.9,Glaze/Ice,2.0,8.0,Wind speed (m/s),All modes,True
+1998-05-18,1998,5,138,1.1,-2.2,0.0,8.9,15.4,Glaze/Ice,2.0,8.9,Wind speed (m/s),All modes,True
+1998-05-19,1998,5,139,-1.1,-5.6,0.0,13.0,18.5,Glaze/Ice,2.0,13.0,Wind speed (m/s),All modes,True
+1998-05-19,1998,5,139,-1.1,-5.6,0.0,13.0,18.5,High Wind,1.0285714285714285,13.0,Wind speed (m/s),Boat,True
+1998-05-20,1998,5,140,-2.8,-6.7,0.0,12.9,18.5,High Wind,1.0,12.9,Wind speed (m/s),Boat,True
+1998-05-22,1998,5,142,-2.2,-5.0,0.0,11.1,15.9,Glaze/Ice,2.0,11.1,Wind speed (m/s),All modes,True
+1998-05-24,1998,5,144,0.6,-3.3,0.0,8.0,11.3,Glaze/Ice,2.0,8.0,Wind speed (m/s),All modes,True
+1998-05-26,1998,5,146,1.7,0.0,1.8,8.1,12.9,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-05-28,1998,5,148,6.1,0.0,0.3,6.2,12.3,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-05-31,1998,5,151,2.2,0.6,1.0,7.9,12.3,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-06-09,1998,6,160,1.7,-2.2,0.0,6.2,12.5,Glaze/Ice,2.0,6.2,Wind speed (m/s),All modes,False
+1998-09-11,1998,9,254,5.6,1.1,0.0,6.1,11.2,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,True
+1998-10-01,1998,10,274,2.2,-0.6,0.3,3.8,9.4,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-10-02,1998,10,275,3.9,0.6,0.3,6.3,11.6,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-10-03,1998,10,276,1.7,-1.7,0.3,6.8,12.5,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-10-08,1998,10,281,2.8,-5.6,0.5,6.5,13.4,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-10-14,1998,10,287,1.1,-3.9,1.0,8.3,16.5,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-10-15,1998,10,288,1.1,-0.6,4.3,10.9,17.9,Rain-on-Snow,1.4333333333333333,4.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1998-10-16,1998,10,289,0.0,-2.2,0.8,13.1,17.9,High Wind,1.057142857142857,13.1,Wind speed (m/s),Boat,True
+1998-10-24,1998,10,297,-3.3,-6.1,1.0,17.3,25.0,High Wind,2.257142857142857,17.3,Wind speed (m/s),Boat,True
+1998-10-24,1998,10,297,-3.3,-6.1,1.0,17.3,25.0,Blizzard,1.485714285714286,17.3,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+1998-10-31,1998,10,304,-0.6,-9.4,0.3,5.9,11.6,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,True
+1998-11-03,1998,11,307,1.1,-3.9,0.5,3.9,11.6,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,False
+1998-11-04,1998,11,308,-1.1,-4.4,0.0,6.7,12.5,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,False
+1998-11-05,1998,11,309,-0.6,-2.8,0.0,5.1,10.3,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,False
+1998-11-07,1998,11,311,1.7,-3.9,0.0,3.7,7.6,Glaze/Ice,2.0,3.7,Wind speed (m/s),All modes,False
+1998-11-11,1998,11,315,-3.3,-10.0,0.0,3.6,8.0,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,False
+1999-04-18,1999,4,108,-5.6,-17.2,0.5,6.3,11.6,Rapid Thaw,1.4333333333333333,11.466666666666667,Temp jump (°C/3d),All modes,True
+1999-05-17,1999,5,137,-2.8,-7.8,0.0,5.1,9.8,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,True
+1999-05-24,1999,5,144,-2.2,-5.0,0.0,5.7,10.3,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,True
+1999-05-27,1999,5,147,-1.7,-5.0,0.0,3.4,6.7,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,True
+1999-05-30,1999,5,150,0.6,-1.1,0.5,4.8,8.0,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+1999-05-31,1999,5,151,0.6,-1.7,0.3,2.8,6.7,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+1999-06-02,1999,6,153,1.1,-0.6,0.5,3.5,8.9,Glaze/Ice,2.0,3.5,Wind speed (m/s),All modes,False
+1999-06-27,1999,6,178,2.8,-0.6,0.0,4.6,7.6,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,False
+1999-08-18,1999,8,230,6.1,3.9,3.3,721.0,12.5,High Wind,3.0,721.0,Wind speed (m/s),Boat,True
+1999-08-19,1999,8,231,5.0,2.2,8.9,13.1,20.1,High Wind,1.057142857142857,13.1,Wind speed (m/s),Boat,True
+1999-08-24,1999,8,236,5.6,-0.6,0.0,6.7,11.2,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,False
+1999-09-15,1999,9,258,2.8,0.0,0.0,5.4,11.6,Glaze/Ice,2.0,5.4,Wind speed (m/s),All modes,True
+1999-09-16,1999,9,259,3.3,-2.8,0.0,1.9,4.0,Glaze/Ice,2.0,1.9,Wind speed (m/s),All modes,True
+1999-09-17,1999,9,260,1.1,-2.8,0.0,3.8,7.6,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+1999-09-18,1999,9,261,0.6,-0.6,0.0,4.6,8.0,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,True
+1999-10-05,1999,10,278,-1.1,-2.8,0.0,13.3,20.6,High Wind,1.1142857142857143,13.3,Wind speed (m/s),Boat,True
+1999-10-05,1999,10,278,-1.1,-2.8,0.0,13.3,20.6,Glaze/Ice,2.0,13.3,Wind speed (m/s),All modes,True
+1999-10-06,1999,10,279,-1.1,-2.8,0.0,13.8,20.6,Glaze/Ice,2.0,13.8,Wind speed (m/s),All modes,True
+1999-10-06,1999,10,279,-1.1,-2.8,0.0,13.8,20.6,High Wind,1.2571428571428571,13.8,Wind speed (m/s),Boat,True
+1999-10-07,1999,10,280,-1.1,-3.3,0.3,11.2,17.0,Glaze/Ice,2.0,11.2,Wind speed (m/s),All modes,True
+1999-10-08,1999,10,281,-1.1,-3.3,0.0,9.7,14.8,Glaze/Ice,2.0,9.7,Wind speed (m/s),All modes,True
+1999-10-09,1999,10,282,-3.3,-5.0,0.0,7.4,11.2,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,True
+2000-04-14,2000,4,105,-4.4,-13.3,0.0,6.9,13.0,Rapid Thaw,1.3666666666666667,10.933333333333334,Temp jump (°C/3d),All modes,True
+2000-05-24,2000,5,145,-7.2,-7.8,0.0,3.0,4.5,Glaze/Ice,2.0,3.0,Wind speed (m/s),All modes,True
+2000-05-25,2000,5,146,-5.0,-7.2,0.0,3.0,7.2,Glaze/Ice,2.0,3.0,Wind speed (m/s),All modes,True
+2000-06-09,2000,6,161,1.7,-1.1,0.0,6.1,9.8,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,False
+2000-06-11,2000,6,163,1.7,-1.7,0.0,2.9,6.7,Glaze/Ice,2.0,2.9,Wind speed (m/s),All modes,False
+2000-06-13,2000,6,165,1.1,-1.7,0.0,4.5,7.6,Glaze/Ice,2.0,4.5,Wind speed (m/s),All modes,False
+2000-07-12,2000,7,194,1.7,-2.2,0.0,5.5,8.0,Glaze/Ice,2.0,5.5,Wind speed (m/s),All modes,False
+2000-07-13,2000,7,195,3.9,-1.7,0.0,7.2,10.7,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2000-08-10,2000,8,223,10.6,0.0,2.0,14.0,28.6,High Wind,1.314285714285714,14.0,Wind speed (m/s),Boat,True
+2000-09-26,2000,9,270,-0.6,-4.4,0.0,6.7,10.7,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+2000-09-27,2000,9,271,-3.3,-4.4,0.0,3.5,7.2,Glaze/Ice,2.0,3.5,Wind speed (m/s),All modes,True
+2000-10-03,2000,10,277,0.6,-8.3,1.0,6.6,13.9,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2000-10-13,2000,10,287,-3.3,-13.3,0.0,3.4,9.4,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,True
+2000-10-15,2000,10,289,-3.9,-7.2,0.0,4.1,7.6,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,True
+2000-10-16,2000,10,290,-4.4,-6.7,0.3,6.4,10.7,Glaze/Ice,2.0,6.4,Wind speed (m/s),All modes,True
+2000-10-17,2000,10,291,-3.3,-5.6,0.3,8.0,11.2,Glaze/Ice,2.0,8.0,Wind speed (m/s),All modes,True
+2000-10-22,2000,10,296,-6.7,-8.3,1.5,7.1,11.2,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,True
+2000-10-23,2000,10,297,-6.7,-9.4,1.0,4.2,8.9,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,True
+2000-11-10,2000,11,315,-16.7,-20.0,0.0,17.5,24.6,Blizzard,1.542857142857143,17.5,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2001-01-08,2001,1,8,-21.1,-25.6,15.7,16.0,26.8,Blizzard,1.1142857142857143,16.0,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2001-05-30,2001,5,150,-0.6,-7.8,0.0,4.6,8.0,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,True
+2001-07-30,2001,7,211,0.6,-1.7,0.0,3.9,9.4,Glaze/Ice,2.0,3.9,Wind speed (m/s),All modes,False
+2001-08-02,2001,8,214,1.1,-1.7,0.0,7.8,11.6,Glaze/Ice,2.0,7.8,Wind speed (m/s),All modes,False
+2001-08-11,2001,8,223,8.3,-1.1,0.0,4.0,9.4,Glaze/Ice,2.0,4.0,Wind speed (m/s),All modes,False
+2001-08-13,2001,8,225,6.1,0.0,0.0,5.1,10.3,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,False
+2001-08-23,2001,8,235,0.6,-2.2,0.0,7.5,11.2,Glaze/Ice,2.0,7.5,Wind speed (m/s),All modes,False
+2001-08-24,2001,8,236,0.6,-1.7,0.0,7.4,10.7,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,False
+2001-08-25,2001,8,237,1.1,-1.7,0.0,7.2,11.2,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2001-08-26,2001,8,238,1.7,-1.1,0.0,4.9,9.4,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,False
+2001-08-30,2001,8,242,1.1,-1.7,0.0,3.4,9.4,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,False
+2001-08-31,2001,8,243,0.6,-1.7,0.0,3.6,7.2,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,False
+2001-09-01,2001,9,244,0.6,-0.6,0.3,6.6,10.7,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,True
+2001-09-02,2001,9,245,0.0,-0.6,1.3,6.2,9.4,Glaze/Ice,2.0,6.2,Wind speed (m/s),All modes,True
+2001-09-03,2001,9,246,2.2,-0.6,0.5,4.6,5.8,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,True
+2001-09-04,2001,9,247,1.1,-1.1,0.0,9.4,15.6,Glaze/Ice,2.0,9.4,Wind speed (m/s),All modes,True
+2001-09-07,2001,9,250,0.6,-0.6,1.5,6.4,9.8,Glaze/Ice,2.0,6.4,Wind speed (m/s),All modes,True
+2001-09-08,2001,9,251,6.7,-0.6,1.3,5.2,9.8,Glaze/Ice,2.0,5.2,Wind speed (m/s),All modes,True
+2001-09-16,2001,9,259,3.3,-1.1,0.0,3.0,8.0,Glaze/Ice,2.0,3.0,Wind speed (m/s),All modes,True
+2001-09-17,2001,9,260,1.1,-1.1,0.3,6.7,11.2,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+2001-09-20,2001,9,263,-0.6,-1.1,0.0,6.3,11.2,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,True
+2001-09-21,2001,9,264,0.0,-1.7,0.0,7.2,10.3,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,True
+2001-09-22,2001,9,265,1.1,-1.1,0.5,7.1,11.6,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,True
+2001-11-08,2001,11,312,-6.1,-19.4,0.5,5.5,8.9,Rapid Thaw,1.2791666666666666,10.233333333333333,Temp jump (°C/3d),All modes,False
+2002-01-16,2002,1,16,-6.1,-15.0,0.0,5.1,12.5,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,False
+2002-03-05,2002,3,64,-6.1,-30.0,0.0,6.0,12.5,Glaze/Ice,2.0,6.0,Wind speed (m/s),All modes,False
+2002-03-07,2002,3,66,-13.3,-29.4,0.0,3.3,4.5,Rapid Thaw,1.6458333333333337,13.16666666666667,Temp jump (°C/3d),All modes,False
+2002-03-18,2002,3,77,-7.2,-16.1,0.0,4.5,8.9,Rapid Thaw,1.3208333333333333,10.566666666666666,Temp jump (°C/3d),All modes,False
+2002-03-19,2002,3,78,-5.0,-17.2,0.0,5.1,7.6,Rapid Thaw,1.625,13.0,Temp jump (°C/3d),All modes,False
+2002-04-02,2002,4,92,-7.8,-12.2,0.0,3.0,6.7,Rapid Thaw,1.4375,11.5,Temp jump (°C/3d),All modes,True
+2002-04-25,2002,4,115,-3.3,-14.4,0.3,7.4,12.5,Rapid Thaw,1.270833333333333,10.166666666666664,Temp jump (°C/3d),All modes,True
+2002-04-26,2002,4,116,2.2,-4.4,1.5,12.7,26.8,Rain-on-Snow,0.5,1.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2002-04-26,2002,4,116,2.2,-4.4,1.5,12.7,26.8,Glaze/Ice,2.0,12.7,Wind speed (m/s),All modes,True
+2002-04-26,2002,4,116,2.2,-4.4,1.5,12.7,26.8,Rapid Thaw,1.7541666666666667,14.033333333333333,Temp jump (°C/3d),All modes,True
+2002-04-27,2002,4,117,-2.8,-11.7,1.0,11.7,26.4,Glaze/Ice,2.0,11.7,Wind speed (m/s),All modes,True
+2002-04-27,2002,4,117,-2.8,-11.7,1.0,11.7,26.4,Rapid Thaw,1.3875000000000002,11.100000000000001,Temp jump (°C/3d),All modes,True
+2002-05-12,2002,5,132,0.6,-2.2,1.0,7.0,12.5,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2002-05-29,2002,5,149,-4.4,-7.2,0.0,8.7,13.9,Glaze/Ice,2.0,8.7,Wind speed (m/s),All modes,True
+2002-06-05,2002,6,156,5.0,-0.6,0.0,6.7,7.2,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,False
+2002-06-28,2002,6,179,0.6,-2.2,0.0,3.0,6.3,Glaze/Ice,2.0,3.0,Wind speed (m/s),All modes,False
+2002-07-25,2002,7,206,1.7,-1.1,0.0,7.4,13.0,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,False
+2002-08-06,2002,8,218,0.6,-1.1,0.0,5.5,10.3,Glaze/Ice,2.0,5.5,Wind speed (m/s),All modes,False
+2002-08-07,2002,8,219,0.6,-0.6,1.5,4.4,6.7,Glaze/Ice,2.0,4.4,Wind speed (m/s),All modes,False
+2002-08-08,2002,8,220,1.1,-0.6,0.5,3.3,5.8,Glaze/Ice,2.0,3.3,Wind speed (m/s),All modes,False
+2002-08-10,2002,8,222,0.6,-0.6,0.0,4.5,6.7,Glaze/Ice,2.0,4.5,Wind speed (m/s),All modes,False
+2002-08-19,2002,8,231,0.6,-0.6,0.0,5.1,9.8,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,False
+2002-08-20,2002,8,232,1.1,-1.7,0.0,4.6,7.6,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,False
+2002-09-20,2002,9,263,0.0,-2.8,0.0,4.5,8.9,Glaze/Ice,2.0,4.5,Wind speed (m/s),All modes,True
+2002-10-05,2002,10,278,0.6,-1.7,0.8,13.7,21.9,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2002-10-05,2002,10,278,0.6,-1.7,0.8,13.7,21.9,High Wind,1.2285714285714282,13.7,Wind speed (m/s),Boat,True
+2002-10-06,2002,10,279,1.1,-1.7,1.0,12.5,20.6,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2002-10-08,2002,10,281,0.0,-3.9,2.5,13.4,21.9,High Wind,1.1428571428571428,13.4,Wind speed (m/s),Boat,True
+2002-10-21,2002,10,294,-4.4,-8.3,1.8,5.0,11.6,Glaze/Ice,2.0,5.0,Wind speed (m/s),All modes,True
+2002-10-22,2002,10,295,-1.7,-6.7,0.5,4.2,10.7,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,True
+2002-10-24,2002,10,297,-3.3,-4.4,0.0,5.7,12.5,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,True
+2002-10-25,2002,10,298,-2.2,-6.7,0.0,1.3,4.0,Glaze/Ice,2.0,1.3,Wind speed (m/s),All modes,True
+2002-10-26,2002,10,299,-2.8,-4.4,0.0,4.1,7.6,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,True
+2002-10-30,2002,10,303,0.6,-5.0,0.8,8.3,15.6,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2002-10-30,2002,10,303,0.6,-5.0,0.8,8.3,15.6,Glaze/Ice,2.0,8.3,Wind speed (m/s),All modes,True
+2002-10-31,2002,10,304,1.1,-2.8,0.0,4.7,8.9,Glaze/Ice,2.0,4.7,Wind speed (m/s),All modes,True
+2002-11-01,2002,11,305,-0.6,-5.6,0.0,5.9,10.3,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,False
+2002-11-25,2002,11,329,-6.1,-13.3,0.0,4.5,7.6,Rapid Thaw,1.4374999999999998,11.499999999999998,Temp jump (°C/3d),All modes,False
+2002-11-26,2002,11,330,-6.1,-13.9,0.0,6.3,16.1,Rapid Thaw,1.4374999999999996,11.499999999999996,Temp jump (°C/3d),All modes,False
+2003-04-15,2003,4,105,0.0,-11.1,0.0,3.8,8.9,Rapid Thaw,1.575,12.6,Temp jump (°C/3d),All modes,True
+2003-05-18,2003,5,138,1.1,-1.7,0.3,6.6,10.3,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2003-05-19,2003,5,139,1.1,0.0,3.8,7.4,11.6,Rain-on-Snow,1.2666666666666666,3.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2003-05-20,2003,5,140,0.6,-0.6,0.8,8.4,14.3,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2003-05-27,2003,5,147,2.2,-5.0,0.0,8.6,16.5,Glaze/Ice,2.0,8.6,Wind speed (m/s),All modes,True
+2003-06-16,2003,6,167,1.7,-2.2,0.0,7.6,11.6,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,False
+2003-07-29,2003,7,210,9.4,0.0,0.3,13.8,25.9,High Wind,1.2571428571428571,13.8,Wind speed (m/s),Boat,True
+2003-08-07,2003,8,219,0.6,-1.1,0.0,5.6,13.0,Glaze/Ice,2.0,5.6,Wind speed (m/s),All modes,False
+2003-08-11,2003,8,223,0.0,-2.2,0.0,3.4,8.0,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,False
+2003-10-01,2003,10,274,1.1,-1.1,5.8,10.1,19.2,Rain-on-Snow,1.9333333333333333,5.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2003-10-02,2003,10,275,4.4,1.1,4.8,3.9,8.0,Rain-on-Snow,1.5999999999999999,4.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2003-10-03,2003,10,276,1.7,-1.7,0.8,6.3,12.5,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2003-10-04,2003,10,277,-1.1,-2.2,0.5,6.7,11.2,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+2003-10-08,2003,10,281,0.6,-5.6,0.5,3.3,7.6,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2003-10-08,2003,10,281,0.6,-5.6,0.5,3.3,7.6,Glaze/Ice,2.0,3.3,Wind speed (m/s),All modes,True
+2003-10-10,2003,10,283,0.0,-1.7,0.0,6.9,11.6,Glaze/Ice,2.0,6.9,Wind speed (m/s),All modes,True
+2003-10-15,2003,10,288,-2.2,-5.6,0.0,6.3,11.2,Glaze/Ice,2.0,6.3,Wind speed (m/s),All modes,True
+2003-10-16,2003,10,289,-3.9,-6.7,0.8,9.6,14.3,Glaze/Ice,2.0,9.6,Wind speed (m/s),All modes,True
+2003-10-22,2003,10,295,-3.9,-5.6,0.0,7.1,10.7,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,True
+2003-10-25,2003,10,298,-7.8,-10.6,0.0,4.6,11.2,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,True
+2003-10-29,2003,10,302,1.1,-12.8,0.3,7.6,13.0,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2003-10-30,2003,10,303,0.0,-1.1,8.4,4.8,8.9,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,True
+2003-10-31,2003,10,304,-0.6,-11.1,0.0,3.5,8.0,Glaze/Ice,2.0,3.5,Wind speed (m/s),All modes,True
+2003-11-03,2003,11,307,-2.8,-7.8,0.0,4.0,8.9,Glaze/Ice,2.0,4.0,Wind speed (m/s),All modes,False
+2003-11-05,2003,11,309,1.1,-6.7,0.0,6.5,12.5,Glaze/Ice,2.0,6.5,Wind speed (m/s),All modes,False
+2003-11-22,2003,11,326,-6.7,-21.7,0.0,6.6,14.3,Rapid Thaw,1.4583333333333335,11.666666666666668,Temp jump (°C/3d),All modes,False
+2003-12-29,2003,12,363,-10.6,-18.9,0.0,15.6,24.6,Blizzard,1.0,15.6,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2004-01-02,2004,1,2,-2.2,-13.3,1.0,7.2,13.0,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2004-01-03,2004,1,3,-1.7,-8.3,0.5,7.5,12.5,Glaze/Ice,2.0,7.5,Wind speed (m/s),All modes,False
+2004-03-04,2004,3,64,-19.4,-23.9,0.0,5.4,12.5,Rapid Thaw,1.4125,11.3,Temp jump (°C/3d),All modes,False
+2004-03-21,2004,3,81,-3.9,-6.1,1.0,6.8,10.7,Rapid Thaw,1.895833333333333,15.166666666666664,Temp jump (°C/3d),All modes,False
+2004-03-22,2004,3,82,-5.6,-21.1,0.0,5.3,12.5,Rapid Thaw,2.15,17.2,Temp jump (°C/3d),All modes,False
+2004-05-15,2004,5,136,-2.2,-5.6,0.0,4.5,7.6,Glaze/Ice,2.0,4.5,Wind speed (m/s),All modes,True
+2004-05-17,2004,5,138,-0.6,-4.4,0.3,8.1,13.4,Glaze/Ice,2.0,8.1,Wind speed (m/s),All modes,True
+2004-05-18,2004,5,139,0.6,-6.1,0.8,4.2,7.6,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,True
+2004-05-18,2004,5,139,0.6,-6.1,0.8,4.2,7.6,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2004-05-20,2004,5,141,2.2,-1.7,2.0,3.6,9.8,Rain-on-Snow,0.6666666666666666,2.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2004-05-21,2004,5,142,1.1,-2.2,1.0,3.1,6.7,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2004-05-22,2004,5,143,1.1,-1.7,0.8,5.1,9.4,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2004-08-01,2004,8,214,2.8,-1.1,0.0,4.3,11.6,Glaze/Ice,2.0,4.3,Wind speed (m/s),All modes,False
+2004-09-27,2004,9,271,1.1,-0.6,8.6,13.5,24.1,High Wind,1.1714285714285713,13.5,Wind speed (m/s),Boat,True
+2004-10-02,2004,10,276,0.6,-9.4,0.3,5.7,8.9,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2004-10-02,2004,10,276,0.6,-9.4,0.3,5.7,8.9,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,True
+2004-12-31,2004,12,366,-3.9,-20.6,0.3,7.7,14.8,Glaze/Ice,2.0,7.7,Wind speed (m/s),All modes,False
+2005-01-07,2005,1,7,-0.6,-7.2,0.0,7.2,19.2,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2005-05-17,2005,5,137,-4.4,-7.8,0.0,7.8,12.5,Glaze/Ice,2.0,7.8,Wind speed (m/s),All modes,True
+2005-05-18,2005,5,138,-1.1,-4.4,0.0,7.3,11.6,Glaze/Ice,2.0,7.3,Wind speed (m/s),All modes,True
+2005-05-27,2005,5,147,0.6,-1.7,0.0,8.4,12.5,Glaze/Ice,2.0,8.4,Wind speed (m/s),All modes,True
+2005-05-28,2005,5,148,0.6,-1.1,0.3,6.4,9.4,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2005-06-01,2005,6,152,0.0,-3.9,0.0,7.2,10.3,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2005-06-03,2005,6,154,0.6,-3.3,0.0,7.5,11.2,Glaze/Ice,2.0,7.5,Wind speed (m/s),All modes,False
+2005-06-09,2005,6,160,2.2,-0.6,4.1,4.2,8.0,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,False
+2005-06-20,2005,6,171,3.3,-2.2,0.0,3.0,5.8,Glaze/Ice,2.0,3.0,Wind speed (m/s),All modes,False
+2005-07-03,2005,7,184,2.2,-1.1,0.0,2.9,6.3,Glaze/Ice,2.0,2.9,Wind speed (m/s),All modes,False
+2005-07-30,2005,7,211,2.8,-0.6,0.0,5.7,9.8,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,False
+2005-09-22,2005,9,265,0.6,-1.1,0.0,13.1,23.2,High Wind,1.057142857142857,13.1,Wind speed (m/s),Boat,True
+2005-09-23,2005,9,266,1.1,0.6,2.5,13.1,23.7,High Wind,1.057142857142857,13.1,Wind speed (m/s),Boat,True
+2005-09-28,2005,9,271,-1.1,-2.8,0.0,9.5,16.5,Glaze/Ice,2.0,9.5,Wind speed (m/s),All modes,True
+2005-10-02,2005,10,275,-2.2,-7.8,0.0,5.4,10.3,Glaze/Ice,2.0,5.4,Wind speed (m/s),All modes,True
+2005-10-08,2005,10,281,-3.3,-5.6,0.0,6.5,10.7,Glaze/Ice,2.0,6.5,Wind speed (m/s),All modes,True
+2005-10-10,2005,10,283,-4.4,-5.6,0.0,10.8,17.9,Glaze/Ice,2.0,10.8,Wind speed (m/s),All modes,True
+2005-10-11,2005,10,284,-2.8,-4.4,0.0,11.7,19.2,Glaze/Ice,2.0,11.7,Wind speed (m/s),All modes,True
+2005-10-12,2005,10,285,-1.7,-3.3,0.5,6.0,14.3,Glaze/Ice,2.0,6.0,Wind speed (m/s),All modes,True
+2005-10-13,2005,10,286,-2.8,-6.1,0.0,3.9,7.6,Glaze/Ice,2.0,3.9,Wind speed (m/s),All modes,True
+2005-10-16,2005,10,289,-5.0,-11.7,0.0,9.4,16.5,Glaze/Ice,2.0,9.4,Wind speed (m/s),All modes,True
+2005-10-18,2005,10,291,-2.8,-4.4,0.0,10.2,17.4,Glaze/Ice,2.0,10.2,Wind speed (m/s),All modes,True
+2005-10-19,2005,10,292,-3.3,-4.4,0.0,7.5,12.5,Glaze/Ice,2.0,7.5,Wind speed (m/s),All modes,True
+2005-10-20,2005,10,293,0.0,-10.6,0.3,4.8,10.7,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,True
+2005-10-21,2005,10,294,1.1,-4.4,0.3,4.2,12.5,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2006-01-01,2006,1,1,-16.1,-18.9,0.0,2.4,4.0,Glaze/Ice,2.0,2.4,Wind speed (m/s),All modes,False
+2006-01-17,2006,1,17,-15.0,-18.3,0.3,2.7,5.8,Glaze/Ice,2.0,2.7,Wind speed (m/s),All modes,False
+2006-02-02,2006,2,33,-31.7,-43.3,0.5,2.4,5.8,Glaze/Ice,2.0,2.4,Wind speed (m/s),All modes,False
+2006-02-03,2006,2,34,-30.6,-48.3,0.0,4.3,10.7,Glaze/Ice,2.0,4.3,Wind speed (m/s),All modes,False
+2006-05-08,2006,5,128,-3.9,-9.4,0.0,4.9,9.8,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,True
+2006-05-09,2006,5,129,-2.8,-7.2,0.0,3.8,6.7,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+2006-05-10,2006,5,130,-3.3,-5.6,0.0,5.1,8.0,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,True
+2006-05-11,2006,5,131,-2.8,-6.7,0.0,4.1,7.6,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,True
+2006-05-12,2006,5,132,-2.8,-6.1,0.0,2.8,10.3,Glaze/Ice,2.0,2.8,Wind speed (m/s),All modes,True
+2006-05-13,2006,5,133,1.7,-9.4,0.0,6.9,11.6,Glaze/Ice,2.0,6.9,Wind speed (m/s),All modes,True
+2006-05-18,2006,5,138,-2.2,-5.6,0.0,5.7,9.4,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,True
+2006-05-24,2006,5,144,2.8,-3.3,0.0,3.7,9.4,Glaze/Ice,2.0,3.7,Wind speed (m/s),All modes,True
+2006-05-30,2006,5,150,0.6,-4.4,0.3,4.7,9.4,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2006-05-31,2006,5,151,0.6,-5.0,0.5,5.1,9.8,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2006-06-12,2006,6,163,7.8,-1.7,0.0,3.8,10.3,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,False
+2006-07-21,2006,7,202,1.7,-1.1,0.8,4.5,7.6,Glaze/Ice,2.0,4.5,Wind speed (m/s),All modes,False
+2006-08-25,2006,8,237,1.1,-2.2,0.0,5.5,8.0,Glaze/Ice,2.0,5.5,Wind speed (m/s),All modes,False
+2006-08-26,2006,8,238,2.2,-2.2,0.0,4.1,7.6,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,False
+2006-09-03,2006,9,246,10.6,-0.6,0.0,6.6,11.2,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,True
+2006-09-10,2006,9,253,0.6,-1.1,0.0,5.5,8.9,Glaze/Ice,2.0,5.5,Wind speed (m/s),All modes,True
+2006-09-29,2006,9,272,0.0,-3.9,0.0,1.9,4.5,Glaze/Ice,2.0,1.9,Wind speed (m/s),All modes,True
+2006-09-30,2006,9,273,0.6,-2.8,3.8,3.6,9.4,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,True
+2006-10-01,2006,10,274,0.6,-1.1,0.0,2.7,8.9,Glaze/Ice,2.0,2.7,Wind speed (m/s),All modes,True
+2006-10-07,2006,10,280,-1.7,-2.8,0.0,13.6,19.7,High Wind,1.1999999999999997,13.6,Wind speed (m/s),Boat,True
+2006-10-08,2006,10,281,-2.2,-3.9,0.0,15.9,24.6,High Wind,1.8571428571428572,15.9,Wind speed (m/s),Boat,True
+2006-10-08,2006,10,281,-2.2,-3.9,0.0,15.9,24.6,Blizzard,1.0857142857142859,15.9,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2006-10-09,2006,10,282,-1.1,-3.3,0.3,19.8,29.9,Blizzard,2.2,19.8,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2006-10-09,2006,10,282,-1.1,-3.3,0.3,19.8,29.9,Glaze/Ice,2.0,19.8,Wind speed (m/s),All modes,True
+2006-10-09,2006,10,282,-1.1,-3.3,0.3,19.8,29.9,High Wind,2.9714285714285715,19.8,Wind speed (m/s),Boat,True
+2006-10-10,2006,10,283,3.9,-1.7,0.5,5.3,14.8,Glaze/Ice,2.0,5.3,Wind speed (m/s),All modes,True
+2006-10-10,2006,10,283,3.9,-1.7,0.5,5.3,14.8,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2006-10-17,2006,10,290,-2.2,-3.3,0.0,7.3,10.7,Glaze/Ice,2.0,7.3,Wind speed (m/s),All modes,True
+2006-10-19,2006,10,292,-2.8,-3.9,0.0,8.6,13.4,Glaze/Ice,2.0,8.6,Wind speed (m/s),All modes,True
+2006-10-29,2006,10,302,-3.9,-6.1,0.0,4.3,9.8,Glaze/Ice,2.0,4.3,Wind speed (m/s),All modes,True
+2007-03-28,2007,3,87,-12.2,-20.0,0.0,6.8,11.2,Rapid Thaw,1.8750000000000002,15.000000000000002,Temp jump (°C/3d),All modes,False
+2007-03-29,2007,3,88,-11.1,-14.4,0.3,4.8,8.0,Rapid Thaw,1.5791666666666664,12.633333333333331,Temp jump (°C/3d),All modes,False
+2007-04-24,2007,4,114,-5.6,-8.3,0.0,7.4,10.7,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,True
+2007-04-25,2007,4,115,-5.0,-12.2,0.0,10.9,17.4,Glaze/Ice,2.0,10.9,Wind speed (m/s),All modes,True
+2007-05-17,2007,5,137,-6.7,-17.2,0.0,3.8,6.7,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+2007-05-18,2007,5,138,-1.1,-11.1,0.0,1.7,4.5,Glaze/Ice,2.0,1.7,Wind speed (m/s),All modes,True
+2007-05-19,2007,5,139,-4.4,-12.8,0.0,2.5,6.3,Glaze/Ice,2.0,2.5,Wind speed (m/s),All modes,True
+2007-05-20,2007,5,140,-4.4,-10.6,0.0,2.8,7.2,Glaze/Ice,2.0,2.8,Wind speed (m/s),All modes,True
+2007-05-21,2007,5,141,-5.0,-7.8,0.0,3.6,6.3,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,True
+2007-05-23,2007,5,143,-2.2,-10.0,3.0,2.0,5.4,Glaze/Ice,2.0,2.0,Wind speed (m/s),All modes,True
+2007-10-13,2007,10,286,-4.4,-5.6,0.0,13.5,19.7,High Wind,1.1714285714285713,13.5,Wind speed (m/s),Boat,True
+2007-10-14,2007,10,287,-3.9,-5.0,0.0,13.6,20.6,High Wind,1.1999999999999997,13.6,Wind speed (m/s),Boat,True
+2007-10-16,2007,10,289,-1.7,-5.6,0.5,3.3,9.4,Glaze/Ice,2.0,3.3,Wind speed (m/s),All modes,True
+2007-10-22,2007,10,295,-2.2,-6.7,0.3,3.0,6.7,Glaze/Ice,2.0,3.0,Wind speed (m/s),All modes,True
+2007-10-23,2007,10,296,-3.3,-6.7,0.3,3.4,9.8,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,True
+2007-10-30,2007,10,303,-4.4,-6.1,0.5,7.7,11.6,Glaze/Ice,2.0,7.7,Wind speed (m/s),All modes,True
+2007-10-31,2007,10,304,-2.8,-5.6,0.0,10.0,14.8,Glaze/Ice,2.0,10.0,Wind speed (m/s),All modes,True
+2007-11-01,2007,11,305,-3.9,-6.1,0.0,8.2,13.9,Glaze/Ice,2.0,8.2,Wind speed (m/s),All modes,False
+2007-11-11,2007,11,315,-4.4,-6.7,0.3,2.4,6.3,Glaze/Ice,2.0,2.4,Wind speed (m/s),All modes,False
+2007-11-12,2007,11,316,-5.6,-17.2,0.3,3.3,7.2,Glaze/Ice,2.0,3.3,Wind speed (m/s),All modes,False
+2007-11-13,2007,11,317,-5.0,-8.3,0.8,4.2,11.6,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,False
+2007-11-22,2007,11,326,-5.0,-11.1,0.8,11.7,16.1,Glaze/Ice,2.0,11.7,Wind speed (m/s),All modes,False
+2008-04-01,2008,4,92,-3.9,-12.2,1.0,6.2,10.3,Rapid Thaw,1.5291666666666666,12.233333333333333,Temp jump (°C/3d),All modes,True
+2008-04-01,2008,4,92,-3.9,-12.2,1.0,6.2,10.3,Glaze/Ice,2.0,6.2,Wind speed (m/s),All modes,True
+2008-04-02,2008,4,93,-1.1,-13.3,1.3,5.3,13.0,Rapid Thaw,1.9208333333333332,15.366666666666665,Temp jump (°C/3d),All modes,True
+2008-04-03,2008,4,94,-11.7,-18.9,0.8,6.2,14.3,Rapid Thaw,1.3666666666666667,10.933333333333334,Temp jump (°C/3d),All modes,True
+2008-04-20,2008,4,111,-9.4,-14.4,0.0,5.1,11.6,Rapid Thaw,1.8291666666666666,14.633333333333333,Temp jump (°C/3d),All modes,True
+2008-05-14,2008,5,135,-4.4,-7.2,0.3,6.1,11.2,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,True
+2008-05-15,2008,5,136,-1.7,-4.4,0.3,1.5,5.4,Glaze/Ice,2.0,1.5,Wind speed (m/s),All modes,True
+2008-05-19,2008,5,140,-2.2,-6.7,0.0,3.4,6.3,Glaze/Ice,2.0,3.4,Wind speed (m/s),All modes,True
+2008-05-20,2008,5,141,-0.6,-5.6,0.0,2.6,5.8,Glaze/Ice,2.0,2.6,Wind speed (m/s),All modes,True
+2008-05-21,2008,5,142,0.0,-6.1,0.0,3.7,7.2,Glaze/Ice,2.0,3.7,Wind speed (m/s),All modes,True
+2008-05-24,2008,5,145,3.9,-0.6,0.8,4.7,10.3,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2008-06-02,2008,6,154,1.1,-1.1,0.3,8.1,18.3,Glaze/Ice,2.0,8.1,Wind speed (m/s),All modes,False
+2008-10-02,2008,10,276,0.6,-2.2,0.5,6.3,13.0,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2009-04-26,2009,4,116,3.9,-5.6,0.5,8.3,18.3,Glaze/Ice,2.0,8.3,Wind speed (m/s),All modes,True
+2009-04-26,2009,4,116,3.9,-5.6,0.5,8.3,18.3,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2009-04-27,2009,4,117,1.7,-4.4,0.0,5.3,8.9,Rapid Thaw,1.3208333333333333,10.566666666666666,Temp jump (°C/3d),All modes,True
+2009-05-12,2009,5,132,-1.1,-11.1,0.0,5.9,10.7,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,True
+2009-05-19,2009,5,139,3.3,0.6,0.8,2.7,6.3,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2009-05-21,2009,5,141,2.8,-2.2,0.0,2.1,5.4,Glaze/Ice,2.0,2.1,Wind speed (m/s),All modes,True
+2009-05-25,2009,5,145,3.3,-1.1,0.5,4.3,9.4,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2009-05-31,2009,5,151,1.1,-3.9,2.0,4.0,6.7,Rain-on-Snow,0.6666666666666666,2.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2009-10-03,2009,10,276,-1.7,-3.9,0.0,9.7,16.5,Glaze/Ice,2.0,9.7,Wind speed (m/s),All modes,True
+2009-10-04,2009,10,277,-1.7,-3.3,0.3,9.7,17.4,Glaze/Ice,2.0,9.7,Wind speed (m/s),All modes,True
+2009-10-09,2009,10,282,2.8,-2.8,0.0,5.5,13.9,Glaze/Ice,2.0,5.5,Wind speed (m/s),All modes,True
+2009-10-10,2009,10,283,1.1,-2.8,0.3,6.1,11.2,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,True
+2009-10-10,2009,10,283,1.1,-2.8,0.3,6.1,11.2,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2009-10-11,2009,10,284,0.0,-3.9,0.0,4.8,11.2,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,True
+2009-10-15,2009,10,288,1.7,-1.1,0.3,2.7,7.6,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2009-10-16,2009,10,289,0.6,-5.6,0.5,4.0,8.0,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2009-10-17,2009,10,290,-0.6,-8.9,1.3,3.8,7.6,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+2009-10-22,2009,10,295,-3.3,-6.7,2.5,15.3,21.5,Glaze/Ice,2.0,15.3,Wind speed (m/s),All modes,True
+2009-10-22,2009,10,295,-3.3,-6.7,2.5,15.3,21.5,High Wind,1.685714285714286,15.3,Wind speed (m/s),Boat,True
+2009-10-23,2009,10,296,-2.2,-3.9,0.0,11.0,17.4,Glaze/Ice,2.0,11.0,Wind speed (m/s),All modes,True
+2009-10-24,2009,10,297,-1.7,-6.1,0.0,7.6,13.9,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,True
+2009-10-27,2009,10,300,-1.1,-5.0,0.3,5.8,14.3,Glaze/Ice,2.0,5.8,Wind speed (m/s),All modes,True
+2009-10-31,2009,10,304,-7.2,-19.4,0.0,4.7,8.9,Glaze/Ice,2.0,4.7,Wind speed (m/s),All modes,True
+2009-11-22,2009,11,326,-20.6,-31.1,0.0,1.9,5.4,Glaze/Ice,2.0,1.9,Wind speed (m/s),All modes,False
+2009-11-23,2009,11,327,-20.6,-31.7,0.0,3.3,5.8,Glaze/Ice,2.0,3.3,Wind speed (m/s),All modes,False
+2009-12-08,2009,12,342,-6.1,-15.0,0.0,2.8,5.8,Glaze/Ice,2.0,2.8,Wind speed (m/s),All modes,False
+2009-12-23,2009,12,357,-12.8,-17.8,0.0,2.4,5.8,Glaze/Ice,2.0,2.4,Wind speed (m/s),All modes,False
+2010-01-10,2010,1,10,-32.2,-40.0,0.0,4.2,7.2,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,False
+2010-01-11,2010,1,11,-28.3,-32.2,0.0,5.8,10.7,Glaze/Ice,2.0,5.8,Wind speed (m/s),All modes,False
+2010-02-09,2010,2,40,-21.1,-34.4,0.0,2.7,7.6,Glaze/Ice,2.0,2.7,Wind speed (m/s),All modes,False
+2010-03-04,2010,3,63,-14.4,-19.4,0.0,5.9,9.4,Rapid Thaw,1.4625,11.7,Temp jump (°C/3d),All modes,False
+2010-03-05,2010,3,64,-15.0,-21.7,0.0,6.8,14.3,Rapid Thaw,1.529166666666667,12.233333333333336,Temp jump (°C/3d),All modes,False
+2010-03-18,2010,3,77,-10.6,-20.6,0.0,4.4,8.9,Rapid Thaw,1.4083333333333328,11.266666666666662,Temp jump (°C/3d),All modes,False
+2010-03-19,2010,3,78,-17.2,-23.9,0.0,8.5,13.4,Rapid Thaw,1.8999999999999997,15.199999999999998,Temp jump (°C/3d),All modes,False
+2010-04-13,2010,4,103,-6.1,-15.0,0.0,3.6,7.6,Rapid Thaw,1.366666666666667,10.933333333333335,Temp jump (°C/3d),All modes,True
+2010-05-07,2010,5,127,-9.4,-22.2,0.0,3.5,6.7,Glaze/Ice,2.0,3.5,Wind speed (m/s),All modes,True
+2010-05-08,2010,5,128,-6.1,-17.8,0.0,7.2,11.6,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,True
+2010-05-21,2010,5,141,-2.2,-4.4,0.0,5.6,9.8,Glaze/Ice,2.0,5.6,Wind speed (m/s),All modes,True
+2010-05-22,2010,5,142,-1.1,-3.9,0.0,5.9,11.2,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,True
+2010-05-23,2010,5,143,-2.2,-5.6,0.8,7.7,11.6,Glaze/Ice,2.0,7.7,Wind speed (m/s),All modes,True
+2010-05-24,2010,5,144,-2.2,-3.9,0.0,4.1,7.2,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,True
+2010-05-27,2010,5,147,-0.6,-1.7,0.0,4.3,10.3,Glaze/Ice,2.0,4.3,Wind speed (m/s),All modes,True
+2010-05-28,2010,5,148,0.0,-1.1,7.6,3.7,8.0,Glaze/Ice,2.0,3.7,Wind speed (m/s),All modes,True
+2010-05-31,2010,5,151,0.6,-1.1,4.1,4.6,8.9,Rain-on-Snow,1.3666666666666665,4.1,Precip (mm),Snowmachine / Four-Wheeler,True
+2010-06-04,2010,6,155,0.0,-2.2,0.0,8.5,15.6,Glaze/Ice,2.0,8.5,Wind speed (m/s),All modes,False
+2010-06-06,2010,6,157,0.0,-1.1,0.0,6.1,11.2,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,False
+2010-06-11,2010,6,162,3.9,-0.6,0.5,3.6,8.0,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,False
+2010-06-12,2010,6,163,3.3,-0.6,0.0,7.2,11.6,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2010-06-13,2010,6,164,1.1,-1.1,0.0,6.1,9.4,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,False
+2010-06-14,2010,6,165,1.7,-1.7,0.0,8.6,12.5,Glaze/Ice,2.0,8.6,Wind speed (m/s),All modes,False
+2010-06-19,2010,6,170,3.9,-1.1,0.0,6.4,10.3,Glaze/Ice,2.0,6.4,Wind speed (m/s),All modes,False
+2010-06-20,2010,6,171,2.2,-1.1,0.0,7.4,10.7,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,False
+2010-06-24,2010,6,175,5.6,-0.6,0.0,4.9,9.4,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,False
+2010-10-15,2010,10,288,-3.3,-8.3,0.3,5.9,12.5,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,True
+2010-10-16,2010,10,289,-3.9,-7.2,0.0,9.0,15.6,Glaze/Ice,2.0,9.0,Wind speed (m/s),All modes,True
+2010-10-17,2010,10,290,-3.9,-7.8,0.5,11.2,17.9,Glaze/Ice,2.0,11.2,Wind speed (m/s),All modes,True
+2010-10-18,2010,10,291,-3.3,-4.4,0.5,12.3,17.9,Glaze/Ice,2.0,12.3,Wind speed (m/s),All modes,True
+2010-10-20,2010,10,293,-2.8,-5.0,0.0,11.7,17.4,Glaze/Ice,2.0,11.7,Wind speed (m/s),All modes,True
+2010-10-28,2010,10,301,-2.8,-7.8,0.0,11.3,17.9,Glaze/Ice,2.0,11.3,Wind speed (m/s),All modes,True
+2010-10-29,2010,10,302,-5.6,-8.9,0.0,8.2,14.8,Glaze/Ice,2.0,8.2,Wind speed (m/s),All modes,True
+2010-10-30,2010,10,303,-5.0,-11.7,0.0,9.8,17.9,Glaze/Ice,2.0,9.8,Wind speed (m/s),All modes,True
+2010-11-08,2010,11,312,-6.7,-10.0,1.3,5.2,10.3,Glaze/Ice,2.0,5.2,Wind speed (m/s),All modes,False
+2010-11-13,2010,11,317,-14.4,-20.0,0.0,4.8,9.4,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,False
+2010-11-14,2010,11,318,-15.6,-19.4,0.0,3.8,9.4,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,False
+2010-11-22,2010,11,326,0.6,-5.6,2.8,7.3,15.6,Rain-on-Snow,0.9333333333333332,2.8,Precip (mm),Snowmachine / Four-Wheeler,False
+2010-11-22,2010,11,326,0.6,-5.6,2.8,7.3,15.6,Glaze/Ice,2.0,7.3,Wind speed (m/s),All modes,False
+2010-11-23,2010,11,327,-2.2,-6.7,0.3,3.1,9.8,Glaze/Ice,2.0,3.1,Wind speed (m/s),All modes,False
+2011-02-01,2011,2,32,-13.3,-21.7,0.0,3.6,8.9,Glaze/Ice,2.0,3.6,Wind speed (m/s),All modes,False
+2011-04-02,2011,4,92,-18.3,-29.4,0.0,0.9,4.0,Glaze/Ice,2.0,0.9,Wind speed (m/s),All modes,True
+2011-05-15,2011,5,135,-1.1,-6.1,0.0,7.2,12.5,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,True
+2011-05-20,2011,5,140,0.0,-2.2,0.0,6.7,12.5,Glaze/Ice,2.0,6.7,Wind speed (m/s),All modes,True
+2011-05-23,2011,5,143,0.0,-1.7,0.0,3.1,7.2,Glaze/Ice,2.0,3.1,Wind speed (m/s),All modes,True
+2011-06-12,2011,6,163,1.1,-3.3,0.5,4.7,8.9,Glaze/Ice,2.0,4.7,Wind speed (m/s),All modes,False
+2011-06-29,2011,6,180,2.8,-1.7,0.0,6.8,11.2,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,False
+2011-10-01,2011,10,274,0.6,-6.1,3.0,5.5,10.7,Rain-on-Snow,1.0,3.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2011-10-03,2011,10,276,0.6,-10.0,1.8,5.0,9.4,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2011-10-09,2011,10,282,0.6,-14.4,2.5,3.2,9.8,Rain-on-Snow,0.8333333333333334,2.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2011-10-12,2011,10,285,-3.3,-7.2,0.0,9.2,17.9,Glaze/Ice,2.0,9.2,Wind speed (m/s),All modes,True
+2011-10-16,2011,10,289,-1.1,-2.8,2.0,13.3,20.1,High Wind,1.1142857142857143,13.3,Wind speed (m/s),Boat,True
+2012-05-18,2012,5,139,1.7,-0.6,0.5,4.7,9.8,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-05-30,2012,5,151,1.1,-1.7,3.0,5.5,11.2,Rain-on-Snow,1.0,3.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-10-04,2012,10,278,1.1,0.0,0.3,6.0,13.9,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-10-05,2012,10,279,5.0,0.6,0.3,6.3,15.6,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-10-06,2012,10,280,3.3,0.6,2.3,4.4,8.9,Rain-on-Snow,0.7666666666666666,2.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-10-07,2012,10,281,2.8,-2.2,3.3,4.6,8.9,Rain-on-Snow,1.0999999999999999,3.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-10-08,2012,10,282,0.6,-1.1,0.8,6.7,13.0,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-10-09,2012,10,283,1.1,-1.1,0.8,7.2,12.5,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-10-11,2012,10,285,0.6,-4.4,1.5,8.2,14.8,Rain-on-Snow,0.5,1.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2012-10-25,2012,10,299,1.1,-3.9,0.5,7.3,16.1,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-01-13,2013,1,13,-15.6,-21.1,1.0,17.9,27.3,Blizzard,1.6571428571428568,17.9,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2013-01-14,2013,1,14,-15.6,-21.7,0.0,17.2,23.7,Blizzard,1.457142857142857,17.2,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2013-05-08,2013,5,128,-2.7,-6.6,0.0,3.8,7.6,Rapid Thaw,1.270833333333333,10.166666666666664,Temp jump (°C/3d),All modes,True
+2013-05-10,2013,5,130,0.6,-1.0,0.3,5.9,9.8,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-05-19,2013,5,139,1.1,-14.9,0.3,8.0,16.5,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-05-20,2013,5,140,2.2,-6.0,1.0,5.1,11.6,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-05-21,2013,5,141,3.3,1.1,1.3,4.9,11.6,Rain-on-Snow,0.5,1.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-05-26,2013,5,146,2.2,-1.0,2.8,3.4,8.9,Rain-on-Snow,0.9333333333333332,2.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-05-29,2013,5,149,1.7,-0.5,0.5,2.7,6.3,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-05-30,2013,5,150,0.6,-1.0,0.3,2.4,5.4,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-09-18,2013,9,261,-0.5,-2.7,0.8,7.6,12.5,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,True
+2013-10-17,2013,10,290,1.1,-2.7,1.3,5.1,13.4,Rain-on-Snow,0.5,1.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-10-18,2013,10,291,1.7,-2.7,0.5,6.2,13.9,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2013-11-09,2013,11,313,1.7,-13.8,1.8,8.7,14.8,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,False
+2013-11-10,2013,11,314,1.7,-8.8,0.3,13.5,21.0,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,False
+2014-04-14,2014,4,104,-2.7,-11.6,0.3,2.2,4.9,Rapid Thaw,1.3166666666666667,10.533333333333333,Temp jump (°C/3d),All modes,True
+2014-04-15,2014,4,105,-2.1,-7.7,0.8,3.4,7.6,Rapid Thaw,1.6625,13.3,Temp jump (°C/3d),All modes,True
+2014-04-16,2014,4,106,-2.7,-7.7,0.0,5.1,9.8,Rapid Thaw,1.5708333333333335,12.566666666666668,Temp jump (°C/3d),All modes,True
+2014-05-01,2014,5,121,2.8,1.1,1.3,5.4,8.1,Rain-on-Snow,0.5,1.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2014-05-10,2014,5,130,1.1,-5.5,0.8,6.6,12.1,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2014-05-11,2014,5,131,2.2,0.0,0.5,4.7,11.2,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2014-05-12,2014,5,132,2.8,-1.0,4.6,5.3,11.2,Rain-on-Snow,1.5333333333333332,4.6,Precip (mm),Snowmachine / Four-Wheeler,True
+2014-05-14,2014,5,134,0.6,-2.1,1.0,7.3,15.2,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2014-05-15,2014,5,135,2.2,0.0,7.6,4.7,9.8,Rain-on-Snow,2.533333333333333,7.6,Precip (mm),Snowmachine / Four-Wheeler,True
+2014-05-17,2014,5,137,1.1,-5.5,2.3,5.2,11.6,Rain-on-Snow,0.7666666666666666,2.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2014-09-29,2014,9,272,2.2,-1.0,0.0,4.6,9.8,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,True
+2014-10-01,2014,10,274,1.1,-0.5,2.0,3.5,11.6,Rain-on-Snow,0.6666666666666666,2.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2014-10-08,2014,10,281,-1.6,-8.2,0.0,5.4,11.6,Glaze/Ice,2.0,5.4,Wind speed (m/s),All modes,True
+2014-10-12,2014,10,285,-6.0,-6.6,0.0,7.2,12.1,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,True
+2014-10-13,2014,10,286,-4.3,-6.0,1.3,7.7,12.1,Glaze/Ice,2.0,7.7,Wind speed (m/s),All modes,True
+2014-10-14,2014,10,287,-3.8,-4.9,0.8,8.9,12.5,Glaze/Ice,2.0,8.9,Wind speed (m/s),All modes,True
+2014-10-20,2014,10,293,-7.1,-10.5,1.5,15.2,22.4,High Wind,1.6571428571428568,15.2,Wind speed (m/s),Boat,True
+2014-10-25,2014,10,298,-6.6,-15.5,0.0,4.1,8.9,Glaze/Ice,2.0,4.1,Wind speed (m/s),All modes,True
+2014-11-11,2014,11,315,1.1,-8.8,0.0,4.7,8.5,Rapid Thaw,1.3625000000000003,10.900000000000002,Temp jump (°C/3d),All modes,False
+2014-11-12,2014,11,316,-0.5,-7.7,0.0,5.1,9.8,Rapid Thaw,1.6583333333333334,13.266666666666667,Temp jump (°C/3d),All modes,False
+2014-11-13,2014,11,317,1.7,-4.9,0.5,3.9,7.6,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,False
+2014-11-14,2014,11,318,-0.5,-6.6,0.0,6.0,10.3,Glaze/Ice,2.0,6.0,Wind speed (m/s),All modes,False
+2014-11-15,2014,11,319,-3.2,-11.6,0.0,4.9,10.3,Glaze/Ice,2.0,4.9,Wind speed (m/s),All modes,False
+2014-11-16,2014,11,320,-3.2,-9.3,0.0,2.1,7.6,Glaze/Ice,2.0,2.1,Wind speed (m/s),All modes,False
+2014-12-28,2014,12,362,-5.5,-24.9,2.8,12.4,22.4,Glaze/Ice,2.0,12.4,Wind speed (m/s),All modes,False
+2014-12-29,2014,12,363,-3.2,-17.7,0.0,8.8,17.4,Glaze/Ice,2.0,8.8,Wind speed (m/s),All modes,False
+2015-05-04,2015,5,124,-6.0,-8.8,0.0,4.2,7.6,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,True
+2015-05-07,2015,5,127,-5.5,-11.0,0.3,5.6,13.4,Glaze/Ice,2.0,5.6,Wind speed (m/s),All modes,True
+2015-05-08,2015,5,128,0.0,-8.8,0.0,6.8,12.1,Glaze/Ice,2.0,6.8,Wind speed (m/s),All modes,True
+2015-05-09,2015,5,129,-0.5,-3.8,0.0,3.0,8.1,Glaze/Ice,2.0,3.0,Wind speed (m/s),All modes,True
+2015-05-10,2015,5,130,0.6,-6.0,0.0,5.9,11.6,Glaze/Ice,2.0,5.9,Wind speed (m/s),All modes,True
+2015-05-11,2015,5,131,0.0,-2.1,0.0,4.4,10.3,Glaze/Ice,2.0,4.4,Wind speed (m/s),All modes,True
+2015-05-12,2015,5,132,0.6,-3.8,0.0,5.4,9.8,Glaze/Ice,2.0,5.4,Wind speed (m/s),All modes,True
+2015-05-15,2015,5,135,0.0,-5.5,0.0,8.0,17.0,Glaze/Ice,2.0,8.0,Wind speed (m/s),All modes,True
+2015-05-16,2015,5,136,2.2,-2.7,2.3,4.2,9.4,Rain-on-Snow,0.7666666666666666,2.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2015-05-16,2015,5,136,2.2,-2.7,2.3,4.2,9.4,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,True
+2015-05-22,2015,5,142,5.0,0.6,0.3,5.1,13.4,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2015-05-25,2015,5,145,1.7,-0.5,8.6,2.9,5.8,Glaze/Ice,2.0,2.9,Wind speed (m/s),All modes,True
+2015-05-25,2015,5,145,1.7,-0.5,8.6,2.9,5.8,Rain-on-Snow,2.8666666666666667,8.6,Precip (mm),Snowmachine / Four-Wheeler,True
+2015-05-26,2015,5,146,0.0,-1.6,0.0,2.4,5.4,Glaze/Ice,2.0,2.4,Wind speed (m/s),All modes,True
+2015-05-27,2015,5,147,1.1,-2.1,0.3,4.0,8.1,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2015-05-28,2015,5,148,2.2,-2.1,0.3,6.7,13.0,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2015-05-29,2015,5,149,5.0,0.0,3.6,3.3,6.7,Rain-on-Snow,1.2,3.6,Precip (mm),Snowmachine / Four-Wheeler,True
+2015-06-03,2015,6,154,-1.0,-3.2,0.0,5.7,11.2,Glaze/Ice,2.0,5.7,Wind speed (m/s),All modes,False
+2015-06-04,2015,6,155,-1.0,-3.8,0.0,7.2,12.1,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2015-06-05,2015,6,156,-0.5,-3.2,1.8,9.3,14.8,Glaze/Ice,2.0,9.3,Wind speed (m/s),All modes,False
+2015-06-06,2015,6,157,3.9,-1.0,0.0,5.3,,Glaze/Ice,2.0,5.3,Wind speed (m/s),All modes,False
+2015-08-27,2015,8,239,3.3,1.7,0.0,13.9,21.9,High Wind,1.2857142857142856,13.9,Wind speed (m/s),Boat,True
+2015-09-19,2015,9,262,-1.0,-3.2,0.3,4.2,8.5,Glaze/Ice,2.0,4.2,Wind speed (m/s),All modes,True
+2015-09-21,2015,9,264,-2.1,-5.5,0.3,2.8,6.7,Glaze/Ice,2.0,2.8,Wind speed (m/s),All modes,True
+2015-10-07,2015,10,280,-3.8,-5.5,0.0,7.0,11.2,Glaze/Ice,2.0,7.0,Wind speed (m/s),All modes,True
+2015-10-08,2015,10,281,-3.8,-5.5,0.0,7.1,11.6,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,True
+2015-10-10,2015,10,283,-3.8,-4.9,0.0,11.2,17.0,Glaze/Ice,2.0,11.2,Wind speed (m/s),All modes,True
+2015-10-11,2015,10,284,-2.1,-3.8,0.0,10.0,16.5,Glaze/Ice,2.0,10.0,Wind speed (m/s),All modes,True
+2015-10-18,2015,10,291,-2.7,-5.5,0.0,7.1,10.7,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,True
+2015-10-23,2015,10,296,-4.3,-6.6,0.0,9.5,15.7,Glaze/Ice,2.0,9.5,Wind speed (m/s),All modes,True
+2015-10-24,2015,10,297,-3.8,-4.3,0.0,6.1,14.8,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,True
+2015-10-25,2015,10,298,-3.8,-13.2,0.0,2.8,7.6,Glaze/Ice,2.0,2.8,Wind speed (m/s),All modes,True
+2015-10-26,2015,10,299,-6.0,-9.3,0.0,3.8,7.2,Glaze/Ice,2.0,3.8,Wind speed (m/s),All modes,True
+2015-11-03,2015,11,307,-3.8,-7.7,0.5,7.2,15.7,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2016-04-26,2016,4,117,-3.2,-4.9,0.3,6.1,10.7,Glaze/Ice,2.0,6.1,Wind speed (m/s),All modes,True
+2016-04-27,2016,4,118,-3.2,-4.9,0.0,4.6,8.5,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,True
+2016-04-29,2016,4,120,-1.6,-3.2,0.0,3.2,6.3,Glaze/Ice,2.0,3.2,Wind speed (m/s),All modes,True
+2016-05-17,2016,5,138,-2.7,-6.0,0.0,7.9,12.5,Glaze/Ice,2.0,7.9,Wind speed (m/s),All modes,True
+2016-05-22,2016,5,143,1.7,0.0,0.5,3.9,8.9,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2016-05-24,2016,5,145,2.8,-1.0,0.8,5.5,10.3,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2016-06-01,2016,6,153,0.0,-3.2,0.8,4.8,8.5,Glaze/Ice,2.0,4.8,Wind speed (m/s),All modes,False
+2016-06-02,2016,6,154,0.6,-3.2,0.0,4.6,8.5,Glaze/Ice,2.0,4.6,Wind speed (m/s),All modes,False
+2016-06-17,2016,6,169,12.8,0.0,0.0,7.4,11.6,Glaze/Ice,2.0,7.4,Wind speed (m/s),All modes,False
+2016-08-19,2016,8,232,2.8,-1.0,4.1,3.9,8.1,Glaze/Ice,2.0,3.9,Wind speed (m/s),All modes,False
+2016-10-19,2016,10,293,0.6,-5.5,0.8,3.0,6.3,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2016-10-29,2016,10,303,5.0,-4.9,2.0,6.8,15.7,Rain-on-Snow,0.6666666666666666,2.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2016-10-30,2016,10,304,2.2,-2.1,0.5,5.9,12.1,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-01-01,2017,1,1,2.2,-6.6,8.1,9.1,16.5,Rain-on-Snow,2.6999999999999997,8.1,Precip (mm),Snowmachine / Four-Wheeler,False
+2017-03-10,2017,3,69,-3.2,-7.7,0.3,6.9,12.5,Rapid Thaw,1.8125000000000004,14.500000000000004,Temp jump (°C/3d),All modes,False
+2017-03-11,2017,3,70,-3.2,-14.3,0.0,5.5,13.0,Rapid Thaw,1.7916666666666665,14.333333333333332,Temp jump (°C/3d),All modes,False
+2017-03-22,2017,3,81,-12.1,-24.3,0.0,5.5,8.9,Rapid Thaw,1.7625,14.1,Temp jump (°C/3d),All modes,False
+2017-05-18,2017,5,138,0.6,-3.3,1.5,4.9,10.7,Rain-on-Snow,0.5,1.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-05-26,2017,5,146,1.7,-4.9,3.6,6.1,16.1,Rain-on-Snow,1.2,3.6,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-05-29,2017,5,149,1.7,-1.0,2.5,9.3,15.2,Rain-on-Snow,0.8333333333333334,2.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-10-01,2017,10,274,3.3,-1.6,2.8,3.6,9.4,Rain-on-Snow,0.9333333333333332,2.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-10-05,2017,10,278,1.7,-0.5,2.8,4.8,11.2,Rain-on-Snow,0.9333333333333332,2.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-10-07,2017,10,280,0.6,-1.6,0.3,5.1,13.4,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-10-08,2017,10,281,0.6,-2.1,0.5,4.1,8.5,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-10-31,2017,10,304,1.1,-8.8,0.3,4.9,9.8,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2017-11-02,2017,11,306,1.7,0.0,1.0,12.2,18.3,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,False
+2017-11-03,2017,11,307,1.7,-1.1,0.5,11.0,21.0,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,False
+2017-11-12,2017,11,316,1.1,-3.2,1.3,6.8,15.2,Rain-on-Snow,0.5,1.3,Precip (mm),Snowmachine / Four-Wheeler,False
+2017-12-21,2017,12,355,0.6,-9.3,0.3,8.6,21.0,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,False
+2018-03-03,2018,3,62,-3.8,-11.0,0.5,6.2,10.7,Rapid Thaw,1.7125,13.7,Temp jump (°C/3d),All modes,False
+2018-03-04,2018,3,63,-9.3,-16.6,0.5,4.8,8.9,Rapid Thaw,2.0375,16.3,Temp jump (°C/3d),All modes,False
+2018-03-05,2018,3,64,-5.5,-15.5,0.8,5.5,8.1,Rapid Thaw,1.2958333333333334,10.366666666666667,Temp jump (°C/3d),All modes,False
+2018-03-31,2018,3,90,-1.0,-11.6,0.5,10.6,16.5,Rapid Thaw,1.2791666666666666,10.233333333333333,Temp jump (°C/3d),All modes,False
+2019-02-08,2019,2,39,0.6,-12.7,0.5,8.6,21.0,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,False
+2019-02-28,2019,2,59,1.1,-10.5,0.8,6.8,12.1,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,False
+2019-03-25,2019,3,84,-5.5,-13.8,0.0,4.2,9.8,Rapid Thaw,1.3375000000000004,10.700000000000003,Temp jump (°C/3d),All modes,False
+2019-03-26,2019,3,85,0.0,-8.2,2.8,7.0,13.9,Rapid Thaw,1.5,12.0,Temp jump (°C/3d),All modes,False
+2019-03-30,2019,3,89,0.6,-6.0,3.8,8.2,19.7,Rain-on-Snow,1.2666666666666666,3.8,Precip (mm),Snowmachine / Four-Wheeler,False
+2019-05-04,2019,5,124,0.6,-5.5,0.3,6.5,10.3,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-05-21,2019,5,141,1.1,-1.0,0.3,2.1,5.8,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-05-27,2019,5,147,0.6,-1.0,2.5,9.8,16.1,Rain-on-Snow,0.8333333333333334,2.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-05-29,2019,5,149,0.6,-1.0,7.1,9.8,17.0,Rain-on-Snow,2.3666666666666667,7.1,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-01,2019,10,274,6.1,-1.0,0.3,4.3,10.3,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-05,2019,10,278,2.8,-0.5,1.5,6.3,13.9,Rain-on-Snow,0.5,1.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-06,2019,10,279,1.7,0.0,0.5,7.2,14.3,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-07,2019,10,280,2.8,-4.3,0.8,4.3,12.1,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-09,2019,10,282,2.2,-2.7,1.8,4.6,11.2,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-10,2019,10,283,3.3,1.1,1.0,6.3,13.9,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-11,2019,10,284,2.8,0.0,1.8,9.6,18.8,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-12,2019,10,285,2.2,-7.1,0.8,2.6,13.4,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-18,2019,10,291,0.6,0.0,0.3,9.6,16.5,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-28,2019,10,301,3.3,0.0,2.8,10.5,17.4,Rain-on-Snow,0.9333333333333332,2.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-30,2019,10,303,2.8,-5.5,2.3,12.1,21.5,Rain-on-Snow,0.7666666666666666,2.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-10-31,2019,10,304,1.7,0.0,2.5,8.5,15.2,Rain-on-Snow,0.8333333333333334,2.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2019-11-01,2019,11,305,1.1,-3.2,1.8,6.1,13.4,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,False
+2019-11-04,2019,11,308,1.1,-16.6,2.8,7.9,16.5,Rain-on-Snow,0.9333333333333332,2.8,Precip (mm),Snowmachine / Four-Wheeler,False
+2019-11-05,2019,11,309,0.6,-3.2,0.5,6.3,16.1,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,False
+2019-11-10,2019,11,314,1.1,-4.3,1.8,5.8,12.1,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,False
+2020-03-07,2020,3,67,-16.6,-21.6,0.0,2.6,5.4,Rapid Thaw,1.8499999999999996,14.799999999999997,Temp jump (°C/3d),All modes,False
+2020-03-13,2020,3,73,-2.7,-4.3,4.6,15.8,27.7,Blizzard,1.0571428571428574,15.8,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2020-03-13,2020,3,73,-2.7,-4.3,4.6,15.8,27.7,Rapid Thaw,1.7625000000000002,14.100000000000001,Temp jump (°C/3d),All modes,False
+2020-03-14,2020,3,74,-2.7,-19.9,1.3,10.3,21.9,Rapid Thaw,3.0,26.666666666666643,Temp jump (°C/3d),All modes,False
+2020-03-15,2020,3,75,-4.3,-25.5,2.5,6.7,14.8,Rapid Thaw,2.2708333333333335,18.166666666666668,Temp jump (°C/3d),All modes,False
+2020-04-01,2020,4,92,-7.1,-16.6,0.0,6.2,10.7,Rapid Thaw,1.5291666666666672,12.233333333333338,Temp jump (°C/3d),All modes,True
+2020-04-02,2020,4,93,-5.5,-18.2,0.3,5.5,10.3,Rapid Thaw,1.5250000000000004,12.200000000000003,Temp jump (°C/3d),All modes,True
+2020-04-13,2020,4,104,-2.1,-7.7,0.3,3.6,11.6,Rapid Thaw,1.9208333333333332,15.366666666666665,Temp jump (°C/3d),All modes,True
+2020-05-26,2020,5,147,1.7,-1.6,0.3,1.5,4.5,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2020-10-02,2020,10,276,1.7,0.0,2.3,6.7,13.0,Rain-on-Snow,0.7666666666666666,2.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2020-10-03,2020,10,277,1.1,0.0,0.5,4.0,9.8,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2020-10-05,2020,10,279,1.1,-0.5,0.3,5.4,9.8,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2020-10-06,2020,10,280,0.6,-1.0,1.8,2.6,8.5,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2020-10-21,2020,10,295,1.7,-1.0,0.3,7.2,14.8,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2020-10-22,2020,10,296,2.2,0.6,0.5,5.3,15.7,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2020-11-06,2020,11,311,1.1,-12.1,2.3,5.9,13.4,Rain-on-Snow,0.7666666666666666,2.3,Precip (mm),Snowmachine / Four-Wheeler,False
+2020-11-07,2020,11,312,0.6,-1.6,1.0,8.9,13.9,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,False
+2021-03-08,2021,3,67,-0.5,-19.9,0.5,10.5,17.0,Rapid Thaw,1.2916666666666663,10.33333333333333,Temp jump (°C/3d),All modes,False
+2021-03-09,2021,3,68,-3.2,-22.1,0.5,5.4,14.8,Rapid Thaw,1.9000000000000004,15.200000000000003,Temp jump (°C/3d),All modes,False
+2021-03-10,2021,3,69,-12.1,-23.8,1.5,6.9,12.5,Rapid Thaw,1.9249999999999998,15.399999999999999,Temp jump (°C/3d),All modes,False
+2021-04-14,2021,4,104,-8.2,-14.9,0.0,5.1,8.9,Rapid Thaw,1.3,10.4,Temp jump (°C/3d),All modes,True
+2021-10-06,2021,10,279,0.6,-2.1,0.3,4.5,9.4,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2021-12-16,2021,12,350,-22.1,-26.0,4.8,11.4,17.9,Glaze/Ice,2.0,11.4,Wind speed (m/s),All modes,False
+2022-03-01,2022,3,60,-10.5,-14.3,0.0,3.3,6.7,Rapid Thaw,1.3166666666666669,10.533333333333335,Temp jump (°C/3d),All modes,False
+2022-05-08,2022,5,128,1.7,-8.8,0.8,5.4,10.7,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2022-05-15,2022,5,135,1.1,-11.6,0.5,4.8,11.6,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2022-05-20,2022,5,140,0.6,-3.2,0.3,4.9,8.9,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2022-05-27,2022,5,147,1.1,-6.0,2.0,4.3,10.3,Rain-on-Snow,0.6666666666666666,2.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2022-10-01,2022,10,274,-1.6,-3.2,0.0,5.3,10.7,Glaze/Ice,2.0,5.3,Wind speed (m/s),All modes,True
+2022-10-02,2022,10,275,-1.0,-4.9,0.0,5.1,11.2,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,True
+2022-10-05,2022,10,278,3.3,-1.6,2.0,6.8,15.7,Rain-on-Snow,0.6666666666666666,2.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2022-10-06,2022,10,279,5.6,1.1,0.3,10.2,19.2,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2022-10-07,2022,10,280,2.2,-0.5,0.5,10.4,21.9,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2022-10-09,2022,10,282,1.7,-7.7,0.8,3.5,12.1,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2022-10-16,2022,10,289,-0.5,-6.0,0.0,9.3,14.8,Glaze/Ice,2.0,9.3,Wind speed (m/s),All modes,True
+2022-10-20,2022,10,293,-1.6,-3.8,1.0,9.8,17.0,Glaze/Ice,2.0,9.8,Wind speed (m/s),All modes,True
+2022-10-21,2022,10,294,-2.1,-3.8,0.0,10.7,17.4,Glaze/Ice,2.0,10.7,Wind speed (m/s),All modes,True
+2022-11-10,2022,11,314,-2.1,-11.6,0.3,7.1,13.9,Glaze/Ice,2.0,7.1,Wind speed (m/s),All modes,False
+2022-11-17,2022,11,321,1.1,-2.7,1.8,5.2,11.6,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,False
+2022-11-18,2022,11,322,1.7,-2.7,0.5,10.3,18.3,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,False
+2022-11-30,2022,11,334,-1.6,-5.5,0.8,6.6,16.1,Glaze/Ice,2.0,6.6,Wind speed (m/s),All modes,False
+2022-12-01,2022,12,335,-2.1,-8.8,3.6,5.1,10.3,Glaze/Ice,2.0,5.1,Wind speed (m/s),All modes,False
+2022-12-02,2022,12,336,0.0,-2.1,2.5,12.0,19.2,Glaze/Ice,2.0,12.0,Wind speed (m/s),All modes,False
+2023-03-06,2023,3,65,-7.7,-12.1,1.3,6.9,11.6,Rapid Thaw,1.3916666666666668,11.133333333333335,Temp jump (°C/3d),All modes,False
+2023-03-07,2023,3,66,-0.5,-8.2,0.0,4.1,8.5,Rapid Thaw,2.4750000000000005,19.800000000000004,Temp jump (°C/3d),All modes,False
+2023-03-08,2023,3,67,-0.5,-21.0,0.0,8.2,15.2,Rapid Thaw,2.0791666666666666,16.633333333333333,Temp jump (°C/3d),All modes,False
+2023-03-21,2023,3,80,-9.3,-19.3,0.0,4.4,8.9,Rapid Thaw,1.6208333333333331,12.966666666666665,Temp jump (°C/3d),All modes,False
+2023-03-22,2023,3,81,-6.0,-17.1,0.0,,,Rapid Thaw,1.6916666666666669,13.533333333333335,Temp jump (°C/3d),All modes,False
+2023-05-28,2023,5,148,2.2,-0.5,1.5,4.4,8.9,Glaze/Ice,2.0,4.4,Wind speed (m/s),All modes,True
+2023-05-28,2023,5,148,2.2,-0.5,1.5,4.4,8.9,Rain-on-Snow,0.5,1.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2023-05-30,2023,5,150,1.7,-1.6,5.3,2.9,6.3,Rain-on-Snow,1.7666666666666666,5.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2023-05-30,2023,5,150,1.7,-1.6,5.3,2.9,6.3,Glaze/Ice,2.0,2.9,Wind speed (m/s),All modes,True
+2023-06-05,2023,6,156,5.6,-0.5,1.0,4.7,10.7,Glaze/Ice,2.0,4.7,Wind speed (m/s),All modes,False
+2023-06-11,2023,6,162,5.0,-1.0,0.0,7.2,13.0,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,False
+2023-10-01,2023,10,274,2.2,-2.1,0.8,,,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2023-10-03,2023,10,276,1.1,-2.1,0.3,7.1,13.0,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2023-10-04,2023,10,277,1.1,-3.8,1.8,6.8,13.9,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2023-10-23,2023,10,296,0.6,-13.2,1.3,8.1,14.8,Rain-on-Snow,0.5,1.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2023-10-24,2023,10,297,2.2,-0.5,0.5,9.8,18.3,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2023-10-29,2023,10,302,1.1,-4.3,2.8,5.2,12.1,Rain-on-Snow,0.9333333333333332,2.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2023-11-06,2023,11,310,-4.9,-6.6,1.0,11.6,17.9,Glaze/Ice,2.0,11.6,Wind speed (m/s),All modes,False
+2023-11-30,2023,11,334,-5.5,-12.1,0.5,4.5,12.1,Glaze/Ice,2.0,4.5,Wind speed (m/s),All modes,False
+2024-01-16,2024,1,16,-2.1,-16.6,0.3,16.5,27.3,Blizzard,1.2571428571428571,16.5,Wind speed (m/s),Snowmachine / Four-Wheeler,False
+2024-02-13,2024,2,44,-7.7,-21.6,0.8,7.6,12.1,Glaze/Ice,2.0,7.6,Wind speed (m/s),All modes,False
+2024-03-21,2024,3,81,-4.9,-15.5,0.0,5.1,9.8,Rapid Thaw,1.5500000000000005,12.400000000000004,Temp jump (°C/3d),All modes,False
+2024-03-22,2024,3,82,-1.0,-8.2,0.3,,,Rapid Thaw,1.9208333333333334,15.366666666666667,Temp jump (°C/3d),All modes,False
+2024-03-23,2024,3,83,-2.1,-17.7,0.3,,11.2,Rapid Thaw,1.666666666666667,13.333333333333336,Temp jump (°C/3d),All modes,False
+2024-04-12,2024,4,103,-6.6,-18.2,0.3,,14.8,Rapid Thaw,1.2708333333333328,10.166666666666663,Temp jump (°C/3d),All modes,True
+2024-04-13,2024,4,104,-13.2,-18.8,0.0,,12.5,Rapid Thaw,1.5250000000000004,12.200000000000003,Temp jump (°C/3d),All modes,True
+2024-04-16,2024,4,107,2.2,-12.7,0.8,,19.7,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-02,2024,10,276,2.2,0.0,1.0,2.1,6.3,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-03,2024,10,277,1.1,-6.6,5.6,4.1,9.4,Rain-on-Snow,1.8666666666666665,5.6,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-07,2024,10,281,0.6,-2.1,1.8,2.7,6.3,Rain-on-Snow,0.6,1.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-08,2024,10,282,0.6,-1.6,0.5,4.5,10.3,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-09,2024,10,283,0.6,-1.6,0.8,4.3,9.8,Rain-on-Snow,0.5,0.8,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-10,2024,10,284,1.1,-0.5,0.5,4.5,9.4,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-11,2024,10,285,1.1,-0.5,1.0,3.1,8.9,Rain-on-Snow,0.5,1.0,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-12,2024,10,286,0.6,-2.7,1.3,7.2,15.7,Rain-on-Snow,0.5,1.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-12,2024,10,286,0.6,-2.7,1.3,7.2,15.7,Glaze/Ice,2.0,7.2,Wind speed (m/s),All modes,True
+2024-10-14,2024,10,288,-0.5,-2.7,0.8,5.5,10.7,Glaze/Ice,2.0,5.5,Wind speed (m/s),All modes,True
+2024-10-21,2024,10,295,2.2,-1.6,2.3,10.5,19.7,Rain-on-Snow,0.7666666666666666,2.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-10-22,2024,10,296,0.6,-3.8,0.3,6.4,13.9,Rain-on-Snow,0.5,0.3,Precip (mm),Snowmachine / Four-Wheeler,True
+2024-11-20,2024,11,325,1.1,-8.2,0.5,14.6,27.7,Rain-on-Snow,0.5,0.5,Precip (mm),Snowmachine / Four-Wheeler,False

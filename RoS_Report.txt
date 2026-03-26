@@ -1,0 +1,130 @@
+
+================================================================================
+RAIN-ON-SNOW SAR DETECTION  |  UTQIAGVIK TRAIL NETWORK  |  2015-2024
+Sentinel-1 RTC  |  Same-orbit delta_VV methodology
+================================================================================
+
+METHODOLOGY
+-----------
+  A rain-on-snow event is detected in the weather record when:
+    PRCP > 0 mm  AND  TMAX > 0 degrees C  AND  month in Oct-May
+
+  CRITICAL DESIGN CHOICE: same-orbit comparison
+  ----------------------------------------------
+  Sentinel-1 acquires in two geometry modes:
+    - Ascending pass  (~06:00 UTC, looking east)
+    - Descending pass (~18:00 UTC, looking west)
+  Look-angle difference between the two is ~30 degrees.
+  Mixing ascending and descending passes introduces a ~2-3 dB spurious
+  delta_VV that can mask or mimic the RoS signal (-3 to -8 dB).
+
+  This script ALWAYS compares:
+    post-event acquisition (orbit X) - baseline acquisition (same orbit X)
+  eliminating the geometry artefact and isolating the surface signal.
+
+  BASELINE CONSTRUCTION
+  ---------------------
+  One October acquisition per year per orbit direction is used as the
+  dry-snow reference. October is chosen because:
+    - Snowpack is established but RoS season has not yet peaked
+    - Ground is still frozen (not thawed tundra from summer)
+    - Consistent annual reference point
+
+  DETECTION THRESHOLD
+  -------------------
+  delta_VV < -3 dB  = wet snow / RoS signal present
+  This threshold is conservative; true RoS events typically produce
+  -5 to -10 dB during active rain, settling to -2 to -4 dB after refreeze.
+  The post-refreeze ice-crust signal (-2 to -4 dB) is what we detect in
+  most cases because the SAR revisit (6-12 days) typically misses the brief
+  wet-snow window (hours to 1-2 days before refreezing at -40 to -50 C).
+
+EVENT RESULTS
+-------------
+
+  2015-05-25  PRCP=8.6mm  -- no post-event S1 scene in window
+
+  2017-01-01  PRCP=8.1mm  -- no post-event S1 scene in window
+
+  2019-05-29  PRCP=7.1mm  TMAX=0.6C  orbit=descending
+    Baseline:       2019-10-30
+    Post-event S1:  2019-06-10
+    delta_VV trail: +6.17 +/- 5.75 dB
+    delta_VV bg:    -0.31 +/- 5.12 dB
+    Wet-snow pixels: trail=3%  bg=33%
+    Trail vs. bg significance: ***
+
+  2024-10-03  PRCP=5.6mm  TMAX=1.1C  orbit=descending
+    Baseline:       2024-10-27
+    Post-event S1:  2024-10-15
+    delta_VV trail: -2.16 +/- 4.36 dB
+    delta_VV bg:    -5.27 +/- 3.51 dB
+    Wet-snow pixels: trail=37%  bg=77%
+    Trail vs. bg significance: ***
+
+  2023-05-30  PRCP=5.3mm  TMAX=1.7C  orbit=descending
+    Baseline:       2023-10-23
+    Post-event S1:  2023-06-11
+    delta_VV trail: +3.32 +/- 3.99 dB
+    delta_VV bg:    +5.25 +/- 3.33 dB
+    Wet-snow pixels: trail=5%  bg=1%
+    Trail vs. bg significance: ***
+
+  2020-10-02  PRCP=2.3mm  TMAX=1.7C  orbit=descending
+    Baseline:       2020-10-26
+    Post-event S1:  2020-10-14
+    delta_VV trail: +1.52 +/- 4.30 dB
+    delta_VV bg:    +4.67 +/- 3.55 dB
+    Wet-snow pixels: trail=11%  bg=2%
+    Trail vs. bg significance: ***
+
+
+INTERPRETATION
+--------------
+  Positive delta_VV: backscatter INCREASED relative to baseline.
+    - Can happen when post-event snow is rougher than baseline dry snow
+    - Or when a thin new snowfall between baseline and post-event adds volume scatter
+    - Does NOT indicate a RoS signal
+
+  Negative delta_VV < -3 dB: backscatter DECREASED.
+    - Consistent with wet snow (during rain) or ice crust (after refreeze)
+    - On trail corridors specifically: ice crust makes the surface specular
+    - Magnitude -5 to -10 dB expected during event; -2 to -4 dB after refreeze
+
+  TRAIL vs. BACKGROUND DIFFERENCE:
+  If delta_VV on trail < delta_VV on background, the trail corridor is
+  experiencing more pronounced surface change. This could reflect:
+    - Lower elevation (trails often follow valleys, river corridors)
+    - Different snow depth / substrate (tundra vs. lake vs. river ice)
+    - The trail route itself acts as a drainage pathway (water collects then freezes)
+
+LIMITATIONS
+-----------
+  1. Timing: We capture post-refreeze ice crust, not the active wet-snow event.
+     The 6-12 day revisit misses the brief window when VV drops most sharply.
+     RECOMMENDATION: In future, use Planet or upcoming S1-NG (shorter revisit).
+
+  2. Orbit mixing: This script enforces same-orbit matching, but in years with
+     only one orbit direction available, inter-year baseline may be used, which
+     introduces seasonal/snowpack state uncertainty.
+
+  3. No ground truth: We have no direct measurement of ice crust presence on
+     specific trail segments. Validation against community traveler logs or
+     in-situ snow pit measurements would confirm the SAR signal.
+
+  4. Precipitation amount vs. ice crust severity: A 1mm RoS event in February
+     (cold refreeze) may produce a more dangerous and persistent ice crust than
+     a 10mm event in April (warmer, faster refreeze-melt cycle). The SAR signal
+     alone does not separate these scenarios.
+
+  5. Spatial resolution: At 10m, individual trail corridors (typically 1-3m
+     wide) are sub-pixel. The 200m buffer captures surrounding snow/ice
+     surface state, not the trail surface directly.
+
+OUTPUT FILES
+------------
+  RoS1_Event_Overview.png   -- RoS climatology, seasonality, SAR availability
+  RoS2_SAR_Before_After.png -- Baseline / post-event VV + delta + distribution
+  RoS3_Statistics.png       -- Summary: delta_VV, wet-snow fraction, vs. precip
+  RoS_Report.txt            -- This report
+================================================================================
