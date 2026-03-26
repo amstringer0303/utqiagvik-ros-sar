@@ -1,0 +1,127 @@
+======================================================================
+FULL RAIN-ON-SNOW CHARACTERIZATION REPORT
+Utqiagvik (Barrow), Alaska  |  GHCN USW00027502  |  1980-2024
+Generated: 2026-03-26 12:32
+======================================================================
+
+1. CLIMATE TIME SERIES (GHCN-Daily)
+----------------------------------------
+Station: USW00027502 (Utqiagvik Airport)
+Record: 1980-2024  (16437 daily observations)
+SNWD data available: 14214 days (86%)
+
+2. RoS EVENT DETECTION
+----------------------------------------
+Loose criterion:   PRCP > 0 mm  AND  TMAX > 0C  AND  month in Oct-May
+Refined criterion: + SNWD > 0 mm (snowpack present) when data available
+
+Loose RoS events 1980-2024:   215 days  (4.9/yr)
+Refined RoS events 1980-2024: 159 days  (3.6/yr)
+Deep-winter (DJF) RoS:        5 days  (0.1/yr)
+
+3. TREND ANALYSIS (Mann-Kendall, 1980-2024)
+----------------------------------------
+  Loose Oct-May       : slope=+0.156 days/yr  p=0.0014  (significant p<0.05)
+  Refined Oct-May     : slope=+0.100 days/yr  p=0.0083  (significant p<0.05)
+  DJF only            : slope=+0.000 days/yr  p=0.8068  (not significant)
+
+4. DECADAL MEANS (refined RoS days/year)
+----------------------------------------
+  1980s: Oct-May=1.9±1.9  DJF=0.1±0.3
+  1990s: Oct-May=2.0±2.0  DJF=0.0±0.0
+  2000s: Oct-May=2.2±2.1  DJF=0.0±0.0
+  2010s: Oct-May=5.8±6.6  DJF=0.4±0.8
+  2020s: Oct-May=8.0±3.7  DJF=0.0±0.0
+
+5. SEASONAL WINDOW
+----------------------------------------
+First RoS (water DOY): mean=81, range=[1,243]
+Last  RoS (water DOY): mean=174, range=[2,243]
+Compound sequences (>=2 days): 30  (max=6 consecutive days)
+
+6. SAR ANALYSIS (Sentinel-1 RTC, 2016-2024)
+----------------------------------------
+Dry-snow baselines acquired: 14
+RoS events processed (matched SAR pair): 65
+Mean trail delta_VV: +1.18 dB
+Mean background delta_VV: +1.59 dB
+Mean wet-snow pixel fraction: 10.1%
+Events with trail < bg (trail enhanced absorption): 30/65
+
+Individual events:
+  2017-05-18   PRCP=1.5mm  TMAX=0.6C  dVV_trail=-8.61dB  wet=34%  ***  post=2017-05-30
+  2017-05-26   PRCP=3.6mm  TMAX=1.7C  dVV_trail=+3.60dB  wet=5%  ***  post=2017-06-08
+  2017-05-29   PRCP=2.5mm  TMAX=1.7C  dVV_trail=-1.70dB  wet=20%  ***  post=2017-06-11
+  2017-10-31   PRCP=0.3mm  TMAX=1.1C  dVV_trail=+0.41dB  wet=12%  ***  post=2017-11-11
+  2017-11-02   PRCP=1.0mm  TMAX=1.7C  dVV_trail=+0.41dB  wet=12%  ***  post=2017-11-11
+  2017-11-03   PRCP=0.5mm  TMAX=1.7C  dVV_trail=+0.41dB  wet=12%  ***  post=2017-11-11
+  2017-11-12   PRCP=1.3mm  TMAX=1.1C  dVV_trail=-1.83dB  wet=33%  ***  post=2017-11-23
+  2017-12-21   PRCP=0.3mm  TMAX=0.6C  dVV_trail=-1.98dB  wet=34%  ***  post=2017-12-29
+  2019-02-08   PRCP=0.5mm  TMAX=0.6C  dVV_trail=+1.84dB  wet=17%  ***  post=2019-02-22
+  2019-02-28   PRCP=0.8mm  TMAX=1.1C  dVV_trail=+1.70dB  wet=19%  ***  post=2019-03-06
+  2019-03-30   PRCP=3.8mm  TMAX=0.6C  dVV_trail=+1.76dB  wet=17%  ***  post=2019-04-11
+  2019-05-04   PRCP=0.3mm  TMAX=0.6C  dVV_trail=+3.90dB  wet=2%  ***  post=2019-05-17
+  2019-05-21   PRCP=0.3mm  TMAX=1.1C  dVV_trail=+1.79dB  wet=25%  ***  post=2019-05-29
+  2019-05-27   PRCP=2.5mm  TMAX=0.6C  dVV_trail=+6.12dB  wet=3%  ***  post=2019-06-10
+  2019-05-29   PRCP=7.1mm  TMAX=0.6C  dVV_trail=+6.12dB  wet=3%  ***  post=2019-06-10
+  2019-10-01   PRCP=0.3mm  TMAX=6.1C  dVV_trail=+3.16dB  wet=6%  ***  post=2019-10-08
+  2019-10-05   PRCP=1.5mm  TMAX=2.8C  dVV_trail=+3.16dB  wet=6%  ***  post=2019-10-08
+  2019-10-06   PRCP=0.5mm  TMAX=1.7C  dVV_trail=+0.00dB  wet=0%  ns  post=2019-10-20
+  2019-10-07   PRCP=0.8mm  TMAX=2.8C  dVV_trail=+0.00dB  wet=0%  ns  post=2019-10-20
+  2019-10-09   PRCP=1.8mm  TMAX=2.2C  dVV_trail=+0.00dB  wet=0%  ns  post=2019-10-20
+  2019-10-10   PRCP=1.0mm  TMAX=3.3C  dVV_trail=+0.00dB  wet=0%  ns  post=2019-10-20
+  2019-10-11   PRCP=1.8mm  TMAX=2.8C  dVV_trail=+0.00dB  wet=0%  ns  post=2019-10-20
+  2019-10-12   PRCP=0.8mm  TMAX=2.2C  dVV_trail=+0.00dB  wet=0%  ns  post=2019-10-20
+  2019-10-18   PRCP=0.3mm  TMAX=0.6C  dVV_trail=+2.01dB  wet=6%  ***  post=2019-11-01
+  2019-10-28   PRCP=2.8mm  TMAX=3.3C  dVV_trail=+2.01dB  wet=6%  ***  post=2019-11-01
+  2019-10-30   PRCP=2.3mm  TMAX=2.8C  dVV_trail=+4.00dB  wet=3%  ***  post=2019-11-13
+  2019-10-31   PRCP=2.5mm  TMAX=1.7C  dVV_trail=+4.00dB  wet=3%  ***  post=2019-11-13
+  2019-11-01   PRCP=1.8mm  TMAX=1.1C  dVV_trail=+4.00dB  wet=3%  ***  post=2019-11-13
+  2019-11-04   PRCP=2.8mm  TMAX=1.1C  dVV_trail=+4.00dB  wet=3%  ***  post=2019-11-13
+  2019-11-05   PRCP=0.5mm  TMAX=0.6C  dVV_trail=+4.00dB  wet=3%  ***  post=2019-11-13
+  2019-11-10   PRCP=1.8mm  TMAX=1.1C  dVV_trail=+4.00dB  wet=3%  ***  post=2019-11-13
+  2020-05-26   PRCP=0.3mm  TMAX=1.7C  dVV_trail=+3.34dB  wet=11%  ***  post=2020-06-04
+  2020-10-02   PRCP=2.3mm  TMAX=1.7C  dVV_trail=+1.58dB  wet=11%  ***  post=2020-10-14
+  2020-10-03   PRCP=0.5mm  TMAX=1.1C  dVV_trail=+1.58dB  wet=11%  ***  post=2020-10-14
+  2020-10-05   PRCP=0.3mm  TMAX=1.1C  dVV_trail=+1.58dB  wet=11%  ***  post=2020-10-14
+  2020-10-06   PRCP=1.8mm  TMAX=0.6C  dVV_trail=+1.58dB  wet=11%  ***  post=2020-10-14
+  2020-10-21   PRCP=0.3mm  TMAX=1.7C  dVV_trail=+0.00dB  wet=0%  ns  post=2020-10-26
+  2020-10-22   PRCP=0.5mm  TMAX=2.2C  dVV_trail=+0.00dB  wet=0%  ns  post=2020-10-26
+  2020-11-06   PRCP=2.3mm  TMAX=1.1C  dVV_trail=+1.85dB  wet=8%  ***  post=2020-11-19
+  2020-11-07   PRCP=1.0mm  TMAX=0.6C  dVV_trail=+1.85dB  wet=8%  ***  post=2020-11-19
+  2021-10-06   PRCP=0.3mm  TMAX=0.6C  dVV_trail=-2.54dB  wet=35%  ***  post=2021-10-09
+  2022-05-08   PRCP=0.8mm  TMAX=1.7C  dVV_trail=-1.09dB  wet=30%  ***  post=2022-05-13
+  2022-05-15   PRCP=0.5mm  TMAX=1.1C  dVV_trail=-0.71dB  wet=30%  ***  post=2022-05-25
+  2022-05-20   PRCP=0.3mm  TMAX=0.6C  dVV_trail=-0.71dB  wet=30%  ***  post=2022-05-25
+  2022-05-27   PRCP=2.0mm  TMAX=1.1C  dVV_trail=+3.79dB  wet=4%  ***  post=2022-06-06
+  2022-11-17   PRCP=1.8mm  TMAX=1.1C  dVV_trail=+0.46dB  wet=12%  ***  post=2022-11-21
+  2022-11-18   PRCP=0.5mm  TMAX=1.7C  dVV_trail=+0.46dB  wet=12%  ***  post=2022-11-21
+  2023-05-28   PRCP=1.5mm  TMAX=2.2C  dVV_trail=+3.32dB  wet=5%  ***  post=2023-06-01
+  2023-05-30   PRCP=5.3mm  TMAX=1.7C  dVV_trail=+3.24dB  wet=8%  ***  post=2023-06-13
+  2023-10-01   PRCP=0.8mm  TMAX=2.2C  dVV_trail=+1.47dB  wet=10%  ***  post=2023-10-11
+  2023-10-03   PRCP=0.3mm  TMAX=1.1C  dVV_trail=+1.47dB  wet=10%  ***  post=2023-10-11
+  2023-10-04   PRCP=1.8mm  TMAX=1.1C  dVV_trail=+1.47dB  wet=10%  ***  post=2023-10-11
+  2023-10-23   PRCP=1.3mm  TMAX=0.6C  dVV_trail=+2.28dB  wet=6%  ***  post=2023-11-04
+  2023-10-24   PRCP=0.5mm  TMAX=2.2C  dVV_trail=+2.28dB  wet=6%  ***  post=2023-11-04
+  2023-10-29   PRCP=2.8mm  TMAX=1.1C  dVV_trail=+2.28dB  wet=6%  ***  post=2023-11-04
+  2024-04-16   PRCP=0.8mm  TMAX=2.2C  dVV_trail=-0.52dB  wet=24%  ***  post=2024-04-20
+  2024-10-02   PRCP=1.0mm  TMAX=2.2C  dVV_trail=-2.28dB  wet=39%  ***  post=2024-10-05
+  2024-10-03   PRCP=5.6mm  TMAX=1.1C  dVV_trail=+0.00dB  wet=0%  ns  post=2024-10-17
+  2024-10-07   PRCP=1.8mm  TMAX=0.6C  dVV_trail=+0.00dB  wet=0%  ns  post=2024-10-17
+  2024-10-08   PRCP=0.5mm  TMAX=0.6C  dVV_trail=+0.00dB  wet=0%  ns  post=2024-10-17
+  2024-10-09   PRCP=0.8mm  TMAX=0.6C  dVV_trail=+0.00dB  wet=0%  ns  post=2024-10-17
+  2024-10-10   PRCP=0.5mm  TMAX=1.1C  dVV_trail=+0.00dB  wet=0%  ns  post=2024-10-17
+  2024-10-11   PRCP=1.0mm  TMAX=1.1C  dVV_trail=+0.00dB  wet=0%  ns  post=2024-10-17
+  2024-10-12   PRCP=1.3mm  TMAX=0.6C  dVV_trail=+0.00dB  wet=0%  ns  post=2024-10-17
+  2024-11-20   PRCP=0.5mm  TMAX=1.1C  dVV_trail=+0.37dB  wet=13%  ***  post=2024-11-22
+
+7. KEY LIMITATIONS
+----------------------------------------
+- Single weather station (airport) may not represent spatial variability
+  across the full trail network (coastal vs. inland routes)
+- SNWD data missing for some years; loose criterion used as fallback
+- Sentinel-1 repeat cycle ~12 days: post-event scenes may miss peak signal
+- 2015 SAR data uses HH/HV polarization (not VV) — excluded
+- Seasonal confounders: May/June comparisons vs. October baseline include
+  spring phenology signal (snowmelt, bare ground) in delta_VV
+- Recovery time analysis limited to 12 events to limit API calls
