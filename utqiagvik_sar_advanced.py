@@ -91,6 +91,9 @@ except ImportError:
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUT_FIG    = os.path.join(SCRIPT_DIR, 'figures')
 GHCN_CSV   = os.path.join(SCRIPT_DIR, 'ghcn_daily_USW00027502.csv')
+# Real Sentinel-1 RTC cache from utqiagvik_ros_sar.py baseline downloads
+ROS_CACHE  = os.path.join(os.path.expanduser('~'), 'Desktop',
+                          'Utqiagvik_Weather_Mobility_Assessment', 'ros_cache')
 CACHE_DIR  = os.path.join(os.path.expanduser('~'), 'Desktop',
                           'Utqiagvik_Weather_Mobility_Assessment',
                           'sar_advanced_cache')
@@ -103,6 +106,17 @@ os.makedirs(CACHE_DIR, exist_ok=True)
 CHIP_BBOX  = [-157.68, 71.15, -156.28, 71.41]  # ~120×26 km analysis window
 WET_DB     = -3.0     # dB: wet snow detection threshold
 N_BASELINE = 5        # number of baseline scenes to stack
+
+# ── Sentinel-1 chip geometry (EPSG:32605, 10 m/px, shape 2564×5195) ───────────
+# Transform: x = 331386 + col*10,  y = 7926291 + row*(-10)
+# Utqiagvik airport (71.2855°N, 156.7669°W) → col=3305, row=1223
+_CHIP_ROWS = 2564
+_CHIP_COLS = 5195
+_X0, _DX   = 331386.417, 10.0        # easting origin, pixel size
+_Y0, _DY   = 7926290.86, -10.0       # northing origin, pixel size (negative)
+UTQ_COL    = 3305                     # Utqiagvik town centre column
+UTQ_ROW    = 1223                     # Utqiagvik town centre row
+CROP_HALF  = 750                      # half-window = 750 px = 7.5 km → 15×15 km chip
 
 # ── Plot style ────────────────────────────────────────────────────────────────
 DARK   = '#0D1117'; PANEL  = '#161B22'; BORDER = '#30363D'
@@ -394,6 +408,146 @@ def train_rf_classifier(X, y, feature_names):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# REAL SAR DATA LOADER (from utqiagvik_ros_sar.py cache)
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _crop_to_utq(arr, row_c=UTQ_ROW, col_c=UTQ_COL, half=CROP_HALF,
+                 chip_rows=_CHIP_ROWS, chip_cols=_CHIP_COLS):
+    """Crop a full-scene dB array to a window centred on Utqiagvik town."""
+    r0 = max(0, row_c - half);  r1 = min(chip_rows, row_c + half)
+    c0 = max(0, col_c - half);  c1 = min(chip_cols, col_c + half)
+    return arr[r0:r1, c0:c1]
+
+
+def load_real_pair(event_date_str, orbit='descending'):
+    """
+    Load (baseline_db_crop, post_db_crop) from the ros_cache directory.
+
+    event_date_str: 'YYYY-MM-DD' of the RoS event
+    Returns (base_db, post_db) cropped 15×15 km chips centred on Utqiagvik,
+    or (None, None) if cache files are not found.
+
+    Cache file conventions (from utqiagvik_ros_sar.py):
+      baseline_{year}_{orbit}.npz  → keys: db, transform, crs_epsg, meta
+      post_{YYYYMMDD}_{orbit}.npz  → same keys
+    """
+    if not os.path.isdir(ROS_CACHE):
+        return None, None
+
+    year = int(event_date_str[:4])
+    date_compact = event_date_str.replace('-', '')
+
+    base_path = os.path.join(ROS_CACHE, f'baseline_{year}_{orbit}.npz')
+    post_path = os.path.join(ROS_CACHE, f'post_{date_compact}_{orbit}.npz')
+
+    if not os.path.exists(base_path) or not os.path.exists(post_path):
+        return None, None
+
+    try:
+        base_d = np.load(base_path, allow_pickle=True)
+        post_d = np.load(post_path, allow_pickle=True)
+        base_db = base_d['db'].astype(np.float32)
+        post_db = post_d['db'].astype(np.float32)
+        # Only crop if shapes match standard descending chip
+        if base_db.shape == (_CHIP_ROWS, _CHIP_COLS) and post_db.shape == (_CHIP_ROWS, _CHIP_COLS):
+            return _crop_to_utq(base_db), _crop_to_utq(post_db)
+        return base_db, post_db   # different shape — return full array
+    except Exception:
+        return None, None
+
+
+def build_real_rf_catalog():
+    """
+    Build a SAR feature catalog from all cached post-event chips.
+    Computes delta_VV (dB) = post − baseline in the Utqiagvik crop window.
+    Joins with GHCN weather data to create labelled training set.
+    Returns a DataFrame with columns: date, year, month, delta_vv_db, wet_snow_pct, ...
+    """
+    import glob, re
+    post_files = sorted(glob.glob(os.path.join(ROS_CACHE, 'post_*_descending.npz')))
+    if not post_files:
+        return None
+
+    wx = pd.read_csv(GHCN_CSV, low_memory=False)
+    wx['DATE'] = pd.to_datetime(wx['DATE'])
+    wx['TMAX_C']  = pd.to_numeric(wx['TMAX'],  errors='coerce') / 10.0
+    wx['TMIN_C']  = pd.to_numeric(wx['TMIN'],  errors='coerce') / 10.0
+    wx['PRCP_mm'] = pd.to_numeric(wx['PRCP'],  errors='coerce') / 10.0
+
+    rows = []
+    for pf in post_files:
+        m = re.search(r'post_(\d{8})_descending', os.path.basename(pf))
+        if not m:
+            continue
+        date_compact = m.group(1)
+        event_date = f'{date_compact[:4]}-{date_compact[4:6]}-{date_compact[6:]}'
+        year = int(date_compact[:4])
+
+        base_path = os.path.join(ROS_CACHE, f'baseline_{year}_descending.npz')
+        if not os.path.exists(base_path):
+            continue
+
+        try:
+            base_d = np.load(base_path, allow_pickle=True)
+            post_d = np.load(pf, allow_pickle=True)
+            base_db = base_d['db'].astype(np.float32)
+            post_db = post_d['db'].astype(np.float32)
+
+            if base_db.shape != post_db.shape:
+                continue
+
+            if base_db.shape == (_CHIP_ROWS, _CHIP_COLS):
+                b = _crop_to_utq(base_db)
+                p = _crop_to_utq(post_db)
+            else:
+                b, p = base_db, post_db
+
+            delta = p - b
+            valid = np.isfinite(delta)
+            if valid.sum() < 100:
+                continue
+
+            dvv_mean = float(np.nanmean(delta))
+            dvv_std  = float(np.nanstd(delta))
+            wet_pct  = float(100 * (delta < WET_DB).sum() / valid.sum())
+            post_mean = float(np.nanmean(p))
+
+            # Join weather: use post-event date
+            post_meta = post_d['meta']
+            scene_date = str(post_meta[0]) if len(post_meta) > 0 else event_date
+            scene_dt   = pd.to_datetime(scene_date)
+            wx_row = wx[wx['DATE'] == scene_dt]
+
+            prcp  = float(wx_row['PRCP_mm'].iloc[0]) if len(wx_row) else np.nan
+            tmax  = float(wx_row['TMAX_C'].iloc[0])  if len(wx_row) else np.nan
+            tmin  = float(wx_row['TMIN_C'].iloc[0])  if len(wx_row) else np.nan
+
+            # Label: RoS if wet_snow_pct > 5 or delta_vv < -1 dB
+            label = int(wet_pct > 5 or dvv_mean < -1.0)
+
+            rows.append({
+                'event_date':    event_date,
+                'scene_date':    scene_date,
+                'year':          year,
+                'month':         scene_dt.month,
+                'delta_vv_db':   dvv_mean,
+                'delta_vv_std':  dvv_std,
+                'wet_snow_pct':  wet_pct,
+                'post_vv_mean':  post_mean,
+                'PRCP_mm':       prcp,
+                'TMAX_C':        tmax,
+                'TMIN_C':        tmin,
+                'ros_label':     label,
+            })
+        except Exception:
+            continue
+
+    if not rows:
+        return None
+    return pd.DataFrame(rows)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # SAR DATA ACCESS (Planetary Computer)
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -471,67 +625,137 @@ def fetch_sar_scene(date_str, orbit_direction='ascending',
 # FIGURES
 # ══════════════════════════════════════════════════════════════════════════════
 
-def fig_sa1_glcm(vv_post, vv_base, event_label='Example Event'):
-    """SA1: GLCM texture feature maps — post vs baseline."""
-    if vv_post is None or vv_base is None:
-        print("  [SA1] No SAR data available — using synthetic example")
+def _db_to_linear(db_arr):
+    """Convert dB to linear power; clamp large values to avoid overflow."""
+    return 10.0 ** (np.clip(db_arr, -40, 20) / 10.0)
+
+
+def _make_km_ticks(npix, pixel_size_m=10, n_ticks=5):
+    """Return (tick_positions, tick_labels_km) for an axis with npix pixels."""
+    ticks = np.linspace(0, npix - 1, n_ticks).astype(int)
+    labels = [f'{v * pixel_size_m / 1000:.1f}' for v in ticks]
+    return ticks, labels
+
+
+def fig_sa1_glcm(base_db, post_db, event_label='Example Event'):
+    """
+    SA1: GLCM texture analysis on real or synthetic Sentinel-1 VV data.
+
+    base_db, post_db: 2-D float arrays in dB (from load_real_pair or synthetic).
+    Produces a 3-row figure:
+      Row 0: Baseline VV | Post-event VV | ΔVV (post−base) | ΔVV histogram
+      Row 1: Baseline GLCM features (contrast / homogeneity / entropy)
+      Row 2: Post-event GLCM features + difference maps
+    """
+    is_synthetic = (base_db is None or post_db is None)
+    if is_synthetic:
+        print("  [SA1] Real data not found — using synthetic 15×15 km demonstration")
         rng = np.random.default_rng(42)
-        H, W = 64, 64
-        # Synthetic: post has lower backscatter in centre (RoS patch)
-        vv_post = rng.exponential(0.02, (H, W)).astype(np.float32)
-        vv_post[20:44, 20:44] *= 0.3  # RoS signal: -5 dB
-        vv_base = rng.exponential(0.02, (H, W)).astype(np.float32)
-        event_label = 'Synthetic demonstration'
+        H, W = 1500, 1500          # match real 15×15 km chip at 10 m/px
+        base_db = (rng.normal(-17, 2.5, (H, W))).astype(np.float32)
+        # Introduce a realistic wet-snow patch (town + lake area)
+        post_db = base_db.copy()
+        # Broad -3 dB suppression in the centre (wet-snow signature)
+        yy, xx = np.mgrid[0:H, 0:W]
+        dist = np.sqrt(((yy - H//2)/200)**2 + ((xx - W//2)/350)**2)
+        post_db -= (3.5 * np.exp(-dist**2 / 2)).astype(np.float32)
+        post_db += (rng.normal(0, 0.5, (H, W))).astype(np.float32)
+        event_label = 'Synthetic 15×15 km demonstration'
 
-    tex_post = glcm_features_fast(vv_post)
-    tex_base = glcm_features_fast(vv_base)
+    # Convert dB → linear for GLCM (GLCM needs positive intensity values)
+    base_lin = _db_to_linear(base_db)
+    post_lin = _db_to_linear(post_db)
 
-    vv_post_db = 10 * np.log10(np.maximum(vv_post, 1e-10))
-    vv_base_db = 10 * np.log10(np.maximum(vv_base, 1e-10))
-    delta_vv   = vv_post_db - vv_base_db
+    # GLCM features on linear arrays
+    tex_base = glcm_features_fast(base_lin)
+    tex_post = glcm_features_fast(post_lin)
 
-    fig, axes = plt.subplots(2, 4, figsize=(18, 8), facecolor=DARK,
-                             gridspec_kw={'hspace': 0.45, 'wspace': 0.05})
+    delta_db = post_db - base_db
+    H, W = base_db.shape
 
+    # ── Figure layout: 3 rows × 4 cols ────────────────────────────────────────
+    fig, axes = plt.subplots(3, 4, figsize=(20, 14), facecolor=DARK,
+                             gridspec_kw={'hspace': 0.38, 'wspace': 0.06})
+
+    cmap_sar   = 'gray'
     cmap_delta = LinearSegmentedColormap.from_list(
-        'delta_vv', ['#B71C1C', '#FF9800', '#0D1117', '#2196F3', '#E3F2FD'])
+        'delta_vv', ['#B71C1C', '#FF5722', '#212121', '#1565C0', '#E3F2FD'])
+    cmap_con   = 'magma'
+    cmap_hom   = 'viridis'
+    cmap_ent   = 'inferno'
 
-    row_labels = ['Post-event', 'Baseline']
-    col_configs = [
-        ('VV backscatter (dB)', None, 'plasma_r'),
-        ('Contrast (GLCM)',     None, 'magma'),
-        ('Homogeneity (GLCM)', None, 'viridis'),
-        ('Entropy (GLCM)',      None, 'inferno'),
-    ]
+    km_ticks, km_labels = _make_km_ticks(H, n_ticks=6)
 
-    for r, (data_vv, tex_data) in enumerate([
-        (vv_post_db, tex_post),
-        (vv_base_db, tex_base),
+    def _imshow(ax, data, cmap, vmin=None, vmax=None, title='', ylabel=''):
+        if vmin is None: vmin = np.nanpercentile(data, 2)
+        if vmax is None: vmax = np.nanpercentile(data, 98)
+        im = ax.imshow(data, cmap=cmap, aspect='equal', origin='upper',
+                       vmin=vmin, vmax=vmax,
+                       extent=[0, W * 10 / 1000, H * 10 / 1000, 0])
+        ax.set_facecolor(PANEL)
+        ax.set_title(title, color=TEXT1, fontsize=8, fontweight='bold', pad=4)
+        if ylabel:
+            ax.set_ylabel(ylabel, color=TEXT2, fontsize=8)
+        ax.tick_params(colors=MUTED, labelsize=6)
+        ax.set_xlabel('km (E→W)', color=MUTED, fontsize=6)
+        ax.set_ylabel(ylabel + '\nkm (N→S)', color=MUTED, fontsize=6)
+        cb = plt.colorbar(im, ax=ax, fraction=0.046, pad=0.03)
+        cb.ax.tick_params(labelsize=6, colors=MUTED)
+        return im
+
+    # Row 0: Baseline | Post | ΔVV | ΔVV histogram
+    _imshow(axes[0, 0], base_db, cmap_sar, title='Baseline VV (dB)\nOct dry-snow')
+    _imshow(axes[0, 1], post_db, cmap_sar, title='Post-event VV (dB)\nSentinel-1 RTC')
+    lim = max(abs(np.nanpercentile(delta_db, 2)), abs(np.nanpercentile(delta_db, 98)))
+    lim = min(lim, 10)
+    _imshow(axes[0, 2], delta_db, cmap_delta, vmin=-lim, vmax=lim,
+            title=f'ΔVV = Post − Baseline (dB)\nWET_DB threshold = {WET_DB} dB')
+
+    ax_hist = axes[0, 3]
+    ax_hist.set_facecolor(PANEL)
+    ax_hist.tick_params(colors=MUTED, labelsize=7)
+    valid = delta_db[np.isfinite(delta_db)].ravel()
+    ax_hist.hist(valid, bins=80, color=BLUE, alpha=0.75, density=True)
+    ax_hist.axvline(WET_DB, color=RED, lw=1.8, ls='--',
+                    label=f'Wet-snow threshold ({WET_DB} dB)')
+    ax_hist.axvline(float(np.nanmean(delta_db)), color=ORANGE, lw=1.5,
+                    label=f'Mean ΔVV = {float(np.nanmean(delta_db)):.2f} dB')
+    wet_pct = 100 * (valid < WET_DB).sum() / len(valid)
+    ax_hist.set_xlabel('ΔVV (dB)', color=MUTED, fontsize=8)
+    ax_hist.set_ylabel('Density', color=MUTED, fontsize=8)
+    ax_hist.set_title(f'ΔVV Distribution\nWet-snow pixels: {wet_pct:.1f}%',
+                      color=TEXT1, fontsize=8, fontweight='bold')
+    ax_hist.legend(fontsize=7, facecolor=PANEL, edgecolor=BORDER, labelcolor=TEXT2)
+    ax_hist.grid(True, alpha=0.25)
+
+    # Row 1: Baseline GLCM features
+    for c, (feat, cmap, title) in enumerate([
+        ('contrast',    cmap_con, 'Baseline\nContrast (GLCM)'),
+        ('homogeneity', cmap_hom, 'Baseline\nHomogeneity (GLCM)'),
+        ('entropy',     cmap_ent, 'Baseline\nEntropy (GLCM)'),
     ]):
-        for c, (title, _, cmap) in enumerate(col_configs):
-            ax = axes[r, c]
-            ax.set_facecolor(PANEL)
-            if c == 0:
-                im = ax.imshow(data_vv, cmap=cmap, aspect='auto',
-                               vmin=np.nanpercentile(data_vv, 5),
-                               vmax=np.nanpercentile(data_vv, 95))
-                ax.set_ylabel(row_labels[r], color=TEXT1)
-            else:
-                key_map = {1: 'contrast', 2: 'homogeneity', 3: 'entropy'}
-                feat = tex_data[key_map[c]]
-                im = ax.imshow(feat, cmap=cmap, aspect='auto',
-                               vmin=np.nanpercentile(feat, 5),
-                               vmax=np.nanpercentile(feat, 95))
-            if r == 0:
-                ax.set_title(title, color=TEXT1, fontsize=8, fontweight='bold')
-            ax.set_xticks([])
-            ax.set_yticks([])
-            plt.colorbar(im, ax=ax, fraction=0.04, pad=0.02).ax.tick_params(
-                labelsize=6, colors=MUTED)
+        _imshow(axes[1, c], tex_base[feat], cmap, title=title)
+    axes[1, 3].set_visible(False)   # spare cell
 
-    plt.suptitle(f'SA1: GLCM Texture Analysis | {event_label}\n'
-                 'Post-event vs same-orbit baseline — Sentinel-1 VV RTC',
-                 color=TEXT1, fontsize=11, fontweight='bold')
+    # Row 2: Post-event GLCM features + difference
+    for c, (feat, cmap, title) in enumerate([
+        ('contrast',    cmap_con, 'Post-event\nContrast (GLCM)'),
+        ('homogeneity', cmap_hom, 'Post-event\nHomogeneity (GLCM)'),
+        ('entropy',     cmap_ent, 'Post-event\nEntropy (GLCM)'),
+    ]):
+        _imshow(axes[2, c], tex_post[feat], cmap, title=title)
+    # Entropy difference map (post − base): shows texture change
+    ent_diff = tex_post['entropy'] - tex_base['entropy']
+    lim_e = np.nanpercentile(np.abs(ent_diff), 98)
+    _imshow(axes[2, 3], ent_diff,
+            LinearSegmentedColormap.from_list('ent_diff', ['#7B1FA2','#212121','#F57F17']),
+            vmin=-lim_e, vmax=lim_e,
+            title='Entropy Difference\n(Post − Baseline)')
+
+    data_src = 'Sentinel-1 RTC VV | real data' if not is_synthetic else 'Synthetic demonstration'
+    plt.suptitle(f'SA1: GLCM Texture Analysis — {event_label}\n'
+                 f'{data_src} | 15×15 km Utqiagvik window | 10 m/px',
+                 color=TEXT1, fontsize=11, fontweight='bold', y=1.01)
     fig.savefig(os.path.join(OUT_FIG, 'SA1_GLCM_Texture.png'),
                 dpi=150, bbox_inches='tight', facecolor=DARK)
     plt.close(fig)
@@ -788,64 +1012,64 @@ def main():
         catalog_path = os.path.join(SCRIPT_DIR, 'E_event_catalog.csv')
 
     print("\n[SA1] GLCM Texture Analysis...")
-    # Try to get a real SAR scene for the clearest documented event
-    vv_post = vv_base = None
-    if HAS_STAC and HAS_RASTERIO:
-        print("  Fetching SAR scenes for 2021-10-06 (best October detection)...")
-        result_post = fetch_sar_scene('2021-10-09', 'descending')
-        result_base = fetch_sar_scene('2021-10-01', 'descending')
-        if result_post and result_base:
-            vv_post = result_post[0]
-            vv_base = result_base[0]
-            print("  SAR scenes loaded successfully")
-    fig_sa1_glcm(vv_post, vv_base, '2021-10-06 (−2.54 dB trail, 35% wet-snow)')
+    # Best wet-snow event: 2021-10-06
+    #   baseline 2021-10-21 (dry snow), post 2021-10-09 (post-RoS)
+    #   ΔVV = −1.76 dB, 35% wet-snow pixels in 15×15 km Utqiagvik window
+    base_db, post_db = load_real_pair('2021-10-06', orbit='descending')
+    if base_db is not None:
+        dvv_mean = float(np.nanmean(post_db - base_db))
+        wet_pct  = float(100 * ((post_db - base_db) < WET_DB).sum()
+                         / np.isfinite(post_db - base_db).sum())
+        print(f"  Loaded real Sentinel-1 data: {base_db.shape[0]*10/1000:.0f}×"
+              f"{base_db.shape[1]*10/1000:.0f} km chip")
+        print(f"  ΔVV mean = {dvv_mean:.2f} dB | wet-snow pixels = {wet_pct:.1f}%")
+        event_label = (f'2021-10-06 RoS event | ΔVV = {dvv_mean:.2f} dB | '
+                       f'{wet_pct:.0f}% wet-snow pixels')
+    else:
+        print("  Real cache not found — using synthetic demonstration")
+        event_label = 'Example event (synthetic)'
+    fig_sa1_glcm(base_db, post_db, event_label)
 
     print("\n[SA2] Dual-Polarisation Ratio Analysis...")
     fig_sa2_dual_pol()
 
     print("\n[SA4] Random Forest Classifier...")
-    event_df, X, y = build_rf_dataset(catalog_path)
-    if X is not None and HAS_SKLEARN:
-        feature_cols = ['delta_vv_db', 'wet_snow_pct']
-        if 'PRCP_mm' in event_df.columns:
-            feature_cols.append('PRCP_mm')
-        if 'TMAX_C' in event_df.columns:
-            feature_cols.append('TMAX_C')
-        if 'month' in event_df.columns:
-            feature_cols.append('month')
-
-        rf_model, rf_metrics = train_rf_classifier(X, y, feature_cols)
-        if rf_metrics:
-            print(f"  5-fold CV AUC: {rf_metrics['cv_auc_mean']:.3f} "
-                  f"± {rf_metrics['cv_auc_std']:.3f}")
-            print(f"  Training AUC: {rf_metrics['train_auc']:.3f}")
-            print("  Top features:")
-            for feat, imp in sorted(rf_metrics['feature_imp'].items(),
-                                    key=lambda x: x[1], reverse=True):
-                print(f"    {feat:20s} {imp:.4f}")
-            fig_sa4_rf_importance(rf_metrics, feature_cols)
+    # Build RF catalog from real cached SAR scenes
+    real_catalog = build_real_rf_catalog()
+    if real_catalog is not None and len(real_catalog) >= 10:
+        print(f"  Built real RF catalog: {len(real_catalog)} scenes from cache")
+        print(f"  RoS events: {real_catalog['ros_label'].sum()} / {len(real_catalog)}")
+        X_real = real_catalog[['delta_vv_db', 'delta_vv_std', 'wet_snow_pct',
+                                'post_vv_mean', 'month']].fillna(0).values
+        y_real = real_catalog['ros_label'].values
+        feature_cols_real = ['delta_vv_db', 'delta_vv_std', 'wet_snow_pct',
+                              'post_vv_mean', 'month']
+        if HAS_SKLEARN:
+            rf_model, rf_metrics = train_rf_classifier(X_real, y_real, feature_cols_real)
+            if rf_metrics:
+                print(f"  5-fold CV AUC: {rf_metrics['cv_auc_mean']:.3f} "
+                      f"± {rf_metrics['cv_auc_std']:.3f}")
+                print(f"  Training AUC: {rf_metrics['train_auc']:.3f}")
+                print("  Top features:")
+                for feat, imp in sorted(rf_metrics['feature_imp'].items(),
+                                        key=lambda x: x[1], reverse=True):
+                    print(f"    {feat:20s} {imp:.4f}")
+                fig_sa4_rf_importance(rf_metrics, feature_cols_real)
+                event_df = real_catalog
     else:
-        if not HAS_SKLEARN:
-            print("  scikit-learn not installed — skipping RF. Install with: pip install scikit-learn")
-        else:
-            print("  Building synthetic demonstration...")
-            rng = np.random.default_rng(42)
-            demo_metrics = {
-                'cv_auc_mean': 0.784,
-                'cv_auc_std':  0.042,
-                'train_auc':   0.901,
-                'feature_imp': {
-                    'delta_vv_db':  0.38,
-                    'wet_snow_pct': 0.27,
-                    'PRCP_mm':      0.15,
-                    'month':        0.12,
-                    'TMAX_C':       0.08,
-                },
-            }
-            fig_sa4_rf_importance(demo_metrics, list(demo_metrics['feature_imp'].keys()))
+        # Fallback to weather-catalog or synthetic
+        print("  Real catalog unavailable — using weather event catalog")
+        event_df, X, y = build_rf_dataset(catalog_path)
+        if X is not None and HAS_SKLEARN:
+            feature_cols = ['delta_vv_db', 'wet_snow_pct', 'PRCP_mm', 'TMAX_C', 'month']
+            feature_cols = [f for f in feature_cols if f in event_df.columns]
+            rf_model, rf_metrics = train_rf_classifier(X, y, feature_cols)
+            if rf_metrics:
+                print(f"  5-fold CV AUC: {rf_metrics['cv_auc_mean']:.3f} ± {rf_metrics['cv_auc_std']:.3f}")
+                fig_sa4_rf_importance(rf_metrics, feature_cols)
 
     print("\n[SA5] Seasonal SAR Change Climatology...")
-    fig_sa5_seasonal_composite(event_df)
+    fig_sa5_seasonal_composite(event_df if 'event_df' in dir() else None)
 
     print(f"\n{'='*68}")
     print("ADVANCED SAR ANALYSIS COMPLETE — figures written to ./figures/")
