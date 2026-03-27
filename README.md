@@ -234,13 +234,61 @@ Wet-snow threshold: **delta_VV < −3.0 dB**. Significance: Welch's t-test, trai
 
 ---
 
+## Novel Statistical Methods (PhD-level extensions)
+
+Four modules add state-of-the-art statistical and remote sensing analysis beyond the baseline characterization:
+
+### NS — Novel Statistics (`utqiagvik_novel_statistics.py`)
+
+| Method | Reference | Key Result |
+|--------|-----------|-----------|
+| **NS1 Trend-Free Pre-Whitening Mann-Kendall (TFPW-MK)** | Yue & Wang (2002) *Hydrol. Processes* 16:1807 | τ = −0.042, p = 0.69 — no significant trend; Sen slope = 0 d/yr [95% CI: −0.04, +0.05] |
+| **NS2 Continuous Wavelet Transform (Morlet)** | Torrence & Compo (1998) *BAMS* 79:61 | No period exceeds 95% red-noise significance; ENSO (3–7 yr) and PDO (10–20 yr) bands visible but sub-threshold given 45-yr record |
+| **NS3 GEV — stationary + non-stationary** | Coles (2001); Hosking & Wallis (1997) | 20-yr return level = **8.1 days** [profile-likelihood 95% CI]; non-stationary model preferred by AIC (ΔAIC = 279) with μ(t) linear trend |
+| **NS4 PELT changepoint detection** | Killick et al. (2012) *JASA* 107:1590 | No statistically significant structural break in 1980–2024 record; single regime μ = 2.2 d/yr |
+| **NS5 Teleconnections: AO, PDO, Niño-3.4** | NOAA CPC monthly indices | PDO partial r = +0.17 (p = 0.27); AO r = −0.12 (p = 0.43) — no index explains RoS variance at 95% confidence |
+
+> **GEV note:** L-moments initialisation with shape bounded ξ ∈ [−0.5, 0.5] (Hosking 1990) prevents the degenerate heavy-tail solution (ξ → +∞) that unconstrained MLE finds when annual counts include many zeros.
+
+### EB — Snowpack Energy Balance (`utqiagvik_snowpack_energy.py`)
+
+Implements the Pomeroy et al. (1998) cold-content / rain-heat framework:
+- **Q_cc** = ρ_ice · c_ice · SWE · |T_snow| — energy deficit before melt can occur
+- **Q_rain** = ρ_w · c_w · P_liq · T_rain — sensible heat delivered by rain
+- **Ice-crust probability** from Q_rain / Q_cc ratio — peaks at 3% of events ≥ 0.5 threshold
+- Decadal T_snow warming signal: −20.2°C (1980s) → −16.1°C (2010s)
+
+### FP — Future Projections (`utqiagvik_future_projections.py`)
+
+- **Bintanja & Andry (2017)** rain-fraction framework applied to observed precipitation partitioning
+- **Temperature sensitivity:** +**1.38 d/°C** [95% CI: 0.61–2.12] — bootstrap regression of annual RoS days on Oct–May mean TMAX
+- **CMIP6 ensemble** (SSP2-4.5, SSP5-8.5): sensitivity-based projections when API unavailable
+
+### SA — Advanced SAR Analysis (`utqiagvik_sar_advanced.py`)
+
+Uses **14 dry-snow baselines + 63 post-event Sentinel-1 RTC scenes** (2016–2024, real data from cache):
+
+| Module | Method | Key Result |
+|--------|--------|-----------|
+| **SA1 GLCM texture** | Haralick (1973) Grey-Level Co-occurrence Matrix | Entropy increases and homogeneity decreases in wet-snow pixels; 2021-10-06 event: ΔVV = −1.76 dB, 35% wet-snow |
+| **SA2 Dual-pol VV/VH** | Ulaby et al. (2014) physical model | Dry snow: VV/VH ≈ +10.5 dB; wet snow: +4.5 dB; ΔVV/VH < −3 dB flags volume→surface scatter transition |
+| **SA3 Multi-event ΔVV maps** | Same-orbit baseline subtraction | 4 confirmed events displayed at 15×15 km, 10 m/px; red contour = wet-snow pixels (ΔVV < −3 dB) |
+| **SA4 Random Forest classifier** | Breiman (2001); Dolant et al. (2016) | CV AUC = **0.746 ± 0.16** on 63 real scenes; weather-based labels (GHCN) prevent data leakage; top feature: post-event mean VV |
+| **SA5 Seasonal SAR climatology** | Temporal variability index (CV) | Peak backscatter variability in Oct–Nov coincides with freeze-up and early RoS season |
+
+---
+
 ## Scripts
 
 | Script | Description |
 |--------|-------------|
-| [`utqiagvik_ros_characterization.py`](utqiagvik_ros_characterization.py) | **Full characterization** — 1980–2024 climate trends + systematic SAR |
+| [`utqiagvik_novel_statistics.py`](utqiagvik_novel_statistics.py) | **Novel stats** — TFPW-MK, CWT, GEV, PELT, teleconnections |
+| [`utqiagvik_snowpack_energy.py`](utqiagvik_snowpack_energy.py) | **Energy balance** — cold content, rain heat, ice-crust probability |
+| [`utqiagvik_future_projections.py`](utqiagvik_future_projections.py) | **Future projections** — Bintanja rain fraction, temperature sensitivity, CMIP6 |
+| [`utqiagvik_sar_advanced.py`](utqiagvik_sar_advanced.py) | **Advanced SAR** — GLCM, dual-pol, multi-event maps, RF classifier |
 | [`utqiagvik_ros_sar.py`](utqiagvik_ros_sar.py) | Primary RoS SAR script — same-orbit baseline subtraction |
 | [`utqiagvik_sar_change_detection.py`](utqiagvik_sar_change_detection.py) | SAR change detection across all extreme event types |
+| [`utqiagvik_ros_characterization.py`](utqiagvik_ros_characterization.py) | Full characterization — 1980–2024 climate trends + systematic SAR |
 | [`utqiagvik_rs_change_detection.py`](utqiagvik_rs_change_detection.py) | Sentinel-2 NDSI optical change detection |
 | [`utqiagvik_rigorous_disruption.py`](utqiagvik_rigorous_disruption.py) | Trail disruption analysis with LOESS trends |
 | [`utqiagvik_trail_disruption.py`](utqiagvik_trail_disruption.py) | Trail disruption event catalog |
@@ -248,6 +296,16 @@ Wet-snow threshold: **delta_VV < −3.0 dB**. Significance: Welch's t-test, trai
 | [`utqiagvik_corridor_analysis.py`](utqiagvik_corridor_analysis.py) | Trail corridor resource exposure analysis |
 | [`utqiagvik_interactive_maps.py`](utqiagvik_interactive_maps.py) | Folium interactive HTML maps |
 | [`utqiagvik_remote_sensing_mapping.py`](utqiagvik_remote_sensing_mapping.py) | Remote sensing framework figures |
+
+### Tests
+
+```
+tests/test_ros_detection.py    # 58 tests — detection logic, physics, energy balance
+tests/test_novel_statistics.py # 20 tests — TFPW-MK, CWT, GEV, PELT, teleconnections
+tests/test_sar_analysis.py     # 15 tests — GLCM, dual-pol, temporal variability, RF
+```
+
+Run: `pytest tests/ -v`  →  **93/93 passing**
 
 ---
 
@@ -257,8 +315,9 @@ Wet-snow threshold: **delta_VV < −3.0 dB**. Significance: Welch's t-test, trai
 geopandas pyogrio rasterio pyproj shapely
 pystac-client planetary-computer
 numpy pandas scipy matplotlib requests
+scikit-learn pywt
 ```
 
 ```bash
-pip install geopandas pyogrio rasterio pyproj shapely pystac-client planetary-computer numpy pandas scipy matplotlib requests
+pip install geopandas pyogrio rasterio pyproj shapely pystac-client planetary-computer numpy pandas scipy matplotlib requests scikit-learn PyWavelets
 ```

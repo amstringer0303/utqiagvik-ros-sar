@@ -325,14 +325,60 @@ def global_wavelet_spectrum(power, scales, dt=1.0):
 def fit_gev_stationary(annual_counts):
     """
     Fit stationary GEV to annual RoS counts (block maxima approach).
+
+    Uses L-moments as starting values and bounds ξ ∈ [−0.5, 0.5] to prevent
+    physically implausible heavy tails. Annual precipitation extremes rarely
+    have |ξ| > 0.4 (e.g. Hosking & Wallis 1997, Regional Frequency Analysis).
+
     Returns shape ξ, location μ, scale σ, and AIC.
     """
-    # GEV in scipy: shape c, loc μ, scale σ  [scipy sign: -ξ]
-    c, loc, scale = genextreme.fit(annual_counts, -0.1)
-    # Log-likelihood
-    ll = np.sum(genextreme.logpdf(annual_counts, c, loc, scale))
-    aic = 2 * 3 - 2 * ll  # 3 parameters
-    return {'shape': -c, 'loc': loc, 'scale': scale, 'aic': aic, 'll': ll}
+    from scipy.optimize import minimize
+
+    counts = np.asarray(annual_counts, dtype=float)
+
+    # L-moment starting estimates (Hosking 1990)
+    n    = len(counts)
+    x    = np.sort(counts)
+    b0   = np.mean(x)
+    b1   = np.mean([(i) / (n - 1) * x[i] for i in range(n)])
+    b2   = np.mean([(i * (i - 1)) / ((n - 1) * (n - 2)) * x[i] for i in range(n)])
+    l1   = b0
+    l2   = 2 * b1 - b0
+    l3   = 6 * b2 - 6 * b1 + b0
+    tau3 = l3 / l2 if l2 > 0 else 0.0
+    # L-skewness to shape (approx Hosking 1990 eq 4.7)
+    xi0  = np.clip(7.859 * tau3 + 2.9554 * tau3**2, -0.5, 0.5)
+    if abs(xi0) > 1e-4:
+        sig0 = l2 * xi0 / (1 - 2**(-xi0)) / np.log(2)
+    else:
+        sig0 = l2 / np.log(2)
+    sig0  = max(sig0, 1e-3)
+    mu0   = l1 - sig0 * (1 - np.exp(-xi0)) / xi0 if abs(xi0) > 1e-4 else l1 - sig0 * np.euler_gamma
+
+    def neg_ll(params):
+        xi, loc, log_sc = params
+        sc = np.exp(log_sc)
+        c  = -xi          # scipy sign convention
+        try:
+            ll = np.sum(genextreme.logpdf(counts, c, loc=loc, scale=sc))
+            return -ll if np.isfinite(ll) else 1e10
+        except Exception:
+            return 1e10
+
+    # Bounded optimisation: ξ in [−0.5, 0.5], σ > 0
+    res = minimize(
+        neg_ll,
+        x0=[xi0, mu0, np.log(max(sig0, 0.1))],
+        method='L-BFGS-B',
+        bounds=[(-0.5, 0.5), (None, None), (np.log(1e-3), None)],
+        options={'maxiter': 2000, 'ftol': 1e-12},
+    )
+    xi, loc, log_sc = res.x
+    scale = np.exp(log_sc)
+    c = -xi
+    ll = -res.fun
+    aic = 2 * 3 - 2 * ll
+    return {'shape': xi, 'loc': loc, 'scale': scale, 'aic': aic, 'll': ll}
 
 
 def fit_gev_nonstationary(annual_counts, t_covariate):
@@ -542,14 +588,20 @@ def segment_stats(x, years, changepoints):
 # NS5: TELECONNECTION DRIVERS
 # ══════════════════════════════════════════════════════════════════════════════
 
+def _cache_valid(path, min_bytes=100):
+    """Return True only if cache file exists and has meaningful content."""
+    return os.path.exists(path) and os.path.getsize(path) >= min_bytes
+
+
 def download_ao_index():
     """
     Arctic Oscillation monthly index from NOAA CPC.
     Returns DataFrame with columns: year, month, ao
     """
     cache = os.path.join(CACHE_DIR, 'ao_monthly.csv')
-    if os.path.exists(cache):
+    if _cache_valid(cache):
         return pd.read_csv(cache)
+    # AO format: 3 columns per row — year  month  value
     url = ('https://www.cpc.ncep.noaa.gov/products/precip/CWlink/'
            'daily_ao_index/monthly.ao.index.b50.current.ascii')
     try:
@@ -558,13 +610,21 @@ def download_ao_index():
         rows = []
         for line in lines:
             parts = line.split()
-            if len(parts) >= 13:
+            if len(parts) == 3:          # year  month  value
+                try:
+                    rows.append({'year': int(parts[0]), 'month': int(parts[1]),
+                                 'ao': float(parts[2])})
+                except ValueError:
+                    pass
+            elif len(parts) >= 13:       # annual block format fallback
                 yr = int(parts[0])
                 for m, val in enumerate(parts[1:13], 1):
                     try:
                         rows.append({'year': yr, 'month': m, 'ao': float(val)})
                     except ValueError:
                         pass
+        if not rows:
+            raise ValueError("No valid AO rows parsed")
         df = pd.DataFrame(rows)
         df.to_csv(cache, index=False)
         return df
@@ -579,7 +639,7 @@ def download_pdo_index():
     Returns DataFrame with columns: year, month, pdo
     """
     cache = os.path.join(CACHE_DIR, 'pdo_monthly.csv')
-    if os.path.exists(cache):
+    if _cache_valid(cache):
         return pd.read_csv(cache)
     url = 'https://www.ncei.noaa.gov/pub/data/cmb/ersst/v5/index/ersst.v5.pdo.dat'
     try:
@@ -611,7 +671,7 @@ def download_nino34_index():
     Returns DataFrame with columns: year, month, nino34
     """
     cache = os.path.join(CACHE_DIR, 'nino34_monthly.csv')
-    if os.path.exists(cache):
+    if _cache_valid(cache):
         return pd.read_csv(cache)
     url = ('https://www.cpc.ncep.noaa.gov/data/indices/'
            'ersst5.nino.mth.91-20.ascii')

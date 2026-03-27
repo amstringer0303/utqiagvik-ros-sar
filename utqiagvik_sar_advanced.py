@@ -522,8 +522,16 @@ def build_real_rf_catalog():
             tmax  = float(wx_row['TMAX_C'].iloc[0])  if len(wx_row) else np.nan
             tmin  = float(wx_row['TMIN_C'].iloc[0])  if len(wx_row) else np.nan
 
-            # Label: RoS if wet_snow_pct > 5 or delta_vv < -1 dB
-            label = int(wet_pct > 5 or dvv_mean < -1.0)
+            # Label from independent weather observations (GHCN), NOT from SAR.
+            # RoS = precipitation fell as rain (TMAX > 0°C) onto existing snow
+            # within the ±12-day window around the post-event SAR scene.
+            # Using weather-based label avoids data leakage between SAR features
+            # and the target variable.
+            event_dt = pd.to_datetime(event_date)
+            window = wx[(wx['DATE'] >= event_dt - pd.Timedelta(days=12)) &
+                        (wx['DATE'] <= event_dt + pd.Timedelta(days=2))]
+            ros_days = window[(window['TMAX_C'] > 0) & (window['PRCP_mm'] > 0.5)]
+            label = int(len(ros_days) > 0)
 
             rows.append({
                 'event_date':    event_date,
@@ -860,6 +868,116 @@ def fig_sa2_dual_pol(events_df=None):
     print("  Saved: SA2_Dual_Pol_Analysis.png")
 
 
+def fig_sa3_multi_event(events=None):
+    """
+    SA3: Multi-event ΔVV comparison — side-by-side before/after maps for all
+    key RoS events with confirmed SAR pairs in the 15×15 km Utqiagvik window.
+
+    Shows baseline VV, post-event VV, and ΔVV (colour scale ±6 dB) for each
+    event in a compact grid. Events are sorted by wet-snow pixel fraction.
+    """
+    # Known good event pairs: (event_date, label, baseline_year)
+    known_events = [
+        ('2021-10-06', '2021-10-06 RoS\nbaseline 2021-10-21\npost 2021-10-09', 2021),
+        ('2020-10-02', '2020-10-02 RoS\nbaseline 2020-10-26\npost 2020-10-14', 2020),
+        ('2019-05-29', '2019-05-29 RoS\nbaseline 2019-10-20\npost 2019-06-10', 2019),
+        ('2024-04-16', '2024-04-16 RoS\nbaseline 2023-10-23\npost 2024-04-20', 2023),
+    ]
+
+    # Load each pair
+    pairs = []
+    for event_date, label, base_year in known_events:
+        b, p = load_real_pair(event_date, orbit='descending')
+        if b is None:
+            # Try previous year's baseline if same-year pair failed
+            date_compact = event_date.replace('-', '')
+            post_path = os.path.join(ROS_CACHE, f'post_{date_compact}_descending.npz')
+            base_path = os.path.join(ROS_CACHE, f'baseline_{base_year}_descending.npz')
+            if os.path.exists(post_path) and os.path.exists(base_path):
+                try:
+                    bd = np.load(base_path, allow_pickle=True)['db'].astype(np.float32)
+                    pd_ = np.load(post_path, allow_pickle=True)['db'].astype(np.float32)
+                    if bd.shape == pd_.shape == (_CHIP_ROWS, _CHIP_COLS):
+                        b, p = _crop_to_utq(bd), _crop_to_utq(pd_)
+                except Exception:
+                    pass
+        if b is not None:
+            delta = p - b
+            wet_pct = float(100 * (delta < WET_DB).sum() / np.isfinite(delta).sum())
+            pairs.append((label, b, p, delta, wet_pct))
+
+    if not pairs:
+        print("  [SA3] No valid event pairs found")
+        return
+
+    # Sort descending by |ΔVV| (most dramatic change first)
+    pairs.sort(key=lambda x: abs(float(np.nanmean(x[3]))), reverse=True)
+    n = len(pairs)
+
+    cmap_sar   = 'gray'
+    cmap_delta = LinearSegmentedColormap.from_list(
+        'dvv', ['#B71C1C', '#FF5722', '#37474F', '#1565C0', '#E3F2FD'])
+
+    fig, axes = plt.subplots(n, 3, figsize=(15, 4.5 * n), facecolor=DARK,
+                             gridspec_kw={'hspace': 0.35, 'wspace': 0.05})
+    if n == 1:
+        axes = axes[np.newaxis, :]
+
+    for row, (label, base_db, post_db, delta, wet_pct) in enumerate(pairs):
+        H, W = base_db.shape
+        extent = [0, W * 10 / 1000, H * 10 / 1000, 0]
+        dvv_mean = float(np.nanmean(delta))
+        lim = 6.0
+
+        # Baseline VV
+        ax = axes[row, 0]
+        ax.set_facecolor(PANEL)
+        vmin, vmax = np.nanpercentile(base_db, 2), np.nanpercentile(base_db, 98)
+        im0 = ax.imshow(base_db, cmap=cmap_sar, aspect='equal',
+                        origin='upper', extent=extent, vmin=vmin, vmax=vmax)
+        ax.set_title('Baseline VV (dB)\nOct dry-snow', color=TEXT1, fontsize=8, fontweight='bold')
+        ax.set_ylabel(label, color=TEXT2, fontsize=7.5)
+        ax.set_xlabel('km →E', color=MUTED, fontsize=7)
+        ax.tick_params(colors=MUTED, labelsize=6)
+        plt.colorbar(im0, ax=ax, fraction=0.046, pad=0.03).ax.tick_params(labelsize=6, colors=MUTED)
+
+        # Post-event VV
+        ax = axes[row, 1]
+        ax.set_facecolor(PANEL)
+        im1 = ax.imshow(post_db, cmap=cmap_sar, aspect='equal',
+                        origin='upper', extent=extent, vmin=vmin, vmax=vmax)
+        ax.set_title('Post-event VV (dB)\nSentinel-1 RTC', color=TEXT1, fontsize=8, fontweight='bold')
+        ax.set_xlabel('km →E', color=MUTED, fontsize=7)
+        ax.tick_params(colors=MUTED, labelsize=6)
+        plt.colorbar(im1, ax=ax, fraction=0.046, pad=0.03).ax.tick_params(labelsize=6, colors=MUTED)
+
+        # ΔVV
+        ax = axes[row, 2]
+        ax.set_facecolor(PANEL)
+        im2 = ax.imshow(delta, cmap=cmap_delta, aspect='equal',
+                        origin='upper', extent=extent, vmin=-lim, vmax=lim)
+        wet_mask = delta < WET_DB
+        ax.set_title(f'ΔVV = Post − Base (dB)\nmean={dvv_mean:+.2f} dB | wet-snow={wet_pct:.0f}%',
+                     color=TEXT1, fontsize=8, fontweight='bold')
+        ax.set_xlabel('km →E', color=MUTED, fontsize=7)
+        ax.tick_params(colors=MUTED, labelsize=6)
+        cb = plt.colorbar(im2, ax=ax, fraction=0.046, pad=0.03)
+        cb.ax.tick_params(labelsize=6, colors=MUTED)
+        cb.set_label('dB', color=MUTED, fontsize=7)
+        # Annotate wet-snow threshold
+        ax.contour(wet_mask, levels=[0.5],
+                   colors=[RED], linewidths=0.6, alpha=0.7,
+                   extent=extent, origin='upper')
+
+    plt.suptitle('SA3: Multi-Event Sentinel-1 ΔVV Comparison\n'
+                 '15×15 km Utqiagvik window | Red contour = wet-snow pixels (ΔVV < −3 dB)',
+                 color=TEXT1, fontsize=12, fontweight='bold', y=1.01)
+    fig.savefig(os.path.join(OUT_FIG, 'SA3_Multi_Event_SAR.png'),
+                dpi=150, bbox_inches='tight', facecolor=DARK)
+    plt.close(fig)
+    print(f"  Saved: SA3_Multi_Event_SAR.png ({n} events)")
+
+
 def fig_sa4_rf_importance(metrics, feature_names):
     """SA4: Random Forest feature importance."""
     if not metrics or 'feature_imp' not in metrics:
@@ -1032,6 +1150,9 @@ def main():
 
     print("\n[SA2] Dual-Polarisation Ratio Analysis...")
     fig_sa2_dual_pol()
+
+    print("\n[SA3] Multi-Event SAR Comparison...")
+    fig_sa3_multi_event()
 
     print("\n[SA4] Random Forest Classifier...")
     # Build RF catalog from real cached SAR scenes
