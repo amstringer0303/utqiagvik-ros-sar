@@ -116,7 +116,10 @@ _X0, _DX   = 331386.417, 10.0        # easting origin, pixel size
 _Y0, _DY   = 7926290.86, -10.0       # northing origin, pixel size (negative)
 UTQ_COL    = 3305                     # Utqiagvik town centre column
 UTQ_ROW    = 1223                     # Utqiagvik town centre row
-CROP_HALF  = 750                      # half-window = 750 px = 7.5 km → 15×15 km chip
+CROP_HALF  = 750                      # half-window for catalog/stats = 7.5 km
+CROP_HALF_VIZ = 200                   # half-window for figures = 200 px = 2 km → 4×4 km chip
+                                      # At 10 m/px in a 600-px panel → 6.6 m/rendered-px
+                                      # Shows town streets, tundra polygons, sea-ice leads
 
 # ── Plot style ────────────────────────────────────────────────────────────────
 DARK   = '#0D1117'; PANEL  = '#161B22'; BORDER = '#30363D'
@@ -670,6 +673,14 @@ def fig_sa1_glcm(base_db, post_db, event_label='Example Event'):
         post_db += (rng.normal(0, 0.5, (H, W))).astype(np.float32)
         event_label = 'Synthetic 15×15 km demonstration'
 
+    # Crop to tight visualization window (4×4 km) centred on town
+    # so rendered pixels are ~7 m on ground (town streets/tundra polygons visible)
+    if not is_synthetic and base_db.shape[0] >= 2 * CROP_HALF_VIZ:
+        h = CROP_HALF_VIZ
+        cy, cx = base_db.shape[0] // 2, base_db.shape[1] // 2
+        base_db = base_db[cy-h:cy+h, cx-h:cx+h]
+        post_db = post_db[cy-h:cy+h, cx-h:cx+h]
+
     # Convert dB → linear for GLCM (GLCM needs positive intensity values)
     base_lin = _db_to_linear(base_db)
     post_lin = _db_to_linear(post_db)
@@ -762,7 +773,7 @@ def fig_sa1_glcm(base_db, post_db, event_label='Example Event'):
 
     data_src = 'Sentinel-1 RTC VV | real data' if not is_synthetic else 'Synthetic demonstration'
     plt.suptitle(f'SA1: GLCM Texture Analysis — {event_label}\n'
-                 f'{data_src} | 15×15 km Utqiagvik window | 10 m/px',
+                 f'{data_src} | {2*CROP_HALF_VIZ*10/1000:.0f}×{2*CROP_HALF_VIZ*10/1000:.0f} km Utqiagvik town window | 10 m/px',
                  color=TEXT1, fontsize=11, fontweight='bold', y=1.01)
     fig.savefig(os.path.join(OUT_FIG, 'SA1_GLCM_Texture.png'),
                 dpi=150, bbox_inches='tight', facecolor=DARK)
@@ -924,6 +935,13 @@ def fig_sa3_multi_event(events=None):
         axes = axes[np.newaxis, :]
 
     for row, (label, base_db, post_db, delta, wet_pct) in enumerate(pairs):
+        # Tight 4×4 km crop centred on Utqiagvik town
+        h = CROP_HALF_VIZ
+        if base_db.shape[0] >= 2 * h and base_db.shape[1] >= 2 * h:
+            cy, cx = base_db.shape[0] // 2, base_db.shape[1] // 2
+            base_db = base_db[cy-h:cy+h, cx-h:cx+h]
+            post_db = post_db[cy-h:cy+h, cx-h:cx+h]
+            delta   = delta  [cy-h:cy+h, cx-h:cx+h]
         H, W = base_db.shape
         extent = [0, W * 10 / 1000, H * 10 / 1000, 0]
         dvv_mean = float(np.nanmean(delta))
@@ -970,7 +988,7 @@ def fig_sa3_multi_event(events=None):
                    extent=extent, origin='upper')
 
     plt.suptitle('SA3: Multi-Event Sentinel-1 ΔVV Comparison\n'
-                 '15×15 km Utqiagvik window | Red contour = wet-snow pixels (ΔVV < −3 dB)',
+                 f'{2*CROP_HALF_VIZ*10/1000:.0f}×{2*CROP_HALF_VIZ*10/1000:.0f} km Utqiagvik town window | Red contour = wet-snow pixels (ΔVV < −3 dB)',
                  color=TEXT1, fontsize=12, fontweight='bold', y=1.01)
     fig.savefig(os.path.join(OUT_FIG, 'SA3_Multi_Event_SAR.png'),
                 dpi=150, bbox_inches='tight', facecolor=DARK)
@@ -1140,8 +1158,8 @@ def main():
                          / np.isfinite(post_db - base_db).sum())
         print(f"  Loaded real Sentinel-1 data: {base_db.shape[0]*10/1000:.0f}×"
               f"{base_db.shape[1]*10/1000:.0f} km chip")
-        print(f"  ΔVV mean = {dvv_mean:.2f} dB | wet-snow pixels = {wet_pct:.1f}%")
-        event_label = (f'2021-10-06 RoS event | ΔVV = {dvv_mean:.2f} dB | '
+        print(f"  dVV mean = {dvv_mean:.2f} dB | wet-snow pixels = {wet_pct:.1f}%")
+        event_label = (f'2021-10-06 RoS event | dVV = {dvv_mean:.2f} dB | '
                        f'{wet_pct:.0f}% wet-snow pixels')
     else:
         print("  Real cache not found — using synthetic demonstration")
