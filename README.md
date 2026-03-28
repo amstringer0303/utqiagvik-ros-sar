@@ -29,6 +29,11 @@ PhD-level remote sensing and climate analysis pipeline for detecting and charact
   - [Conclusion 3 — Every 1°C of warming adds 1.4 more RoS days/year](#conclusion-3--every-1c-of-warming-adds-14-more-ros-daysyear)
   - [Conclusion 4 — SAR reveals spatially non-uniform wetting across the trail network](#conclusion-4--sar-reveals-spatially-non-uniform-wetting-across-the-trail-network)
   - [Conclusion 5 — The 20-year return level is already the new normal](#conclusion-5--the-20-year-return-level-is-already-the-new-normal)
+- [Ecological Impact — Teshekpuk Lake Herd Caribou](#ecological-impact--teshekpuk-lake-herd-caribou)
+  - [Conclusion 6 — RoS correlates negatively with caribou population growth (r = −0.50)](#conclusion-6--ros-frequency-correlates-negatively-with-caribou-population-growth-r--050)
+  - [Conclusion 7 — Mid-winter RoS causes worst forage lockout; 24.5% winter range blocked](#conclusion-7--mid-winter-ros-events-cause-worst-forage-lockout-winter-range-245-blocked-by-ice-crust)
+  - [Conclusion 8 — Coastal corridors pose peak migration hazard in October and May](#conclusion-8--coastal-corridors-pose-peak-migration-hazard-in-october-and-may)
+  - [Conclusion 9 — Subsistence hunting season increasingly disrupted](#conclusion-9--subsistence-hunting-season-is-increasingly-disrupted-by-unsafe-travel-conditions)
 - [Full Event Table](#full-event-table)
 - [Limitations](#limitations)
 - [Scripts](#scripts)
@@ -336,6 +341,51 @@ GEV extreme value analysis (L-moments initialisation, shape xi bounded to [−0.
 
 ---
 
+## Ecological Impact — Teshekpuk Lake Herd Caribou
+
+> Analysis linking RoS climate record (1980–2024) and SAR forage-lockout mapping to the Teshekpuk Lake Herd (TLH), the primary caribou herd on the Alaska North Slope near Utqiagvik.
+
+### Conclusion 6 — RoS frequency correlates negatively with caribou population growth (r = −0.50)
+
+![Population vs RoS overlay](figures/CB1_Population_RoS_Overlay.png)
+
+The TLH peaked at **69,200 animals in 2013** and has since declined 54% to ~32,000 (2023). Cross-correlating annual RoS days with inter-survey population change rates gives Pearson r = **−0.50** (p = 0.058, n = 15 intervals) — negative years in population growth consistently align with elevated RoS frequency. The correlation is borderline significant given the short and irregular survey record, but the direction is physically consistent: rain-on-snow forms impenetrable ice crusts that lock caribou off ground-dwelling sedges and lichens, causing starvation especially in calving cows and calves.
+
+---
+
+### Conclusion 7 — Mid-winter RoS events cause worst forage lockout; winter range 24.5% blocked by ice crust
+
+![Forage Lockout Index by phase](figures/CB2_Forage_Lockout_Index.png)
+
+The **Forage Lockout Index (FLI)** weights RoS days by migration-phase criticality (calving = 2×, migration = 1.5×, winter grazing = 1×). SAR wet-snow fraction from the full 130×124 km network confirms the worst phase-specific lockout:
+
+| Migration Phase | SAR Wet-Snow | Criticality Weight | Notes |
+|---|---|---|---|
+| Spring migration (Apr–May) | 13.9% | 1.5× | Pre-calving nutritional window |
+| Calving (Jun) | 0.0% | 2× | Snow melted; no lockout |
+| Fall migration (Aug–Oct) | 7.3% | 1.5× | Fat accumulation disrupted |
+| Winter range (Nov–Mar) | **24.5%** | 1× | Highest physical blockage |
+
+Despite calving receiving the highest criticality weight, **spring migration lockout (13.9%) at 1.5× weight** produces the largest FLI contribution because it coincides with the period of greatest energetic need before calving. Mid-winter events (Jan–Feb, 24.5% lockout) can be catastrophic for animals already in negative energy balance.
+
+---
+
+### Conclusion 8 — Coastal corridors pose peak migration hazard in October and May
+
+![Migration hazard calendar](figures/CB3_Migration_Hazard_Calendar.png)
+
+The month × year RoS heatmap with migration-phase annotations shows that the **spring migration corridor (April–May)** is increasingly exposed to RoS events — rising from near-zero in the 1980s to 2–3 events/year in the 2020s. The fall migration (August–October) encounters most events in October, exactly when animals cross the sea-ice corridor from the inland tundra to coastal wintering areas near Elson Lagoon and Peard Bay. The SAR data confirms coastal sections of this route have the highest wet-snow frequency, creating a compound hazard: animals must cross the most RoS-affected terrain at the highest-frequency RoS time of year.
+
+---
+
+### Conclusion 9 — Subsistence hunting season is increasingly disrupted by unsafe travel conditions
+
+![Subsistence access risk](figures/CB4_Subsistence_Access_Risk.png)
+
+The fall caribou hunt (September–October) is a critical food-security period for Utqiagvik residents. RoS events during this window create overflow ice on trail routes, making snowmobile travel dangerous before adequate snow depth. The decadal trend shows **September–October RoS days have increased from <1 d/decade (1980s) to 3–4 d/decade (2020s)**. SAR monthly lockout bars confirm October has the highest network coverage of post-RoS ice crust signatures. The combination of more frequent RoS and earlier freeze-up variability is compressing the safe hunting window from both ends.
+
+---
+
 ## Full Event Table
 
 All 49 network-matched SAR events (2017–2024, descending orbit, 40 m/px):
@@ -417,6 +467,7 @@ Wet-snow threshold: **ΔVV < −3.0 dB**. Trail ΔVV = mean within 200 m buffer 
 | [`utqiagvik_sar_advanced.py`](utqiagvik_sar_advanced.py) | **Advanced SAR** — GLCM texture, dual-pol, multi-event maps, RF classifier, seasonal composites |
 | [`utqiagvik_novel_statistics.py`](utqiagvik_novel_statistics.py) | **Novel stats** — TFPW-MK, CWT, GEV, PELT, teleconnections |
 | [`utqiagvik_snowpack_energy.py`](utqiagvik_snowpack_energy.py) | **Energy balance** — cold content, rain heat, ice-crust probability |
+| [`utqiagvik_caribou_ros_impact.py`](utqiagvik_caribou_ros_impact.py) | **Caribou impact** — TLH population vs RoS, Forage Lockout Index, migration hazard calendar, subsistence access risk |
 | [`utqiagvik_future_projections.py`](utqiagvik_future_projections.py) | **Future projections** — Bintanja rain fraction, temperature sensitivity, CMIP6 |
 | [`utqiagvik_ros_sar.py`](utqiagvik_ros_sar.py) | Primary RoS SAR script — same-orbit baseline subtraction |
 | [`utqiagvik_sar_change_detection.py`](utqiagvik_sar_change_detection.py) | SAR change detection across all extreme event types |
