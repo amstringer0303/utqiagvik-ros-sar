@@ -14,18 +14,30 @@ ADF&G survey reports as cited in peer-reviewed literature:
   NOAA Arctic Report Card 2024, Table 1 (Mech et al. coordinators)
   ADF&G caribou management reports 2016–2023
 
-RoS–forage mechanism:
-  Ice crust formation locks lichen, sedge, and cottongrass beneath an
-  impenetrable layer. Caribou can crater through 30–40 cm soft snow but
-  cannot break ice crusts > ~1 cm thick (Bergerud 1974; Forchhammer &
-  Boertmann 1993). If a RoS event occurs during calving (Jun) or
-  pre-calving migration (Apr–May), nutritional stress increases calf
-  mortality. If during fall (Oct–Nov), adults enter winter in poor body
-  condition, increasing overwinter mortality the following spring.
+RoS–forage mechanism (starvation, not migration delay):
+  The primary impact of RoS is STARVATION MORTALITY via ice-crust formation.
+  Rain freezes on refreeze into an impenetrable ice layer over sedges, grasses,
+  and lichens. Caribou can crater through 30-40 cm soft snow but cannot break
+  ice crusts > ~1 cm thick (Bergerud 1974; Forchhammer & Boertmann 1993).
+  Documented impacts:
+    - Direct starvation: prolonged lockout (>1 week) causes rapid fat depletion
+      and death, especially in animals already in negative energy balance
+    - Reproductive failure: RoS during late pregnancy (Apr-May) causes abortion
+      or underweight calves; underweight calves have 2-3x higher predation
+      mortality (Fancy & White 1985; Griffith et al. 2002)
+    - Body-condition cascade: even non-lethal lockout reduces fat reserves,
+      suppressing calf recruitment for 1-2 years post-event
+    - Mass mortality precedent: ~20,000 reindeer died in a single Svalbard RoS
+      event (2013-14); similar scale events documented on Banks Island
+
+  Migration DELAY or REROUTING is a secondary effect and less well-documented
+  for TLH specifically. The TLH has a relatively short migration (~100-200 km)
+  vs the Western Arctic Herd (~1,000 km), so migration disruption is a lesser
+  concern. The dominant pathway here is forage access on winter and spring range.
 
 Outputs: figures/CB1_Population_RoS_Overlay.png
          figures/CB2_Forage_Lockout_Index.png
-         figures/CB3_Migration_Hazard_Calendar.png
+         figures/CB3_Forage_Exposure_Calendar.png
          figures/CB4_Subsistence_Access_Risk.png
 """
 
@@ -315,10 +327,10 @@ def fig_cb2_forage_lockout():
     phases = ['Spring migration', 'Calving', 'Fall migration', 'Winter range']
     colors = [BLUE, RED, AMBER, '#9E9E9E']
     weights = [1.5, 2.0, 1.5, 1.0]
-    labels_pretty = ['Spring migration\n(Mar-May, w=1.5)',
-                     'Calving season\n(Jun-Jul, w=2.0)',
-                     'Fall migration\n(Oct-Nov, w=1.5)',
-                     'Winter range\n(Dec-Feb, w=1.0)']
+    labels_pretty = ['Spring migration\n(Mar-May, w=1.5)\nforage lockout -> calf loss',
+                     'Calving season\n(Jun-Jul, w=2.0)\ncow starvation / calf mortality',
+                     'Fall migration\n(Oct-Nov, w=1.5)\nbody condition entering winter',
+                     'Winter range\n(Dec-Feb, w=1.0)\ndirect starvation mortality']
 
     fig, axes = plt.subplots(2, 2, figsize=(14, 9), facecolor=DARK,
                              gridspec_kw={'hspace': 0.45, 'wspace': 0.35})
@@ -359,9 +371,9 @@ def fig_cb2_forage_lockout():
         ax.set_xlim(1980, 2025)
 
     plt.suptitle(
-        'CB2: Forage Lockout Index by Caribou Migration Phase | Utqiagvik 1980-2024\n'
-        'Weighted RoS days (calving=2x, migration=1.5x) | SAR wet-snow % from Sentinel-1',
-        color=TEXT1, fontsize=11, fontweight='bold')
+        'CB2: Forage Lockout Index by Caribou Phase | Utqiagvik 1980-2024\n'
+        'Primary mechanism: ice-crust starvation mortality | Weighted RoS days (calving=2x, migration=1.5x) | SAR wet-snow % from Sentinel-1',
+        color=TEXT1, fontsize=10, fontweight='bold')
 
     fig.savefig(os.path.join(OUT_FIG, 'CB2_Forage_Lockout_Index.png'),
                 dpi=150, bbox_inches='tight', facecolor=DARK)
@@ -375,8 +387,11 @@ def fig_cb2_forage_lockout():
 
 def fig_cb3_migration_hazard_calendar():
     """
-    Monthly RoS frequency heatmap overlaid with migration phase bands.
-    Shows which months carry the highest forage-lockout risk.
+    Monthly RoS frequency heatmap overlaid with caribou phase bands.
+    Shows which months carry the highest forage-lockout and starvation risk.
+    Primary hazard is ice-crust forage lockout -> starvation, NOT migration delay.
+    TLH has short migration (~100-200 km); forage access on winter/spring range
+    is the dominant mortality pathway.
     """
     annual, monthly, ros_events = load_ros_events()
 
@@ -429,10 +444,10 @@ def fig_cb3_migration_hazard_calendar():
         ax1.text(ev['year'] + 0.2, 0.7, ev['severity'].upper(),
                  color=RED, fontsize=6, rotation=90)
 
-    ax1.set_title('CB3: RoS Hazard Calendar overlaid with TLH Migration Phases\n'
-                  'Red shading = calving (most critical); Blue = spring migration; '
-                  'Amber = fall migration',
-                  color=TEXT1, fontsize=10, fontweight='bold')
+    ax1.set_title('CB3: Seasonal Forage Exposure Calendar — Teshekpuk Lake Herd\n'
+                  'Primary hazard = ice-crust forage lockout -> starvation mortality (NOT migration delay)\n'
+                  'Red = calving (calf starvation/abortion); Blue = spring pre-calving; Amber = fall body-condition loss',
+                  color=TEXT1, fontsize=9, fontweight='bold')
 
     # Bottom panel: annual total RoS with phase breakdown
     ax2.set_facecolor(PANEL)
@@ -454,10 +469,10 @@ def fig_cb3_migration_hazard_calendar():
     ax2.grid(True, alpha=0.2, axis='y')
     ax2.set_xlim(1979.5, 2024.5)
 
-    fig.savefig(os.path.join(OUT_FIG, 'CB3_Migration_Hazard_Calendar.png'),
+    fig.savefig(os.path.join(OUT_FIG, 'CB3_Forage_Exposure_Calendar.png'),
                 dpi=150, bbox_inches='tight', facecolor=DARK)
     plt.close(fig)
-    print('  Saved: CB3_Migration_Hazard_Calendar.png')
+    print('  Saved: CB3_Forage_Exposure_Calendar.png')
 
 
 # ═════════════════════════════════════════════════════════════════════════════

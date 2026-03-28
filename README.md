@@ -32,7 +32,7 @@ PhD-level remote sensing and climate analysis pipeline for detecting and charact
 - [Ecological Impact — Teshekpuk Lake Herd Caribou](#ecological-impact--teshekpuk-lake-herd-caribou)
   - [Conclusion 6 — RoS correlates negatively with caribou population growth (r = −0.50)](#conclusion-6--ros-frequency-correlates-negatively-with-caribou-population-growth-r--050)
   - [Conclusion 7 — Mid-winter RoS causes worst forage lockout; 24.5% winter range blocked](#conclusion-7--mid-winter-ros-events-cause-worst-forage-lockout-winter-range-245-blocked-by-ice-crust)
-  - [Conclusion 8 — Coastal corridors pose peak migration hazard in October and May](#conclusion-8--coastal-corridors-pose-peak-migration-hazard-in-october-and-may)
+  - [Conclusion 8 — Spring and fall phases now carry substantial forage-lockout risk](#conclusion-8--spring-and-fall-phases-now-carry-substantial-forage-lockout-risk-from-rising-ros)
   - [Conclusion 9 — Subsistence hunting season increasingly disrupted](#conclusion-9--subsistence-hunting-season-is-increasingly-disrupted-by-unsafe-travel-conditions)
 - [Full Event Table](#full-event-table)
 - [Limitations](#limitations)
@@ -353,28 +353,32 @@ The TLH peaked at **69,200 animals in 2013** and has since declined 54% to ~32,0
 
 ---
 
-### Conclusion 7 — Mid-winter RoS events cause worst forage lockout; winter range 24.5% blocked by ice crust
+### Conclusion 7 — Ice-crust forage lockout causes starvation mortality; winter range 24.5% blocked
 
 ![Forage Lockout Index by phase](figures/CB2_Forage_Lockout_Index.png)
 
-The **Forage Lockout Index (FLI)** weights RoS days by migration-phase criticality (calving = 2×, migration = 1.5×, winter grazing = 1×). SAR wet-snow fraction from the full 130×124 km network confirms the worst phase-specific lockout:
+The primary RoS impact on caribou is **starvation mortality via ice-crust formation** — not migration delay. Rain freezes into an impenetrable crust over sedges, grasses, and lichens. Caribou can crater through ~30–40 cm of soft snow but cannot break ice crusts >1 cm thick (Bergerud 1974; Forchhammer & Boertmann 1993). The **Forage Lockout Index (FLI)** weights RoS days by phase criticality based on the starvation pathway:
 
-| Migration Phase | SAR Wet-Snow | Criticality Weight | Notes |
+| Caribou Phase | Mortality Pathway | SAR Wet-Snow | Weight |
 |---|---|---|---|
-| Spring migration (Apr–May) | 13.9% | 1.5× | Pre-calving nutritional window |
-| Calving (Jun) | 0.0% | 2× | Snow melted; no lockout |
-| Fall migration (Aug–Oct) | 7.3% | 1.5× | Fat accumulation disrupted |
-| Winter range (Nov–Mar) | **24.5%** | 1× | Highest physical blockage |
+| Spring migration (Mar–May) | Calf starvation / abortion in lactating cows | 13.9% | 1.5× |
+| Calving (Jun–Jul) | Cow starvation; underweight calves 2–3× predation rate | 0.0% | 2× |
+| Fall migration (Oct–Nov) | Poor body condition entering winter | 7.3% | 1.5× |
+| Winter range (Dec–Feb) | **Direct overwinter starvation** | **24.5%** | 1× |
 
-Despite calving receiving the highest criticality weight, **spring migration lockout (13.9%) at 1.5× weight** produces the largest FLI contribution because it coincides with the period of greatest energetic need before calving. Mid-winter events (Jan–Feb, 24.5% lockout) can be catastrophic for animals already in negative energy balance.
+**Spring migration lockout (13.9% at 1.5× weight)** produces the largest FLI contribution — highest energetic need before calving. Mid-winter events (Jan–Feb, 24.5% network locked) are catastrophic for animals already in negative energy balance with depleted fat reserves. Even non-lethal lockout suppresses calf recruitment for 1–2 years post-event via the body-condition cascade.
 
 ---
 
-### Conclusion 8 — Coastal corridors pose peak migration hazard in October and May
+### Conclusion 8 — Spring and fall phases now carry substantial forage-lockout risk from rising RoS
 
-![Migration hazard calendar](figures/CB3_Migration_Hazard_Calendar.png)
+![Seasonal forage exposure calendar](figures/CB3_Forage_Exposure_Calendar.png)
 
-The month × year RoS heatmap with migration-phase annotations shows that the **spring migration corridor (April–May)** is increasingly exposed to RoS events — rising from near-zero in the 1980s to 2–3 events/year in the 2020s. The fall migration (August–October) encounters most events in October, exactly when animals cross the sea-ice corridor from the inland tundra to coastal wintering areas near Elson Lagoon and Peard Bay. The SAR data confirms coastal sections of this route have the highest wet-snow frequency, creating a compound hazard: animals must cross the most RoS-affected terrain at the highest-frequency RoS time of year.
+The month × year RoS heatmap shows the changing seasonal distribution of forage-lockout risk. The primary hazard is **ice-crust starvation on the range**, not migration routing — the TLH has a relatively short migration (~100–200 km vs the Western Arctic Herd's ~1,000 km), so range forage access dominates. Key trends:
+
+- **Spring range (March–May)**: RoS exposure has risen from near-zero in the 1980s to 2–3 events/year in the 2020s, directly threatening the pre-calving nutritional window when cows need maximum forage for fetal development
+- **Fall range (October–November)**: Animals must accumulate fat before the rut and winter; RoS in this window locks forage at the worst possible time, reducing overwinter survival probability
+- **Documented mortality events** (2003 extreme: ~1/3 of collared TLH lost) align with years of high spring + fall combined RoS exposure
 
 ---
 
