@@ -516,12 +516,12 @@ def main():
     print("\n[EB] Computing event-level energy metrics...")
     events = compute_event_metrics(wx)
     print(f"  {len(events)} refined RoS events with snowpack data")
-    print(f"  Mean Q_cc   : {events['Q_cc_Jm2'].mean():.0f} J/m²  "
-          f"(σ={events['Q_cc_Jm2'].std():.0f})")
-    print(f"  Mean Q_rain : {events['Q_rain_Jm2'].mean():.0f} J/m²  "
-          f"(σ={events['Q_rain_Jm2'].std():.0f})")
+    print(f"  Mean Q_cc   : {events['Q_cc_Jm2'].mean():.0f} J/m2  "
+          f"(std={events['Q_cc_Jm2'].std():.0f})")
+    print(f"  Mean Q_rain : {events['Q_rain_Jm2'].mean():.0f} J/m2  "
+          f"(std={events['Q_rain_Jm2'].std():.0f})")
     print(f"  Mean energy ratio: {events['energy_ratio'].mean():.3f}")
-    print(f"  Events with ice_prob ≥ 0.5 : "
+    print(f"  Events with ice_prob >= 0.5 : "
           f"{(events['ice_prob'] >= 0.5).sum()} "
           f"({100*(events['ice_prob'] >= 0.5).mean():.1f}%)")
     fig_eb1_event_energy(events)

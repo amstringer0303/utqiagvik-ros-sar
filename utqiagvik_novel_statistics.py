@@ -1378,9 +1378,9 @@ def main():
     print(f"\n[NS1] Trend-Free Pre-Whitening Mann-Kendall...")
     mk = tfpw_mann_kendall(ann)
     print(f"  Sen slope : {mk['slope_per_yr']:+.4f} days/yr")
-    print(f"  Kendall τ : {mk['tau']:.4f}")
-    print(f"  p-value   : {mk['p_value']:.4f}  ({'SIGNIFICANT' if mk['significant'] else 'not significant'})")
-    print(f"  Lag-1 r₁  : {mk['r1_autocorr']:.4f}")
+    print(f"  Kendall tau : {mk['tau']:.4f}")
+    print(f"  p-value     : {mk['p_value']:.4f}  ({'SIGNIFICANT' if mk['significant'] else 'not significant'})")
+    print(f"  Lag-1 r1    : {mk['r1_autocorr']:.4f}")
     print(f"  n_eff     : {mk['n_eff']} (from n={len(ann)})")
     boot_lo, boot_hi = bootstrap_ci_slope(ann)
     print(f"  Bootstrap 95% CI slope: [{boot_lo:.4f}, {boot_hi:.4f}] days/yr")
@@ -1409,10 +1409,10 @@ def main():
     gev_nonst = fit_gev_nonstationary(ann, np.arange(len(ann), dtype=float))
     rps = np.array([2, 5, 10, 20, 50, 100])
     rls = gev_return_level(gev_stat, rps)
-    print(f"  Stationary GEV:  ξ={gev_stat['shape']:.3f}, μ={gev_stat['loc']:.2f}, "
-          f"σ={gev_stat['scale']:.2f}")
+    print(f"  Stationary GEV:  xi={gev_stat['shape']:.3f}, mu={gev_stat['loc']:.2f}, "
+          f"sigma={gev_stat['scale']:.2f}")
     print(f"  AIC (stat): {gev_stat['aic']:.1f}  |  AIC (non-stat): {gev_nonst['aic']:.1f}")
-    print(f"  μ trend in non-stationary model: {gev_nonst['mu_trend_per_yr']:+.3f} days/yr")
+    print(f"  mu trend in non-stationary model: {gev_nonst['mu_trend_per_yr']:+.3f} days/yr")
     print(f"  Return levels: {dict(zip(rps.astype(int), rls.round(1)))}")
     rl20_lo, rl20, rl20_hi = profile_likelihood_ci(ann, return_period=20)
     print(f"  20-yr return level: {rl20:.1f}d [95%CI: {rl20_lo:.1f}–{rl20_hi:.1f}]")
@@ -1427,8 +1427,8 @@ def main():
     print(f"  Changepoint years: {cp_years}")
     segments = segment_stats(ann, list(years), changepoints)
     for seg in segments:
-        print(f"  Segment {seg['start_year']}–{seg['end_year']}: "
-              f"μ={seg['mean']:.2f} d/yr (σ={seg['std']:.2f}), "
+        print(f"  Segment {seg['start_year']}-{seg['end_year']}: "
+              f"mean={seg['mean']:.2f} d/yr (std={seg['std']:.2f}), "
               f"trend slope={seg['slope_per_yr']:+.3f} d/yr")
     fig_ns4_changepoint(ann, years, changepoints, segments)
 
