@@ -1076,74 +1076,145 @@ def fig_sa4_rf_importance(metrics, feature_names):
     print("  Saved: SA4_RF_Classifier.png")
 
 
+def _build_network_seasonal_composites():
+    """
+    For each month group, stack all network-cache post-event scenes vs their
+    same-year baseline and compute mean ΔVV map across the full 130x124 km grid.
+    Returns dict: month_group_label -> (mean_delta_db, n_scenes)
+    """
+    import glob, re
+    post_files = sorted(glob.glob(os.path.join(NETWORK_CACHE, 'post_*_descending.npz')))
+    if not post_files:
+        return {}
+
+    # Group files by month
+    groups = {
+        'Oct': [], 'Nov-Dec': [], 'Jan-Feb': [], 'Mar-Apr': [], 'May-Jun': []
+    }
+    month_map = {10: 'Oct', 11: 'Nov-Dec', 12: 'Nov-Dec',
+                 1: 'Jan-Feb', 2: 'Jan-Feb', 3: 'Mar-Apr',
+                 4: 'Mar-Apr', 5: 'May-Jun', 6: 'May-Jun'}
+
+    for pf in post_files:
+        m = re.search(r'post_(\d{8})_descending', os.path.basename(pf))
+        if not m:
+            continue
+        date8 = m.group(1)
+        month = int(date8[4:6])
+        year  = int(date8[:4])
+        grp   = month_map.get(month)
+        if grp is None:
+            continue
+        base_path = os.path.join(NETWORK_CACHE, f'baseline_{year}_descending.npz')
+        if not os.path.exists(base_path):
+            # Try adjacent years
+            for dy in [1, -1]:
+                alt = os.path.join(NETWORK_CACHE, f'baseline_{year+dy}_descending.npz')
+                if os.path.exists(alt):
+                    base_path = alt
+                    break
+            else:
+                continue
+        groups[grp].append((pf, base_path))
+
+    composites = {}
+    for grp, pairs in groups.items():
+        if not pairs:
+            continue
+        deltas = []
+        for pf, bf in pairs:
+            try:
+                post_db = np.load(pf,  allow_pickle=True)['db'].astype(np.float32)
+                base_db = np.load(bf,  allow_pickle=True)['db'].astype(np.float32)
+                if post_db.shape == base_db.shape:
+                    deltas.append(post_db - base_db)
+            except Exception:
+                pass
+        if deltas:
+            stack = np.stack(deltas, axis=0)
+            composites[grp] = (np.nanmean(stack, axis=0).astype(np.float32), len(deltas))
+    return composites
+
+
 def fig_sa5_seasonal_composite(event_df):
-    """SA5: Seasonal SAR change climatology."""
-    fig, axes = plt.subplots(2, 4, figsize=(18, 8), facecolor=DARK,
-                             gridspec_kw={'hspace': 0.55, 'wspace': 0.05})
+    """
+    SA5: Seasonal SAR change climatology using real network-cache composites.
+    Shows mean dVV map across full 130x124 km trail network for 5 season groups.
+    """
+    composites = _build_network_seasonal_composites()
+    use_real = bool(composites)
+
+    group_order = ['Oct', 'Nov-Dec', 'Jan-Feb', 'Mar-Apr', 'May-Jun']
+    titles      = ['October\n(onset freeze)', 'Nov-Dec\n(freeze-up)',
+                   'Jan-Feb\n(deep winter)', 'Mar-Apr\n(pre-melt)',
+                   'May-Jun\n(spring melt)']
+
+    # Fallback synthetic if no network cache
+    if not use_real and event_df is not None and 'month' in event_df.columns:
+        pass   # drop through to old path below
+
+    cmap_delta = LinearSegmentedColormap.from_list(
+        'dvv5', ['#B71C1C', '#EF5350', '#37474F', '#1565C0', '#90CAF9'])
+
+    n_panels = len(group_order)
+    fig, axes = plt.subplots(1, n_panels, figsize=(20, 5.5), facecolor=DARK,
+                             gridspec_kw={'wspace': 0.08})
 
     months_of_interest = [10, 11, 12, 1, 2, 3, 4, 5]
     month_labels = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May']
 
     for i, (month, label) in enumerate(zip(months_of_interest, month_labels)):
-        row, col = i // 4, i % 4
-        ax = axes[row, col]
+        # dummy — handled below
+        pass
+
+    for i, (grp, title) in enumerate(zip(group_order, titles)):
+        ax = axes[i]
         ax.set_facecolor(PANEL)
 
-        # Get events for this month
-        if event_df is not None and 'month' in event_df.columns:
-            m_data = event_df[event_df['month'] == month]
-            if 'delta_vv_db' in m_data.columns and len(m_data) > 0:
-                vals = m_data['delta_vv_db'].dropna().values
-                n = len(vals)
-                mean = vals.mean()
-                std  = vals.std() if n > 1 else 0
-            else:
-                n, mean, std = 0, 0, 0
+        if use_real and grp in composites:
+            delta_map, n_sc = composites[grp]
+            H, W = delta_map.shape
+            pix_m = 40.0
+            w_km  = W * pix_m / 1000
+            h_km  = H * pix_m / 1000
+            extent = [0, w_km, h_km, 0]
+            mean_dvv = float(np.nanmean(delta_map))
+            wet_frac = float(100 * (delta_map < WET_DB).sum() / np.isfinite(delta_map).sum())
+
+            im = ax.imshow(delta_map, cmap=cmap_delta, aspect='equal',
+                           origin='upper', extent=extent, vmin=-4, vmax=4)
+            ax.contour(delta_map < WET_DB, levels=[0.5], colors=[RED],
+                       linewidths=0.5, alpha=0.6, extent=extent, origin='upper')
+            ax.set_title(f'{title}\nn={n_sc}  mean={mean_dvv:+.2f}dB\nwet={wet_frac:.0f}%',
+                         color=TEXT1, fontsize=8, fontweight='bold')
+            ax.set_xlabel('km E', color=MUTED, fontsize=7)
+            if i == 0:
+                ax.set_ylabel('km N', color=MUTED, fontsize=7)
+            ax.tick_params(colors=MUTED, labelsize=6)
         else:
-            n, mean, std = 0, 0, 0
+            # Synthetic fallback
+            rng = np.random.default_rng(i * 17)
+            readme_means = {'Oct': -0.5, 'Nov-Dec': 1.2, 'Jan-Feb': 1.6,
+                            'Mar-Apr': -0.3, 'May-Jun': 3.5}
+            mean_val = readme_means.get(grp, 0)
+            mock = rng.normal(mean_val, 2.0, (64, 64)).astype(np.float32)
+            im = ax.imshow(mock, cmap=cmap_delta, aspect='equal', vmin=-4, vmax=4)
+            ax.set_title(f'{title}\n(synthetic)', color=MUTED, fontsize=8)
+            ax.set_xticks([]); ax.set_yticks([])
 
-        # If no real data, use summary statistics from README
-        readme_stats = {
-            10: (-0.5, 2.5, 25), 11: (1.2, 2.0, 30),
-            12: (-1.5, 1.5, 5),  1: (1.5, 1.8, 8),
-            2:  (1.7, 1.5, 6),   3: (1.6, 1.8, 5),
-            4:  (-0.3, 1.5, 10), 5: (3.5, 3.0, 15),
-        }
-        if n == 0:
-            mean, std, n = readme_stats.get(month, (0, 1, 5))
+    cb = plt.colorbar(im, ax=axes.tolist(), shrink=0.85, pad=0.01, fraction=0.015)
+    cb.set_label('Mean dVV (dB)', color=MUTED, fontsize=9)
+    cb.ax.tick_params(labelsize=7, colors=MUTED)
 
-        # Visual representation: simulated spatial map
-        rng = np.random.default_rng(month * 42)
-        mock_map = rng.normal(mean, std, (32, 32))
-        # Add spatial structure (trail-like linear features)
-        if mean < -1:
-            mock_map[10:22, :] += -abs(mean) * 0.5  # "trail" feature
-
-        norm = TwoSlopeNorm(vmin=-8, vcenter=0, vmax=8)
-        cmap = LinearSegmentedColormap.from_list(
-            'ros_map', ['#B71C1C', '#E53935', '#FF8F00', '#1B1B2F', '#1565C0', '#42A5F5'])
-        im = ax.imshow(mock_map, cmap=cmap, norm=norm, aspect='auto')
-        ax.set_title(f'{label} (n={n})\nμΔVV={mean:+.1f}dB',
-                     color=TEXT1, fontsize=8, fontweight='bold')
-        ax.set_xticks([]); ax.set_yticks([])
-
-        # Significance marker
-        t_stat = mean / (std / np.sqrt(max(n, 2)))
-        p_val  = 2 * (1 - stats.t.cdf(abs(t_stat), df=max(n-1, 1)))
-        sig_str = '***' if p_val < 0.001 else '**' if p_val < 0.01 else '*' if p_val < 0.05 else ''
-        if sig_str:
-            ax.text(0.95, 0.95, sig_str, transform=ax.transAxes,
-                    ha='right', va='top', color='white', fontsize=10)
-
-    plt.colorbar(im, ax=axes.ravel().tolist(), label='ΔVV (dB)', shrink=0.6, pad=0.01,
-                 fraction=0.01)
-    plt.suptitle('SA5: Seasonal SAR Change Climatology | Utqiagvik RoS 2016–2024\n'
-                 'Monthly mean ΔVV relative to same-orbit October baseline',
+    src_str = 'Sentinel-1 RTC 40 m/px real composites' if use_real else 'Synthetic demonstration'
+    plt.suptitle(f'SA5: Seasonal SAR Change Climatology | Utqiagvik Trail Network 130x124 km\n'
+                 f'{src_str} | Mean dVV vs Oct dry-snow baseline | Red = wet-snow (dVV < -3 dB)',
                  color=TEXT1, fontsize=11, fontweight='bold')
     fig.savefig(os.path.join(OUT_FIG, 'SA5_Seasonal_SAR_Climatology.png'),
                 dpi=150, bbox_inches='tight', facecolor=DARK)
     plt.close(fig)
-    print("  Saved: SA5_Seasonal_SAR_Climatology.png")
+    src = 'real composites' if use_real else 'synthetic'
+    print(f"  Saved: SA5_Seasonal_SAR_Climatology.png ({src})")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
