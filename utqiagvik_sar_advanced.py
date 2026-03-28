@@ -97,6 +97,8 @@ ROS_CACHE  = os.path.join(os.path.expanduser('~'), 'Desktop',
 CACHE_DIR  = os.path.join(os.path.expanduser('~'), 'Desktop',
                           'Utqiagvik_Weather_Mobility_Assessment',
                           'sar_advanced_cache')
+# Full trail-network cache: 130x124 km at 40 m/px (3253x3111 px), EPSG:32605
+NETWORK_CACHE = os.path.join(SCRIPT_DIR, 'network_cache')
 GHCN_URL   = ('https://www.ncei.noaa.gov/data/global-historical-climatology-'
               'network-daily/access/USW00027502.csv')
 PC_URL     = "https://planetarycomputer.microsoft.com/api/stac/v1"
@@ -455,6 +457,27 @@ def load_real_pair(event_date_str, orbit='descending'):
         if base_db.shape == (_CHIP_ROWS, _CHIP_COLS) and post_db.shape == (_CHIP_ROWS, _CHIP_COLS):
             return _crop_to_utq(base_db), _crop_to_utq(post_db)
         return base_db, post_db   # different shape — return full array
+    except Exception:
+        return None, None
+
+
+def load_network_pair(event_date_str, orbit='descending'):
+    """
+    Load (base_db, post_db) from the full-network cache (130x124 km, 40 m/px).
+    Returns full arrays or (None, None) if not found.
+    """
+    if not os.path.isdir(NETWORK_CACHE):
+        return None, None
+    year = int(event_date_str[:4])
+    date_compact = event_date_str.replace('-', '')
+    base_path = os.path.join(NETWORK_CACHE, f'baseline_{year}_{orbit}.npz')
+    post_path = os.path.join(NETWORK_CACHE, f'post_{date_compact}_{orbit}.npz')
+    if not os.path.exists(base_path) or not os.path.exists(post_path):
+        return None, None
+    try:
+        base_db = np.load(base_path, allow_pickle=True)['db'].astype(np.float32)
+        post_db = np.load(post_path, allow_pickle=True)['db'].astype(np.float32)
+        return base_db, post_db
     except Exception:
         return None, None
 
@@ -887,41 +910,38 @@ def fig_sa3_multi_event(events=None):
     Shows baseline VV, post-event VV, and ΔVV (colour scale ±6 dB) for each
     event in a compact grid. Events are sorted by wet-snow pixel fraction.
     """
-    # Known good event pairs: (event_date, label, baseline_year)
+    # Known good event pairs with confirmed network-cache post files
     known_events = [
-        ('2021-10-06', '2021-10-06 RoS\nbaseline 2021-10-21\npost 2021-10-09', 2021),
-        ('2020-10-02', '2020-10-02 RoS\nbaseline 2020-10-26\npost 2020-10-14', 2020),
-        ('2019-05-29', '2019-05-29 RoS\nbaseline 2019-10-20\npost 2019-06-10', 2019),
-        ('2024-04-16', '2024-04-16 RoS\nbaseline 2023-10-23\npost 2024-04-20', 2023),
+        ('2021-10-06', '2021-10-06 RoS event\nOct dry-snow baseline'),
+        ('2020-10-02', '2020-10-02 RoS event\nOct dry-snow baseline'),
+        ('2020-05-26', '2020-05-26 Spring RoS\nOct dry-snow baseline'),
+        ('2024-04-16', '2024-04-16 Spring RoS\nOct dry-snow baseline'),
     ]
 
-    # Load each pair
+    # Pixel size for network cache
+    NET_PIX_M = 40.0
+
     pairs = []
-    for event_date, label, base_year in known_events:
-        b, p = load_real_pair(event_date, orbit='descending')
+    for event_date, label in known_events:
+        b, p = load_network_pair(event_date, orbit='descending')
         if b is None:
-            # Try previous year's baseline if same-year pair failed
-            date_compact = event_date.replace('-', '')
-            post_path = os.path.join(ROS_CACHE, f'post_{date_compact}_descending.npz')
-            base_path = os.path.join(ROS_CACHE, f'baseline_{base_year}_descending.npz')
-            if os.path.exists(post_path) and os.path.exists(base_path):
-                try:
-                    bd = np.load(base_path, allow_pickle=True)['db'].astype(np.float32)
-                    pd_ = np.load(post_path, allow_pickle=True)['db'].astype(np.float32)
-                    if bd.shape == pd_.shape == (_CHIP_ROWS, _CHIP_COLS):
-                        b, p = _crop_to_utq(bd), _crop_to_utq(pd_)
-                except Exception:
-                    pass
-        if b is not None:
+            # fall back to old 10 m cache, cropped to stats window
+            b, p = load_real_pair(event_date, orbit='descending')
+            pix_m = 10.0
+        else:
+            pix_m = NET_PIX_M
+        if b is not None and b.shape == p.shape:
             delta = p - b
-            wet_pct = float(100 * (delta < WET_DB).sum() / np.isfinite(delta).sum())
-            pairs.append((label, b, p, delta, wet_pct))
+            n_fin = np.isfinite(delta).sum()
+            if n_fin == 0:
+                continue
+            wet_pct = float(100 * (delta < WET_DB).sum() / n_fin)
+            pairs.append((label, b, p, delta, wet_pct, pix_m))
 
     if not pairs:
         print("  [SA3] No valid event pairs found")
         return
 
-    # Sort descending by |ΔVV| (most dramatic change first)
     pairs.sort(key=lambda x: abs(float(np.nanmean(x[3]))), reverse=True)
     n = len(pairs)
 
@@ -934,18 +954,15 @@ def fig_sa3_multi_event(events=None):
     if n == 1:
         axes = axes[np.newaxis, :]
 
-    for row, (label, base_db, post_db, delta, wet_pct) in enumerate(pairs):
-        # Tight 4×4 km crop centred on Utqiagvik town
-        h = CROP_HALF_VIZ
-        if base_db.shape[0] >= 2 * h and base_db.shape[1] >= 2 * h:
-            cy, cx = base_db.shape[0] // 2, base_db.shape[1] // 2
-            base_db = base_db[cy-h:cy+h, cx-h:cx+h]
-            post_db = post_db[cy-h:cy+h, cx-h:cx+h]
-            delta   = delta  [cy-h:cy+h, cx-h:cx+h]
+    for row, (label, base_db, post_db, delta, wet_pct, pix_m) in enumerate(pairs):
         H, W = base_db.shape
-        extent = [0, W * 10 / 1000, H * 10 / 1000, 0]
+        w_km = W * pix_m / 1000
+        h_km = H * pix_m / 1000
+        extent = [0, w_km, h_km, 0]
         dvv_mean = float(np.nanmean(delta))
         lim = 6.0
+
+        res_str = f'{pix_m:.0f} m/px | {w_km:.0f}x{h_km:.0f} km network'
 
         # Baseline VV
         ax = axes[row, 0]
@@ -953,9 +970,10 @@ def fig_sa3_multi_event(events=None):
         vmin, vmax = np.nanpercentile(base_db, 2), np.nanpercentile(base_db, 98)
         im0 = ax.imshow(base_db, cmap=cmap_sar, aspect='equal',
                         origin='upper', extent=extent, vmin=vmin, vmax=vmax)
-        ax.set_title('Baseline VV (dB)\nOct dry-snow', color=TEXT1, fontsize=8, fontweight='bold')
+        ax.set_title(f'Baseline VV (dB)\nOct dry-snow | {res_str}',
+                     color=TEXT1, fontsize=7.5, fontweight='bold')
         ax.set_ylabel(label, color=TEXT2, fontsize=7.5)
-        ax.set_xlabel('km →E', color=MUTED, fontsize=7)
+        ax.set_xlabel('km E', color=MUTED, fontsize=7)
         ax.tick_params(colors=MUTED, labelsize=6)
         plt.colorbar(im0, ax=ax, fraction=0.046, pad=0.03).ax.tick_params(labelsize=6, colors=MUTED)
 
@@ -964,8 +982,8 @@ def fig_sa3_multi_event(events=None):
         ax.set_facecolor(PANEL)
         im1 = ax.imshow(post_db, cmap=cmap_sar, aspect='equal',
                         origin='upper', extent=extent, vmin=vmin, vmax=vmax)
-        ax.set_title('Post-event VV (dB)\nSentinel-1 RTC', color=TEXT1, fontsize=8, fontweight='bold')
-        ax.set_xlabel('km →E', color=MUTED, fontsize=7)
+        ax.set_title('Post-event VV (dB)\nSentinel-1 RTC', color=TEXT1, fontsize=7.5, fontweight='bold')
+        ax.set_xlabel('km E', color=MUTED, fontsize=7)
         ax.tick_params(colors=MUTED, labelsize=6)
         plt.colorbar(im1, ax=ax, fraction=0.046, pad=0.03).ax.tick_params(labelsize=6, colors=MUTED)
 
@@ -975,25 +993,23 @@ def fig_sa3_multi_event(events=None):
         im2 = ax.imshow(delta, cmap=cmap_delta, aspect='equal',
                         origin='upper', extent=extent, vmin=-lim, vmax=lim)
         wet_mask = delta < WET_DB
-        ax.set_title(f'ΔVV = Post − Base (dB)\nmean={dvv_mean:+.2f} dB | wet-snow={wet_pct:.0f}%',
-                     color=TEXT1, fontsize=8, fontweight='bold')
-        ax.set_xlabel('km →E', color=MUTED, fontsize=7)
+        ax.set_title(f'dVV = Post - Base (dB)\nmean={dvv_mean:+.2f} dB  wet-snow={wet_pct:.0f}%',
+                     color=TEXT1, fontsize=7.5, fontweight='bold')
+        ax.set_xlabel('km E', color=MUTED, fontsize=7)
         ax.tick_params(colors=MUTED, labelsize=6)
         cb = plt.colorbar(im2, ax=ax, fraction=0.046, pad=0.03)
         cb.ax.tick_params(labelsize=6, colors=MUTED)
         cb.set_label('dB', color=MUTED, fontsize=7)
-        # Annotate wet-snow threshold
-        ax.contour(wet_mask, levels=[0.5],
-                   colors=[RED], linewidths=0.6, alpha=0.7,
-                   extent=extent, origin='upper')
+        ax.contour(wet_mask, levels=[0.5], colors=[RED],
+                   linewidths=0.5, alpha=0.7, extent=extent, origin='upper')
 
-    plt.suptitle('SA3: Multi-Event Sentinel-1 ΔVV Comparison\n'
-                 f'{2*CROP_HALF_VIZ*10/1000:.0f}×{2*CROP_HALF_VIZ*10/1000:.0f} km Utqiagvik town window | Red contour = wet-snow pixels (ΔVV < −3 dB)',
+    plt.suptitle('SA3: Multi-Event Sentinel-1 dVV — Full Trail Network (130x124 km)\n'
+                 'Red contour = wet-snow pixels (dVV < -3 dB) | Sentinel-1 RTC 40 m/px',
                  color=TEXT1, fontsize=12, fontweight='bold', y=1.01)
     fig.savefig(os.path.join(OUT_FIG, 'SA3_Multi_Event_SAR.png'),
                 dpi=150, bbox_inches='tight', facecolor=DARK)
     plt.close(fig)
-    print(f"  Saved: SA3_Multi_Event_SAR.png ({n} events)")
+    print(f"  Saved: SA3_Multi_Event_SAR.png ({n} events, full 130x124 km network)")
 
 
 def fig_sa4_rf_importance(metrics, feature_names):
