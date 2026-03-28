@@ -23,6 +23,12 @@ PhD-level remote sensing and climate analysis pipeline for detecting and charact
   - [6. Trail vs. Background Response](#6-trail-vs-background-response)
   - [7. Recovery Time](#7-recovery-time)
 - [Novel Statistical Methods](#novel-statistical-methods)
+- [Main Conclusions](#main-conclusions)
+  - [Conclusion 1 — Rain-on-Snow has quadrupled since the 1980s](#conclusion-1--rain-on-snow-has-quadrupled-since-the-1980s)
+  - [Conclusion 2 — The snowpack is getting dangerously easy to saturate](#conclusion-2--the-snowpack-is-getting-dangerously-easy-to-saturate)
+  - [Conclusion 3 — Every 1°C of warming adds 1.4 more RoS days/year](#conclusion-3--every-1c-of-warming-adds-14-more-ros-daysyear)
+  - [Conclusion 4 — SAR reveals spatially non-uniform wetting across the trail network](#conclusion-4--sar-reveals-spatially-non-uniform-wetting-across-the-trail-network)
+  - [Conclusion 5 — The 20-year return level is already the new normal](#conclusion-5--the-20-year-return-level-is-already-the-new-normal)
 - [Full Event Table](#full-event-table)
 - [Limitations](#limitations)
 - [Scripts](#scripts)
@@ -277,6 +283,56 @@ Mean ΔVV composites stacked across all 49 network-cache post-event scenes, grou
 | May–Jun | 10 | +0.50 dB | 4.5% | Spring melt confounds baseline comparison; spatially heterogeneous |
 
 **Key finding:** January–February events, though rare (n=2), show the highest wet-snow pixel fraction (27.5%) across the full network. This is consistent with a near-isothermal snowpack at mid-winter that requires very little additional heat to reach 0°C — a small rainfall event can saturate the full snow column. The October events, despite being the most numerous, show nearly zero wet-snow fraction because the snowpack is thin and cold enough to refreeze rapidly before the next SAR acquisition.
+
+---
+
+## Main Conclusions
+
+> Five conclusions drawn from the combined GHCN-Daily climate record (1980–2024) and Sentinel-1 SAR network analysis (2016–2024).
+
+---
+
+### Conclusion 1 — Rain-on-Snow has quadrupled since the 1980s
+
+![Annual RoS frequency](figures/C1_RoS_Annual_Frequency.png)
+
+The 1980s averaged ~2 RoS days/year. The 2020s average **8 days/year — a 4× increase** in four decades. The trend is statistically significant (Mann-Kendall p = 0.008, Sen slope +0.10 d/yr). Critically, deep-winter (Dec–Feb) events remain almost nonexistent — the entire increase comes from **October and April–May** as sea-ice retreat delays freeze-up and advances melt onset. What used to be a rare outlier year (≥8 RoS days) is now the average.
+
+---
+
+### Conclusion 2 — The snowpack is getting dangerously easy to saturate
+
+![Snowpack vulnerability](figures/EB3_Threshold_Vulnerability.png)
+
+Mean snowpack temperature has warmed from −20°C (1980s) to −16°C (2010s). A warmer snowpack needs less rainfall to fully saturate and form an ice crust on refreeze. The energy ratio Q_rain / Q_cc is trending upward — rain is delivering an increasing fraction of the energy needed to overwhelm the snowpack cold content. **Ice-crust probability peaks in October and November**, exactly when the snowmobile and ATV travel season begins. A single early-season RoS event can create dangerous overflow ice that persists for the entire winter.
+
+---
+
+### Conclusion 3 — Every 1°C of warming adds 1.4 more RoS days/year
+
+![Warming sensitivity](figures/FP3_Warming_Sensitivity.png)
+
+OLS regression of annual RoS days on October–May mean TMAX gives a sensitivity of **+1.38 d/°C** (95% bootstrap CI: 0.61–2.12). Under continued Arctic warming this implies 5–10 additional RoS days/year by 2100 under high-emissions scenarios. No single large-scale climate index (AO, PDO, ENSO) explains the variance — the driver is local mean temperature, not teleconnection pattern.
+
+---
+
+### Conclusion 4 — SAR reveals spatially non-uniform wetting across the trail network
+
+![Seasonal SAR climatology](figures/SA5_Seasonal_SAR_Climatology.png)
+
+The new full-network Sentinel-1 composites (130×124 km, 40 m/px, 49 scenes) show that RoS wetting is not spatially uniform across the trail network:
+
+- **Coastal corridors** (near Utqiagvik town and Elson Lagoon) consistently show stronger ΔVV signal than inland tundra — thinner snowpack and proximity to open-water moisture sources make these routes the most hazardous
+- **January–February events**, though rare (n=2), saturate **27.5% of the network area** — the highest wet-snow fraction of any season. A near-isothermal mid-winter snowpack requires very little rainfall to reach 0°C throughout the full snow column
+- **October events** (n=23) show near-zero wet-snow fraction (0.1%) because the cold, thin early-season snowpack refreezes completely before the next SAR acquisition 12 days later — the hazard exists but SAR cannot capture it at current revisit frequency
+
+---
+
+### Conclusion 5 — The 20-year return level is already the new normal
+
+![Novel statistics summary](figures/NS0_Novel_Statistics_Summary.png)
+
+GEV extreme value analysis (L-moments initialisation, shape xi bounded to [−0.5, 0.5]) gives a **20-year return level of 8.1 days/year** — nearly identical to the current 2020s observed mean of 8.0 days/year. What was statistically a 1-in-20-year extreme in the 1980–2000 baseline is now occurring every year. The non-stationary GEV model is preferred over the stationary model by ΔAIC = 279, confirming a significant upward shift in the location parameter over time. No structural breakpoint was detected by PELT — the increase is a gradual acceleration, not a step change.
 
 ---
 
