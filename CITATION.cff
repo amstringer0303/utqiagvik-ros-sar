@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software or dataset, please cite it as below."
+type: software
+title: "Utqiagvik Rain-on-Snow SAR Analysis"
+abstract: >
+  PhD-level remote sensing and climate analysis pipeline for detecting and
+  characterizing Rain-on-Snow (RoS) events and their ecological impact around
+  Utqiagvik (Barrow), Alaska. Combines GHCN-Daily station records (1980-2024)
+  with systematic Sentinel-1 SAR change detection across the full 130x124 km
+  trail network. Includes caribou forage-lockout analysis for the Teshekpuk
+  Lake Herd.
+authors:
+  - family-names: "Stringer"
+    given-names: "A."
+repository-code: "https://github.com/amstringer0303/utqiagvik-ros-sar"
+license: MIT
+keywords:
+  - rain-on-snow
+  - SAR
+  - Sentinel-1
+  - Arctic
+  - Alaska
+  - Utqiagvik
+  - North Slope
+  - caribou
+  - Teshekpuk Lake
+  - climate change
+  - remote sensing
