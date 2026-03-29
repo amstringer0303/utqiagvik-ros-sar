@@ -36,6 +36,7 @@ PhD-level remote sensing and climate analysis pipeline for detecting and charact
   - [Conclusion 9 — Subsistence hunting season increasingly disrupted](#conclusion-9--subsistence-hunting-season-is-increasingly-disrupted-by-unsafe-travel-conditions)
 - [Full Event Table](#full-event-table)
 - [Limitations](#limitations)
+- [Dataset](#dataset)
 - [Scripts](#scripts)
 - [Requirements](#requirements)
 
@@ -463,11 +464,35 @@ Wet-snow threshold: **ΔVV < −3.0 dB**. Trail ΔVV = mean within 200 m buffer 
 
 ---
 
+## Dataset
+
+The `build_dataset.py` script exports the full SAR dataset to publication-ready GeoTIFFs. Run after downloading the network cache:
+
+```bash
+python download_network_sar.py --orbit desc   # ~1.4 GB network cache
+python build_dataset.py                        # ~3.3 GB GeoTIFF export
+```
+
+Output structure (`dataset/`):
+
+| Folder | Files | Content |
+|--------|-------|---------|
+| `baselines/` | 9 | October dry-snow median composites (dB) |
+| `scenes/` | 49 | Post-RoS acquisitions (dB) |
+| `delta_vv/` | 49 | ΔVV change detection — post minus baseline (dB) |
+| `wetsnow/` | 49 | Binary ice-crust mask: 1 = wet-snow (ΔVV < −3 dB), 0 = dry |
+| `manifest.csv` | 1 | Per-event metadata: date, orbit, mean ΔVV, wet-snow % |
+
+All GeoTIFFs: **EPSG:32605** (UTM Zone 5N) · **40 m/px** · LZW-compressed · CRS/transform/nodata embedded · openable in QGIS, ArcGIS, or any GDAL tool. The dataset is not committed to git due to size — rebuild locally using the script above.
+
+---
+
 ## Scripts
 
 | Script | Description |
 |--------|-------------|
 | [`download_network_sar.py`](download_network_sar.py) | **Download** — fetches 130×124 km Sentinel-1 RTC network tiles at 40 m/px |
+| [`build_dataset.py`](build_dataset.py) | **Export** — converts network_cache NPZ to 156 georeferenced GeoTIFFs + manifest.csv |
 | [`utqiagvik_sar_advanced.py`](utqiagvik_sar_advanced.py) | **Advanced SAR** — GLCM texture, dual-pol, multi-event maps, RF classifier, seasonal composites |
 | [`utqiagvik_novel_statistics.py`](utqiagvik_novel_statistics.py) | **Novel stats** — TFPW-MK, CWT, GEV, PELT, teleconnections |
 | [`utqiagvik_snowpack_energy.py`](utqiagvik_snowpack_energy.py) | **Energy balance** — cold content, rain heat, ice-crust probability |

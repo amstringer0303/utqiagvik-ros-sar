@@ -5,4 +5,7 @@ ros_cache/
 sar_cache/
 rs_cache/
 era5_cache/
+network_cache/
 *.npz
+# Exported GeoTIFF dataset (3.3 GB — rebuild with: python build_dataset.py)
+dataset/
