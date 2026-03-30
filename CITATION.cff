@@ -14,6 +14,10 @@ authors:
     given-names: "A."
 repository-code: "https://github.com/amstringer0303/utqiagvik-ros-sar"
 license: MIT
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19324872
+    description: "Zenodo dataset DOI (GeoTIFF archive)"
 keywords:
   - rain-on-snow
   - SAR

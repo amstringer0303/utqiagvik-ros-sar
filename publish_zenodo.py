@@ -138,15 +138,52 @@ def _md5(path, chunk=1 << 20):
     return h.hexdigest()
 
 
+def _build_zip_archives(tmp_dir):
+    """
+    Bundle each layer type into a ZIP archive.
+    Zenodo has a 100-file-per-record limit; 158 GeoTIFFs exceed it.
+    4 ZIPs + manifest + README = 6 files total.
+    Returns list of (local_path, zenodo_name).
+    """
+    import zipfile
+    os.makedirs(tmp_dir, exist_ok=True)
+
+    bundles = [
+        ('baselines.zip',  'baselines/*.tif'),
+        ('scenes.zip',     'scenes/*.tif'),
+        ('delta_vv.zip',   'delta_vv/*.tif'),
+        ('wetsnow.zip',    'wetsnow/*.tif'),
+    ]
+
+    files = []
+    for zip_name, pattern in bundles:
+        zip_path = os.path.join(tmp_dir, zip_name)
+        tifs = sorted(glob.glob(os.path.join(DATASET_DIR, pattern)))
+        print(f'  Packing {zip_name} ({len(tifs)} files) ...', end='', flush=True)
+        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_STORED) as zf:
+            for t in tifs:
+                zf.write(t, os.path.basename(t))
+        size = os.path.getsize(zip_path)
+        print(f' {_sizeof_fmt(size)}')
+        files.append((zip_path, zip_name))
+
+    # Add flat manifest and README
+    for name in ['manifest.csv', 'README.txt']:
+        p = os.path.join(DATASET_DIR, name)
+        if os.path.exists(p):
+            files.append((p, name))
+
+    return files
+
+
 def _all_dataset_files():
-    """Return list of (local_path, zenodo_name) for everything in dataset/."""
+    """Kept for reference — not used when zip bundles are built."""
     files = []
     for pattern in ['baselines/*.tif', 'scenes/*.tif',
                     'delta_vv/*.tif', 'wetsnow/*.tif',
                     'manifest.csv', 'README.txt']:
         for p in sorted(glob.glob(os.path.join(DATASET_DIR, pattern))):
-            rel = os.path.relpath(p, DATASET_DIR).replace('\\', '/')
-            files.append((p, rel))
+            files.append((p, os.path.basename(p)))
     return files
 
 
@@ -215,11 +252,15 @@ class ZenodoUploader:
 
 def main():
     parser = argparse.ArgumentParser(description='Upload SAR dataset to Zenodo')
-    parser.add_argument('--token',   required=True, help='Zenodo API token')
-    parser.add_argument('--sandbox', action='store_true',
+    parser.add_argument('--token',      required=True, help='Zenodo API token')
+    parser.add_argument('--sandbox',    action='store_true',
                         help='Use sandbox.zenodo.org for testing')
-    parser.add_argument('--publish', action='store_true',
-                        help='Publish the deposit after upload (assigns DOI — irreversible)')
+    parser.add_argument('--publish',    action='store_true',
+                        help='Publish the deposit after upload (assigns DOI -- irreversible)')
+    parser.add_argument('--deposit-id', type=str, default=None,
+                        help='Resume an existing draft deposit (skip create step)')
+    parser.add_argument('--bucket-url', type=str, default=None,
+                        help='Bucket URL for existing deposit (required with --deposit-id)')
     args = parser.parse_args()
 
     base_url = ZENODO_SANDBOX_URL if args.sandbox else ZENODO_URL
@@ -245,9 +286,22 @@ def main():
 
     uploader = ZenodoUploader(args.token, base_url)
 
-    # Step 1: create deposit
-    print('\n[1/4] Creating deposit ...')
-    deposit_id, bucket_url = uploader.create_deposit()
+    # Step 0: build ZIP bundles (bypasses 100-file Zenodo limit)
+    import tempfile, shutil
+    tmp_dir = os.path.join(SCRIPT_DIR, '_zenodo_tmp')
+    print('\n[0/4] Building ZIP archives (GeoTIFFs already LZW-compressed, stored mode) ...')
+    files = _build_zip_archives(tmp_dir)
+    total_bytes = sum(os.path.getsize(p) for p, _ in files)
+    print(f'  {len(files)} files to upload  ({_sizeof_fmt(total_bytes)})')
+
+    # Step 1: create or resume deposit
+    if args.deposit_id and args.bucket_url:
+        deposit_id = args.deposit_id
+        bucket_url = args.bucket_url
+        print(f'\n[1/4] Resuming existing deposit {deposit_id}')
+    else:
+        print('\n[1/4] Creating deposit ...')
+        deposit_id, bucket_url = uploader.create_deposit()
 
     # Step 2: set metadata
     print('\n[2/4] Setting metadata ...')
@@ -282,6 +336,11 @@ def main():
             print('  Publish cancelled. Deposit saved as draft.')
     else:
         print('\n  Re-run with --publish to assign DOI when ready.')
+
+    # Cleanup temp ZIPs
+    if os.path.isdir(tmp_dir):
+        shutil.rmtree(tmp_dir)
+        print('  Cleaned up temporary ZIP files.')
 
     print('\n' + '=' * 60)
     print('DONE')
