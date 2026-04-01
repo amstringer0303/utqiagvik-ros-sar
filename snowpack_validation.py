@@ -182,7 +182,10 @@ def load_era5_point(lon, lat, year_range=(2016, 2025)):
         print('ERROR: pip install xarray netcdf4')
         sys.exit(1)
 
-    files = sorted(glob.glob(os.path.join(ERA5_DIR, 'era5_*.nc')))
+    # Prefer _fixed.nc (unzipped from CDS zip-wrapped downloads), fall back to .nc
+    files = sorted(glob.glob(os.path.join(ERA5_DIR, 'era5_*_fixed.nc')))
+    if not files:
+        files = sorted(glob.glob(os.path.join(ERA5_DIR, 'era5_*.nc')))
     if not files:
         return None
 
@@ -199,7 +202,9 @@ def load_era5_point(lon, lat, year_range=(2016, 2025)):
         'sd':  'sd',     # m of water equivalent
         'sp':  'sp',     # Pa
     })
-    df['time'] = pd.to_datetime(df['time'])
+    # New CDS API uses 'valid_time' as the time dimension name
+    time_col = 'valid_time' if 'valid_time' in df.columns else 'time'
+    df['time'] = pd.to_datetime(df[time_col])
     df = df.sort_values('time').set_index('time')
 
     # Unit conversions
@@ -261,7 +266,9 @@ def main():
     print('=' * 60)
 
     # Check ERA5
-    era5_files = sorted(glob.glob(os.path.join(ERA5_DIR, 'era5_*.nc')))
+    era5_files = sorted(glob.glob(os.path.join(ERA5_DIR, 'era5_*_fixed.nc')))
+    if not era5_files:
+        era5_files = sorted(glob.glob(os.path.join(ERA5_DIR, 'era5_*.nc')))
     print(f'ERA5 files found: {len(era5_files)}')
     if args.check or not era5_files:
         if not era5_files:
@@ -325,14 +332,25 @@ def main():
         'wet_snow_pct':  manifest['wet_snow_pct'].values,
         'mean_delta_vv': manifest['mean_delta_vv_db'].values,
         'month':         [d.month for d in event_dates],
+        'year':          [d.year for d in event_dates],
     })
 
-    # Threshold sweep to find optimal SAR dB threshold
-    thresholds = np.linspace(-6.0, 0.0, 61)
+    # Filter to events covered by available ERA5 data (model can only validate these)
+    era5_years = sorted(set(int(f.split('_')[1])
+                            for f in [os.path.basename(x) for x in
+                                      glob.glob(os.path.join(ERA5_DIR, 'era5_*_fixed.nc'))]))
+    comp_era5 = comp[comp['year'].isin(era5_years)].copy()
+    print(f'\nEvents with ERA5 coverage: {len(comp_era5)}/{len(comp)} '
+          f'(years {min(era5_years)}-{max(era5_years)})')
+
+    # ROC: sweep wet_snow_pct threshold (SAR predictor)
+    # Truth: model predicts ice crust at >=1 of 25 grid points (fraction >= 0.04)
+    MODEL_THRESH = 1.0 / (N_GRID * N_GRID)   # at least 1 grid point
+    thresholds = np.linspace(0.0, 50.0, 101)  # wet_snow_pct 0-50%
     TPRs, FPRs = [], []
     for thresh in thresholds:
-        pred = comp['mean_delta_vv'] < thresh
-        truth = comp['model_icecrust_frac'] > 0.3
+        pred  = comp_era5['wet_snow_pct'] > thresh
+        truth = comp_era5['model_icecrust_frac'] >= MODEL_THRESH
         TP = (pred & truth).sum()
         FP = (pred & ~truth).sum()
         TN = (~pred & ~truth).sum()
@@ -342,37 +360,50 @@ def main():
         TPRs.append(TPR)
         FPRs.append(FPR)
 
-    # AUC (trapezoidal)
-    AUC = -np.trapz(TPRs, FPRs)
+    # AUC (trapezoidal; negate because FPR is decreasing with increasing threshold)
+    try:
+        AUC = float(np.trapezoid(TPRs, FPRs))
+    except AttributeError:
+        AUC = float(-np.trapz(TPRs, FPRs))
+    AUC = abs(AUC)
 
-    # Optimal threshold: maximise TPR - FPR (Youden's J)
+    # Optimal threshold: maximise Youden's J = TPR - FPR
     J = np.array(TPRs) - np.array(FPRs)
-    opt_idx = np.argmax(J)
-    opt_thresh = thresholds[opt_idx]
-    opt_TPR    = TPRs[opt_idx]
-    opt_FPR    = FPRs[opt_idx]
+    opt_idx   = int(np.argmax(J))
+    opt_thresh = float(thresholds[opt_idx])
+    opt_TPR    = float(TPRs[opt_idx])
+    opt_FPR    = float(FPRs[opt_idx])
 
-    print(f'\nValidation results:')
-    print(f'  AUC (ROC):          {AUC:.3f}')
-    print(f'  Optimal threshold:  {opt_thresh:.1f} dB  (Youden J)')
-    print(f'  TPR at optimal:     {opt_TPR:.3f}')
-    print(f'  FPR at optimal:     {opt_FPR:.3f}')
-    print(f'  Literature threshold (-3 dB):')
-    lit_idx = np.argmin(np.abs(thresholds - (-3.0)))
-    print(f'    TPR={TPRs[lit_idx]:.3f}  FPR={FPRs[lit_idx]:.3f}')
+    # Spearman correlation between model ice-crust fraction and SAR wet_snow_pct
+    from scipy.stats import spearmanr
+    rho, pval = spearmanr(comp_era5['model_icecrust_frac'],
+                          comp_era5['wet_snow_pct'])
+
+    n_model_pos = int((comp_era5['model_icecrust_frac'] >= MODEL_THRESH).sum())
+
+    print(f'\nValidation results (ERA5-covered events, n={len(comp_era5)}):')
+    print(f'  Model ice-crust positive events: {n_model_pos}')
+    print(f'  Spearman rho (model vs wet_pct): {rho:.3f}  p={pval:.3f}')
+    print(f'  AUC (ROC, wet_pct threshold):    {AUC:.3f}')
+    print(f'  Optimal wet_snow_pct threshold:  {opt_thresh:.1f}%  (Youden J)')
+    print(f'  TPR at optimal:                  {opt_TPR:.3f}')
+    print(f'  FPR at optimal:                  {opt_FPR:.3f}')
 
     # Save stats
     stats = {
         'AUC_ROC': float(AUC),
-        'optimal_threshold_dB': float(opt_thresh),
+        'optimal_wetpct_threshold': float(opt_thresh),
         'optimal_TPR': float(opt_TPR),
         'optimal_FPR': float(opt_FPR),
-        'literature_threshold_dB': -3.0,
-        'literature_TPR': float(TPRs[lit_idx]),
-        'literature_FPR': float(FPRs[lit_idx]),
-        'n_events': len(event_dates),
+        'spearman_rho': float(rho),
+        'spearman_pval': float(pval),
+        'model_icecrust_threshold': float(MODEL_THRESH),
+        'n_events_total': len(comp),
+        'n_events_era5': len(comp_era5),
         'n_sar_detected': int(sum(sar_detected.values())),
-        'n_model_icecrust': int(sum(v > 0.3 for v in model_icecrust.values())),
+        'n_model_icecrust': n_model_pos,
+        'era5_years': era5_years,
+        'note': 'ROC calibrates SAR wet_snow_pct threshold vs 1D snowpack model ice-crust detection',
     }
     out_json = os.path.join(SCRIPT_DIR, 'snowpack_validation_stats.json')
     with open(out_json, 'w') as f:
@@ -383,24 +414,36 @@ def main():
     plt.rcParams.update({'figure.dpi': 150, 'font.size': 10,
                          'axes.spines.top': False, 'axes.spines.right': False})
 
-    # SV1: Event-level agreement scatter
+    # SV1: Event-level agreement scatter (ERA5-covered events highlighted)
     print('\n[SV1] Model vs SAR agreement...')
     fig, ax = plt.subplots(figsize=(7, 6))
-    colors = ['#d73027' if r else '#4575b4' for r in comp['sar_detected']]
-    sc = ax.scatter(comp['model_icecrust_frac'], comp['wet_snow_pct'],
-                    c=comp['mean_delta_vv'], cmap='RdBu_r',
-                    vmin=-5, vmax=2, s=60, zorder=3, edgecolors='gray', lw=0.5)
-    plt.colorbar(sc, ax=ax, label='Mean ΔVV (dB)')
-    ax.axvline(0.3, color='gray', ls='--', lw=1, label='Model threshold (30% coverage)')
+
+    # All events (grey for non-ERA5)
+    mask_era5 = comp['year'].isin(era5_years)
+    sc = ax.scatter(comp.loc[~mask_era5, 'model_icecrust_frac'],
+                    comp.loc[~mask_era5, 'wet_snow_pct'],
+                    c='lightgray', s=40, zorder=2, edgecolors='gray', lw=0.3,
+                    label='Events outside ERA5 period')
+    sc = ax.scatter(comp_era5['model_icecrust_frac'], comp_era5['wet_snow_pct'],
+                    c=comp_era5['mean_delta_vv'], cmap='RdBu_r',
+                    vmin=-3, vmax=2, s=60, zorder=3, edgecolors='gray', lw=0.5)
+    plt.colorbar(sc, ax=ax, label='Mean network ΔVV (dB)')
+    ax.axvline(MODEL_THRESH, color='gray', ls='--', lw=1,
+               label=f'Model threshold ({MODEL_THRESH:.2f})')
     ax.axhline(5.0, color='gray', ls=':', lw=1, label='SAR threshold (5% wet-snow)')
     # Annotate quadrants
-    ax.text(0.05, 0.95, 'FN', transform=ax.transAxes, color='#d73027', fontsize=12, fontweight='bold')
-    ax.text(0.85, 0.95, 'TP', transform=ax.transAxes, color='green', fontsize=12, fontweight='bold')
-    ax.text(0.05, 0.02, 'TN', transform=ax.transAxes, color='#4575b4', fontsize=12, fontweight='bold')
-    ax.text(0.85, 0.02, 'FP', transform=ax.transAxes, color='orange', fontsize=12, fontweight='bold')
+    ax.text(0.02, 0.97, 'FN', transform=ax.transAxes, color='#d73027',
+            fontsize=12, fontweight='bold', va='top')
+    ax.text(0.90, 0.97, 'TP', transform=ax.transAxes, color='green',
+            fontsize=12, fontweight='bold', va='top')
+    ax.text(0.02, 0.02, 'TN', transform=ax.transAxes, color='#4575b4',
+            fontsize=12, fontweight='bold', va='bottom')
+    ax.text(0.90, 0.02, 'FP', transform=ax.transAxes, color='orange',
+            fontsize=12, fontweight='bold', va='bottom')
     ax.set_xlabel('Snowpack model: network ice-crust fraction')
     ax.set_ylabel('SAR: network wet-snow coverage (%)')
-    ax.set_title(f'Snowpack Model vs SAR Detection — Utqiagvik (AUC={AUC:.3f})')
+    ax.set_title(f'Snowpack Model vs SAR — Utqiagvik\n'
+                 f'Spearman rho={rho:.2f}, p={pval:.3f}  (ERA5 n={len(comp_era5)})')
     ax.legend(fontsize=8)
     fig.tight_layout()
     out = os.path.join(FIGURE_DIR, 'SV1_Model_SAR_Agreement.png')
@@ -408,7 +451,7 @@ def main():
     plt.close(fig)
     print(f'  Saved: {out}')
 
-    # SV2: ROC curve + threshold calibration
+    # SV2: ROC curve + threshold sensitivity
     print('\n[SV2] Threshold calibration ROC...')
     fig, axes = plt.subplots(1, 2, figsize=(11, 5))
 
@@ -416,12 +459,10 @@ def main():
     ax.plot(FPRs, TPRs, 'k-', lw=2)
     ax.plot([0, 1], [0, 1], 'gray', ls='--', lw=1)
     ax.scatter([opt_FPR], [opt_TPR], color='red', s=100, zorder=5,
-               label=f'Optimal: {opt_thresh:.1f} dB\n(TPR={opt_TPR:.2f}, FPR={opt_FPR:.2f})')
-    ax.scatter([FPRs[lit_idx]], [TPRs[lit_idx]], color='blue', s=100, zorder=5, marker='s',
-               label=f'Literature: -3.0 dB\n(TPR={TPRs[lit_idx]:.2f}, FPR={FPRs[lit_idx]:.2f})')
+               label=f'Optimal: {opt_thresh:.0f}% wet-snow\n(TPR={opt_TPR:.2f}, FPR={opt_FPR:.2f})')
     ax.set_xlabel('False Positive Rate')
     ax.set_ylabel('True Positive Rate')
-    ax.set_title(f'ROC Curve (AUC={AUC:.3f})\nSAR threshold vs SnowModel ice-crust')
+    ax.set_title(f'ROC Curve (AUC={AUC:.3f})\nSAR wet_snow_pct threshold vs SnowModel ice-crust')
     ax.legend(fontsize=8)
 
     ax = axes[1]
@@ -429,13 +470,12 @@ def main():
     ax.plot(thresholds, FPRs, 'b-', lw=2, label='FPR')
     ax.plot(thresholds, J,    'g--', lw=1.5, label="Youden's J")
     ax.axvline(opt_thresh, color='red', ls='--', lw=1,
-               label=f'Optimal: {opt_thresh:.1f} dB')
-    ax.axvline(-3.0, color='blue', ls=':', lw=1, label='Literature: -3.0 dB')
-    ax.set_xlabel('ΔVV threshold (dB)')
+               label=f'Optimal: {opt_thresh:.0f}%')
+    ax.axvline(5.0, color='blue', ls=':', lw=1, label='Default SAR: 5% wet-snow')
+    ax.set_xlabel('SAR wet-snow coverage threshold (%)')
     ax.set_ylabel('Rate')
     ax.set_title('Threshold Sensitivity')
     ax.legend(fontsize=8)
-    ax.invert_xaxis()
 
     fig.tight_layout()
     out = os.path.join(FIGURE_DIR, 'SV2_Threshold_Calibration.png')
@@ -443,25 +483,32 @@ def main():
     plt.close(fig)
     print(f'  Saved: {out}')
 
-    # SV3: Spatial map — model vs SAR by grid point
+    # SV3: Spatial map — model ice-crust frequency by grid point
     print('\n[SV3] Spatial validation map...')
     fig, ax = plt.subplots(figsize=(9, 6))
 
+    max_frac = max(
+        (sum(pt_res.values()) / max(len(event_dates), 1)
+         for pt_res in point_results.values()), default=0.01
+    )
+    scs = []
     for (lat, lon), pt_res in point_results.items():
         model_events = sum(pt_res.values())
-        sar_events   = sum(sar_detected.values())
         frac = model_events / max(len(event_dates), 1)
-        ax.scatter(-lon, lat, s=200 * frac + 20,
-                   c=frac, cmap='Reds', vmin=0, vmax=1,
-                   edgecolors='gray', lw=0.5, zorder=3)
+        sc_ = ax.scatter(-lon, lat, s=300 * frac / max(max_frac, 0.01) + 20,
+                         c=[frac], cmap='Reds', vmin=0, vmax=max_frac,
+                         edgecolors='gray', lw=0.5, zorder=3)
+        scs.append(sc_)
 
+    if scs:
+        plt.colorbar(scs[-1], ax=ax, label='Ice-crust event fraction')
     # Mark Utqiagvik
     ax.scatter(156.77, 71.29, marker='*', s=300, color='gold',
                edgecolors='black', lw=1, zorder=5, label='Utqiagvik')
-    ax.set_xlabel('Longitude (°W, absolute)')
-    ax.set_ylabel('Latitude (°N)')
+    ax.set_xlabel('Longitude (degrees W)')
+    ax.set_ylabel('Latitude (degrees N)')
     ax.set_title('Snowpack Model: Network Ice-Crust Event Frequency\n'
-                 'Circle size and colour = fraction of 49 events with model ice crust')
+                 'Circle size & colour = fraction of events with model ice crust')
     ax.legend()
     fig.tight_layout()
     out = os.path.join(FIGURE_DIR, 'SV3_Spatial_Validation.png')
@@ -471,12 +518,9 @@ def main():
 
     print('\n' + '=' * 60)
     print('VALIDATION COMPLETE')
-    print(f'  AUC = {AUC:.3f}   Optimal threshold = {opt_thresh:.1f} dB')
-    if abs(opt_thresh - (-3.0)) < 0.5:
-        print('  Literature -3 dB threshold CONFIRMED by SnowModel.')
-    else:
-        print(f'  Locally calibrated threshold ({opt_thresh:.1f} dB) differs from')
-        print('  literature value (-3.0 dB) — report both in manuscript.')
+    print(f'  ERA5 events: {len(comp_era5)}/{len(comp)}   AUC = {AUC:.3f}')
+    print(f'  Spearman rho = {rho:.3f}  p = {pval:.3f}')
+    print(f'  Optimal SAR threshold: {opt_thresh:.0f}% wet-snow coverage')
     print('=' * 60)
 
 

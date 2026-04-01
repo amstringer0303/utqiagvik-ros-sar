@@ -1,0 +1,21 @@
+{
+  "AUC_ROC": 0.4216666666666667,
+  "optimal_wetpct_threshold": 8.0,
+  "optimal_TPR": 0.45,
+  "optimal_FPR": 0.3333333333333333,
+  "spearman_rho": -0.2311617310156947,
+  "spearman_pval": 0.18152181398549494,
+  "model_icecrust_threshold": 0.04,
+  "n_events_total": 49,
+  "n_events_era5": 35,
+  "n_sar_detected": 27,
+  "n_model_icecrust": 20,
+  "era5_years": [
+    2016,
+    2017,
+    2018,
+    2019,
+    2020
+  ],
+  "note": "ROC calibrates SAR wet_snow_pct threshold vs 1D snowpack model ice-crust detection"
+}

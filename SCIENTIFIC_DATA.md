@@ -137,6 +137,20 @@ Tabular metadata for all 49 events:
 ### `README.txt`
 Plain-text description of dataset structure, coordinate reference system, processing parameters, and known limitations.
 
+### `visual/` — Human-Interpretable Subdataset
+
+A supplementary visual layer is provided to allow non-specialist users to perceive RoS events in SAR imagery without any post-processing:
+
+**`visual/rgb/`** — 49 false-colour Cloud Optimized GeoTIFFs. RGB composite where Band 1 = post-event σ° (dB), Band 2 = Band 3 = baseline σ° (dB), scaled to uint8. Wet snow appears **blue/cyan** relative to unchanged tundra (grey/white). Users can drag these directly into QGIS, ArcGIS, or Google Earth Engine without any further processing.
+
+**`visual/delta_vis/`** — 49 colourised ΔVV Cloud Optimized GeoTIFFs. Single-band uint8 images encoding ΔVV using a RdBu diverging colourmap, scaled −8 dB (value 0, dark red) through 0 dB (value 127, white) to +4 dB (value 254, dark blue). Pixel value 255 = NoData. A QGIS pseudocolour style file (`visual/styles/delta_vis_style.qml`) is provided for one-click rendering.
+
+**`visual/thumbs/`** — 49 side-by-side PNG thumbnails (false-colour RGB | colourised ΔVV) at 1/8 resolution (~388 × 406 pixels). Suitable for event browsing and quick quality control.
+
+**`visual/index.html`** — Self-contained dark-mode event browser. Opens locally in any web browser (no server required). Displays all 49 events sorted by wet-snow coverage, with embedded thumbnails, event metadata table, and QGIS loading instructions.
+
+All visual files use identical spatial extent, CRS (EPSG:32605), and affine transform as the primary dataset GeoTIFFs, and are therefore directly co-registered with the analytical layers.
+
 ---
 
 ## Technical Validation
