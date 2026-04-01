@@ -116,7 +116,7 @@ def save_npz(arr_db, path):
                         transform=np.array([t.a, t.b, t.c, t.d, t.e, t.f]),
                         crs_epsg=np.int32(32615),
                         pixel_m=np.float32(PIXEL_M))
-    print(f"    Saved: {os.path.basename(path)}.npz")
+    print(f"    Saved: {os.path.basename(path)}")
 
 def get_scenes(catalog, bbox, date_range, orbit='descending', max_items=8):
     res = catalog.search(
@@ -161,8 +161,10 @@ def build_post(date_str, orbit='descending'):
         print(f"  post_{date_str}: exists, skipping.")
         return
     catalog = pystac_client.Client.open(PC_URL, modifier=pc.sign_inplace)
-    y, m, d = date_str[:4], date_str[4:6], date_str[6:]
-    date_range = f'{y}-{m}-{d}/{y}-{m}-{int(d)+14:02d}'
+    from datetime import datetime as _dt, timedelta as _td
+    start = _dt.strptime(date_str, '%Y%m%d')
+    end   = start + _td(days=14)
+    date_range = f'{start.strftime("%Y-%m-%d")}/{end.strftime("%Y-%m-%d")}'
     try:
         items = get_scenes(catalog, NETWORK_BBOX, date_range, orbit, max_items=2)
     except Exception:
