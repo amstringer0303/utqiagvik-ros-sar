@@ -1,13 +1,13 @@
 {
-  "AUC_ROC": 0.6014957264957266,
+  "AUC_ROC": 0.6279264214046822,
   "optimal_wetpct_threshold": 8.0,
   "optimal_TPR": 0.5,
-  "optimal_FPR": 0.2222222222222222,
-  "spearman_rho": 0.12068889593616926,
-  "spearman_pval": 0.4351721740954232,
+  "optimal_FPR": 0.21739130434782608,
+  "spearman_rho": 0.1458788219416442,
+  "spearman_pval": 0.3172361544616042,
   "model_icecrust_threshold": 0.04,
   "n_events_total": 49,
-  "n_events_era5": 44,
+  "n_events_era5": 49,
   "n_sar_detected": 27,
   "n_model_icecrust": 26,
   "era5_years": [
@@ -18,7 +18,8 @@
     2020,
     2021,
     2022,
-    2023
+    2023,
+    2024
   ],
   "note": "ROC calibrates SAR wet_snow_pct threshold vs 1D snowpack model ice-crust detection"
 }
