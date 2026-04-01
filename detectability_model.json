@@ -1,0 +1,41 @@
+{
+  "model": "logistic",
+  "features": [
+    "intercept",
+    "delta_T_days",
+    "T_snow_14day_mean_C",
+    "delta_T_x_T_snow"
+  ],
+  "coefficients": [
+    0.14526693611107436,
+    -1.454310712472938,
+    -0.15645651658790014,
+    1.5878523247634648
+  ],
+  "ci_lower_95": [
+    -0.6519373637315445,
+    -3.4834949566509805,
+    -0.8987292502772919,
+    1.4011762087624007
+  ],
+  "ci_upper_95": [
+    1.2371201141929522,
+    -1.2897142042669458,
+    0.35782453284566507,
+    5.958276167785475
+  ],
+  "n_observations": 70,
+  "n_detected": 27,
+  "detection_threshold_wet_pct": 5.0,
+  "monthly_mean_P_detection": {
+    "1": 0.0,
+    "2": 0.9251,
+    "3": 0.8907,
+    "4": 0.9387,
+    "5": 0.5464,
+    "10": 0.3136,
+    "11": 0.7436,
+    "12": 0.9368
+  },
+  "interpretation": "P(detection) is the probability that a SAR descending pass acquired delta_T days after a RoS event will show wet_snow_pct > 5% across the Utqiagvik trail network. Lower T_snow (colder snowpack) and longer delta_T both reduce P(detection), systematically underrepresenting October events relative to February events."
+}
