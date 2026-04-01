@@ -233,38 +233,49 @@ def fig1_study_area():
                    framealpha=0.7, edgecolor='gray')
     panel_label(ax_main, 'a')
 
-    # Inset: Alaska location map (simple matplotlib, no cartopy)
-    ax_in = fig.add_subplot(gs[1])
-    ax_in.set_facecolor('#cce5f0')
+    # Inset: cartopy Alaska location map
+    import cartopy.crs as ccrs
+    import cartopy.feature as cfeature
+    proj = ccrs.LambertConformal(central_longitude=-154, central_latitude=64,
+                                  standard_parallels=(55, 70))
+    ax_in = fig.add_subplot(gs[1], projection=proj)
+    ax_in.set_extent([-172, -128, 54, 73], crs=ccrs.PlateCarree())
 
-    # Rough Alaska coastline polygon (simplified)
-    ak_lon = [-141, -141, -163, -167, -166, -160, -152, -148, -138, -133, -130,
-               -132, -137, -141]
-    ak_lat = [60,   70,   70,   66,   63,   59,   58,   57,   56,   56,  60,
-               60,   60,   60]
-    ax_in.fill(ak_lon, ak_lat, color='#e8e0d5', edgecolor='#888', lw=0.5, zorder=2)
+    ax_in.add_feature(cfeature.OCEAN.with_scale('50m'),
+                      facecolor='#cce5f0', zorder=0)
+    ax_in.add_feature(cfeature.LAND.with_scale('50m'),
+                      facecolor='#e8e0d5', edgecolor='#888', lw=0.4, zorder=1)
+    ax_in.add_feature(cfeature.COASTLINE.with_scale('50m'),
+                      lw=0.4, edgecolor='#555', zorder=2)
+    ax_in.add_feature(cfeature.BORDERS.with_scale('50m'),
+                      lw=0.3, edgecolor='#aaa', zorder=2)
 
     # Study bbox
     bbox_lon = [-158.6, -155.4, -155.4, -158.6, -158.6]
     bbox_lat = [70.4,   70.4,   71.5,   71.5,   70.4]
-    ax_in.fill(bbox_lon, bbox_lat, color=RED, alpha=0.6, zorder=4)
-    ax_in.plot(bbox_lon, bbox_lat, color=RED, lw=0.8, zorder=5)
+    ax_in.fill(bbox_lon, bbox_lat, color=RED, alpha=0.55,
+               transform=ccrs.PlateCarree(), zorder=4)
+    ax_in.plot(bbox_lon, bbox_lat, color=RED, lw=0.9,
+               transform=ccrs.PlateCarree(), zorder=5)
 
-    # Utqiagvik dot
+    # Utqiagvik star
     ax_in.plot(-156.77, 71.29, '*', color=ORANGE, ms=6,
-               markeredgecolor='k', markeredgewidth=0.3, zorder=6)
+               markeredgecolor='k', markeredgewidth=0.3,
+               transform=ccrs.PlateCarree(), zorder=6)
 
     # Arctic circle
-    ax_in.axhline(66.56, color='navy', ls='--', lw=0.5, alpha=0.5)
-    ax_in.text(-167, 67.0, 'Arctic Circle', fontsize=4, color='navy', alpha=0.7)
+    ac_lons = np.linspace(-172, -128, 200)
+    ax_in.plot(ac_lons, np.full(200, 66.56), 'navy', lw=0.5,
+               ls='--', alpha=0.6, transform=ccrs.PlateCarree())
+    ax_in.text(-170, 67.2, 'Arctic Circle', fontsize=4, color='navy',
+               transform=ccrs.PlateCarree(), alpha=0.8)
 
-    ax_in.set_xlim(-172, -128)
-    ax_in.set_ylim(54, 73)
-    ax_in.set_xlabel('Longitude (°)', fontsize=6)
-    ax_in.set_ylabel('Latitude (°N)', fontsize=6)
+    gl = ax_in.gridlines(crs=ccrs.PlateCarree(), draw_labels=False,
+                          lw=0.3, color='gray', alpha=0.4, linestyle=':')
     ax_in.set_title('Alaska\nlocation', fontsize=6)
-    ax_in.text(-157.5, 71.7, 'Study\narea', fontsize=5, color=RED,
-               ha='center', fontweight='bold')
+    ax_in.text(-157.0, 72.0, 'Study\narea', fontsize=5, color=RED,
+               ha='center', fontweight='bold',
+               transform=ccrs.PlateCarree())
     panel_label(ax_in, 'b')
 
     save(fig, 'FIG1_Study_Area')
