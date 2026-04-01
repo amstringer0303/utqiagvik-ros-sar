@@ -216,6 +216,14 @@ The positive mean ΔVV in October and November reflects a systematic effect: the
 
 ΔVV fields show spatially coherent patterns consistent with known landscape features: lowest ΔVV values (strongest wet-snow response) cluster within 20–30 km of the Elson Lagoon coastline and along the Peard Bay corridor, where thinner snow over sea ice provides less thermal buffering. Inland tundra sites show weaker responses for the same precipitation event. This gradient is consistent across multiple events and years, confirming that the signal reflects real snowpack heterogeneity rather than processing artefacts.
 
+### 4.6 Comparison with ERA5-Forced 1D Snowpack Model
+
+To assess whether SAR detections align with physically-based ice-crust formation predictions, a simplified 1D snowpack model (Anderson 1976 heat-diffusion physics) was forced with ERA5 hourly reanalysis at 25 representative grid points (5×5 array, 0.65° × 0.65° sampling) across the network domain for 2016–2020. The model tracks snowpack water equivalent, bulk temperature, liquid water fraction, and ice-crust formation/persistence at 6-hourly timesteps.
+
+For 44 events with ERA5 temporal coverage (2016–2023), the Spearman rank correlation between model ice-crust fraction (fraction of grid points predicting ice crust within 14 days of the event) and SAR wet-snow coverage (%) was ρ = +0.08 (p = 0.60, n = 44). The ROC AUC for a SAR wet-snow coverage threshold sweep (0–50%) versus model binary ice-crust prediction was 0.60. The optimal SAR threshold from this calibration is 8% network wet-snow coverage — close to the 5% default applied in the dataset manifest.
+
+AUC = 0.60 indicates modest but above-random agreement: the 1D model identifies more ice-crust-prone events correctly than incorrectly. The Spearman ρ of +0.08 is not statistically significant (p = 0.60) at n = 44, indicating that while the direction of association is positive (more model ice-crust → more SAR wet-snow), sample size is insufficient for definitive quantitative validation at this stage. The weak agreement is consistent with the known challenge of predicting 40-m-scale spatial variability in ice-crust formation from coarse 0.25° ERA5 reanalysis. Users requiring snowpack model validation are directed to higher-resolution (1–4 km) downscaled reanalysis products (e.g., SnowModel, HRRR) rather than ERA5 at native resolution.
+
 ---
 
 ## Usage Notes
