@@ -27,35 +27,36 @@ os.makedirs(OUT_DIR, exist_ok=True)
 
 AREA   = [72.0, -159.0, 70.0, -155.0]   # N W S E
 YEARS  = list(range(2016, 2025))
-MONTHS = [f'{m:02d}' for m in range(1, 13)]
+# Snow season only: Oct-May (months 10,11,12,1,2,3,4,5)
+SNOW_MONTHS = [10, 11, 12, 1, 2, 3, 4, 5]
 DAYS   = [f'{d:02d}' for d in range(1, 32)]
-TIMES  = [f'{h:02d}:00' for h in range(0, 24)]
+# 6-hourly to stay within CDS cost limits (4x smaller than hourly)
+TIMES  = ['00:00', '06:00', '12:00', '18:00']
 
+# Minimal set for SnowModel forcing
 VARIABLES = [
     '2m_temperature',
     'total_precipitation',
-    '10m_u_component_of_wind',
-    '10m_v_component_of_wind',
-    'surface_pressure',
     'snowfall',
     'snow_depth',
+    'surface_pressure',
 ]
 
-def download_year(c, year):
-    out_path = os.path.join(OUT_DIR, f'era5_{year}.nc')
+def download_year_month(c, year, month):
+    out_path = os.path.join(OUT_DIR, f'era5_{year}_{month:02d}.nc')
     if os.path.exists(out_path):
         size_mb = os.path.getsize(out_path) / 1e6
-        print(f'  {year}: already exists ({size_mb:.0f} MB), skipping.')
+        print(f'  {year}-{month:02d}: already exists ({size_mb:.1f} MB), skipping.')
         return
 
-    print(f'  {year}: requesting ...', flush=True)
+    print(f'  {year}-{month:02d}: requesting ...', flush=True)
     c.retrieve(
         'reanalysis-era5-single-levels',
         {
             'product_type': 'reanalysis',
             'variable':     VARIABLES,
             'year':         str(year),
-            'month':        MONTHS,
+            'month':        f'{month:02d}',
             'day':          DAYS,
             'time':         TIMES,
             'area':         AREA,
@@ -64,7 +65,7 @@ def download_year(c, year):
         out_path
     )
     size_mb = os.path.getsize(out_path) / 1e6
-    print(f'  {year}: done ({size_mb:.0f} MB)')
+    print(f'  {year}-{month:02d}: done ({size_mb:.1f} MB)')
 
 def main():
     print('=' * 55)
@@ -77,7 +78,8 @@ def main():
 
     c = cdsapi.Client()
     for year in YEARS:
-        download_year(c, year)
+        for month in SNOW_MONTHS:
+            download_year_month(c, year, month)
 
     print()
     total = sum(
