@@ -123,7 +123,8 @@ def make_thumb(date_str, base, post, delta, wetsnow, wet_pct, dvv, out_path):
                   aspect='equal', interpolation='nearest', alpha=0.45)
 
     date_fmt = f'{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}'
-    fig.suptitle(f'{COMMUNITY}  |  {date_fmt}  |  mean dVV = {dvv:+.2f} dB',
+    dvv_str = f'{dvv:+.2f}' if np.isfinite(dvv) else 'N/A'
+    fig.suptitle(f'{COMMUNITY}  |  {date_fmt}  |  mean dVV = {dvv_str} dB',
                  fontsize=7.5, y=1.01)
     fig.savefig(out_path, dpi=120, bbox_inches='tight', pad_inches=0.05)
     plt.close(fig)
@@ -215,16 +216,24 @@ def main():
         print('No data found. Run download_arviat_sar.py first.')
         return
 
-    # Build baselines dict
+    # Check free disk space — skip heavy GeoTIFFs if < 3 GB available
+    import shutil as _shutil
+    _, _, _free = _shutil.disk_usage(SCRIPT_DIR)
+    THUMBS_ONLY = _free < 3 * 1024**3
+    if THUMBS_ONLY:
+        print(f'  NOTE: <3 GB free ({_free/1e9:.1f} GB) — writing thumbnails + HTML only')
+
+    # Build baselines dict (keep in memory; write GeoTIFF only when space allows)
     baselines = {}
     for bf in base_files:
         year = int(os.path.basename(bf).split('_')[1])
         arr, transform = load_npz(bf)
         baselines[year] = (arr, transform)
-        out = os.path.join(DATASET_DIR, 'baselines', f'baseline_{year}_descending.tif')
-        if not os.path.exists(out):
-            write_cog(arr, transform, out, nodata=np.nan)
-            print(f'  baseline_{year}.tif')
+        if not THUMBS_ONLY:
+            out = os.path.join(DATASET_DIR, 'baselines', f'baseline_{year}_ascending.tif')
+            if not os.path.exists(out):
+                write_cog(arr, transform, out, nodata=np.nan)
+                print(f'  baseline_{year}.tif')
 
     # Process post-event scenes
     ros_events = detect_ros_events()
@@ -236,7 +245,7 @@ def main():
     write_qml = True
 
     for pf in post_files:
-        bn       = os.path.basename(pf)       # post_20191015_descending.npz
+        bn       = os.path.basename(pf)       # post_20191015_ascending.npz
         parts    = bn.replace('.npz','').split('_')
         date_str = parts[1]
         year     = int(date_str[:4])
@@ -245,7 +254,11 @@ def main():
             continue
 
         base_arr, transform = baselines[year]
-        post_arr, _         = load_npz(pf)
+        try:
+            post_arr, _ = load_npz(pf)
+        except (EOFError, ValueError, Exception) as _e:
+            print(f'    SKIP {date_str}: corrupt NPZ ({_e})')
+            continue
 
         # ΔVV
         delta = post_arr - base_arr
@@ -258,59 +271,66 @@ def main():
         wet_pct  = float(np.nanmean(delta < WET_DB) * 100)
         mean_dvv = float(np.nanmean(delta))
 
-        # Write GeoTIFFs
-        scene_path = os.path.join(DATASET_DIR, 'scenes',
-                                   f'post_{date_str}_descending.tif')
-        delta_path = os.path.join(DATASET_DIR, 'delta_vv',
-                                   f'delta_{date_str}_descending.tif')
-        ws_path    = os.path.join(DATASET_DIR, 'wetsnow',
-                                   f'wetsnow_{date_str}_descending.tif')
+        if not THUMBS_ONLY:
+            # Write full GeoTIFFs
+            scene_path = os.path.join(DATASET_DIR, 'scenes',
+                                       f'post_{date_str}_ascending.tif')
+            delta_path = os.path.join(DATASET_DIR, 'delta_vv',
+                                       f'delta_{date_str}_ascending.tif')
+            ws_path    = os.path.join(DATASET_DIR, 'wetsnow',
+                                       f'wetsnow_{date_str}_ascending.tif')
 
-        for path, arr, nd, dtype in [
-            (scene_path, post_arr, np.nan, 'float32'),
-            (delta_path, delta,    np.nan, 'float32'),
-            (ws_path,    ws,       255,    'uint8'),
-        ]:
-            if not os.path.exists(path):
-                write_cog(arr, transform, path, nodata=nd, dtype=dtype)
+            for path, arr, nd, dtype in [
+                (scene_path, post_arr, np.nan, 'float32'),
+                (delta_path, delta,    np.nan, 'float32'),
+                (ws_path,    ws,       255,    'uint8'),
+            ]:
+                if not os.path.exists(path):
+                    write_cog(arr, transform, path, nodata=nd, dtype=dtype)
 
-        # Visual outputs
-        rgb_path   = os.path.join(VIS_DIR, 'rgb', f'rgb_{date_str}.tif')
-        dv_path    = os.path.join(VIS_DIR, 'delta_vis', f'delta_vis_{date_str}.tif')
+            # COG visual outputs
+            rgb_path = os.path.join(VIS_DIR, 'rgb', f'rgb_{date_str}.tif')
+            dv_path  = os.path.join(VIS_DIR, 'delta_vis', f'delta_vis_{date_str}.tif')
+
+            if not os.path.exists(rgb_path):
+                rgb = np.stack([db_to_display(post_arr),
+                                db_to_display(base_arr),
+                                db_to_display(base_arr)], axis=0)
+                write_cog(rgb, transform, rgb_path, count=3, dtype='uint8',
+                          colorinterp=[ColorInterp.red, ColorInterp.green,
+                                        ColorInterp.blue])
+
+            if not os.path.exists(dv_path):
+                write_cog(db_to_uint8(delta), transform, dv_path,
+                          nodata=255, dtype='uint8')
+
+        # Thumbnail (always written)
         thumb_path = os.path.join(VIS_DIR, 'thumbs', f'thumb_{date_str}.png')
-
-        if not os.path.exists(rgb_path):
-            rgb = np.stack([db_to_display(post_arr),
-                            db_to_display(base_arr),
-                            db_to_display(base_arr)], axis=0)
-            write_cog(rgb, transform, rgb_path, count=3, dtype='uint8',
-                      colorinterp=[ColorInterp.red, ColorInterp.green,
-                                    ColorInterp.blue])
-
-        if not os.path.exists(dv_path):
-            write_cog(db_to_uint8(delta), transform, dv_path,
-                      nodata=255, dtype='uint8')
-
         if not os.path.exists(thumb_path):
             ws_disp = ws.astype(np.float32)
             ws_disp[ws_disp == 255] = np.nan
-            make_thumb(date_str, base_arr, post_arr, delta, ws_disp,
-                       wet_pct, mean_dvv, thumb_path)
+            dvv_disp = mean_dvv if np.isfinite(mean_dvv) else 0.0
+            try:
+                make_thumb(date_str, base_arr, post_arr, delta, ws_disp,
+                           wet_pct, dvv_disp, thumb_path)
+            except Exception as _e:
+                print(f'    WARNING: thumb failed for {date_str}: {_e}')
+                plt.close('all')
 
-        if write_qml:
+        if write_qml and not THUMBS_ONLY:
             build_qml(os.path.join(VIS_DIR, 'styles', 'delta_vis_style.qml'))
             write_qml = False
 
         date_pd = pd.to_datetime(date_str, format='%Y%m%d')
         manifest_rows.append({
             'date':            date_pd.strftime('%Y-%m-%d'),
-            'orbit':           'descending',
+            'orbit':           'ascending',
             'baseline_year':   year,
             'mean_delta_vv_db': round(mean_dvv, 3),
             'wet_snow_pct':    round(wet_pct, 2),
-            'scene_tif':       f'scenes/post_{date_str}_descending.tif',
-            'delta_tif':       f'delta_vv/delta_{date_str}_descending.tif',
-            'wetsnow_tif':     f'wetsnow/wetsnow_{date_str}_descending.tif',
+            'scene_tif':       f'scenes/post_{date_str}_ascending.tif',
+            'delta_tif':       f'delta_vv/delta_{date_str}_ascending.tif',
+            'wetsnow_tif':     f'wetsnow/wetsnow_{date_str}_ascending.tif',
         })
         events.append({
             'date':      date_pd.strftime('%Y-%m-%d'),
