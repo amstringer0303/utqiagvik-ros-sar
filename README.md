@@ -1,6 +1,6 @@
 # Utqiagvik Rain-on-Snow SAR Analysis
 
-PhD-level remote sensing and climate analysis pipeline for detecting and characterizing Rain-on-Snow (RoS) events and their impact on the Utqiagvik (Barrow), Alaska trail network. Combines GHCN-Daily station records (1980–2024) with systematic Sentinel-1 SAR change detection using same-orbit baseline subtraction across the **full 130×124 km trail network**.
+remote sensing and climate analysis pipeline for detecting and characterizing Rain-on-Snow (RoS) events and their impact on the Utqiagvik (Barrow), Alaska trail network. Combines GHCN-Daily station records (1980–2024) with systematic Sentinel-1 SAR change detection using same-orbit baseline subtraction across the **full 130×124 km trail network**.
 
 **Dataset DOI:** [10.5281/zenodo.19324872](https://doi.org/10.5281/zenodo.19324872) (156 GeoTIFFs, 3.3 GB, CC-BY-4.0)
 **Station:** GHCN USW00027502 (Utqiagvik Airport, 71.28°N, 156.78°W)
