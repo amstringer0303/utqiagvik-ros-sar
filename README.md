@@ -74,14 +74,19 @@ Baselines are October median composites (4–5 scenes per year, 2016–2024) to 
 
 ## Event Detection
 
-Two detection criteria are applied to GHCN-Daily records (1980–2024, 16,437 observations):
+Detection is applied to GHCN-Daily records (1980–2024, 16,437 observations) using two complementary criteria following Rennert et al. (2009, *J. Climate* 22:5905) and Peeters et al. (2019, *Hydrol. Process.* 33:2781):
 
-| Criterion | Rule |
-|-----------|------|
+| Criterion | Rules |
+|-----------|-------|
 | **Loose** | PRCP > 0 mm AND TMAX > 0°C AND month ∈ Oct–May |
-| **Refined** | Loose + SNWD > 0 mm (snowpack confirmed present) when data available (86% of days) |
+| **Refined** | PRCP ≥ 1 mm AND TMAX > 0°C AND month ∈ Oct–May AND SNWD > 0 mm (snowpack confirmed, available 86% of days) |
 
-The refined criterion removes events where rain fell on bare ground. Other extreme events detected from the same record:
+**Refined criterion rationale:**
+- **PRCP ≥ 1 mm** (not merely > 0): trace precipitation amounts (< 1 mm) are unlikely to generate meaningful liquid infiltration into the snowpack and are excluded following Rennert et al. (2009).
+- **SNWD > 0 mm**: removes events where rain fell on bare ground — without a snowpack there is no ice crust to form and no forage lockout.
+- **TMAX > 0°C as phase proxy**: GHCN-Daily records total precipitation only, not rain and snow separately. TMAX > 0°C is used as the precipitation phase indicator — the standard approach for station-based ROS detection when sub-daily phase data are unavailable. This is a known limitation (see [Limitations](#limitations)). Reanalysis-based detection (ERA5-Land `rain` variable) enables a stricter rain-fraction criterion (≥ 50% of precip must be liquid; Peeters et al. 2019) and is applied in the Arviat demo pipeline.
+
+The refined criterion removes events where rain fell on bare ground or as trace amounts unlikely to form an ice crust. Other extreme events detected from the same record:
 
 | Event | Threshold |
 |-------|-----------|
@@ -456,6 +461,7 @@ Wet-snow threshold: **ΔVV < −3.0 dB**. Trail ΔVV = mean within 200 m buffer 
 
 - **Single station:** USW00027502 is at the airport. Routes 50–100 km inland (e.g., toward Peard Bay) may experience meaningfully different RoS conditions — the new network-scale SAR data now allows spatial verification of this assumption.
 - **SNWD availability:** Snow depth data covers 86% of days; the loose criterion is used as fallback.
+- **Phase proxy:** GHCN-Daily records total precipitation only. TMAX > 0°C is used as the precipitation phase indicator — standard practice for station-based ROS detection (Rennert et al. 2009). This cannot distinguish mixed-phase events or cold rain from warm snow. ERA5-Land separates rain and snowfall explicitly, enabling the stricter rain-fraction criterion (≥ 50% liquid) applied in the Arviat demo; reanalysis-based detection should be preferred where station data are the only option.
 - **S1 repeat cycle:** ~12-day revisit. Post-event scenes can be up to 14 days after the event; liquid-water signal may have partially refrozen.
 - **40 m/px resolution limit:** Trail widths of 2–5 m are below the network-cache pixel size. The 10 m/px town cache resolves trail-scale features; the 40 m/px network cache measures the corridor-scale snowpack response.
 - **2015 excluded:** Early S1 acquisitions over Alaska used HH/HV polarization — incompatible with this VV/VH pipeline.
@@ -500,7 +506,7 @@ python run_arviat_demo.py
 
 **What it does:**
 - Downloads ERA5-Land daily weather for Arviat via the free Open-Meteo API
-- Detects Rain-on-Snow events using a simple 4-rule filter
+- Detects Rain-on-Snow events using a 5-rule literature-standard filter (rain ≥ 1 mm, rain fraction ≥ 50%, snow depth ≥ 1 cm, TMAX > 0°C, month ∈ Oct–May; Rennert et al. 2009, Peeters et al. 2019)
 - Downloads Sentinel-1 RTC scenes from Microsoft Planetary Computer (free)
 - Computes same-orbit ΔVV change detection (wet-snow signal)
 - Outputs GeoTIFFs (baseline, post-event, delta), `events.csv`, and 3-panel figures
@@ -518,7 +524,9 @@ demo_arviat/
 
 The location, spatial extent, date range, and number of events are all configurable
 via `ARVIAT_CONFIG` at the top of `run_arviat_demo.py`. The same-orbit constraint
-and −3 dB wet-snow threshold from the Utqiagvik pipeline are preserved.
+is preserved. The SAR threshold is sub-season aware: −3 dB for Oct–Feb (early winter /
+deep winter) and −5 dB for Mar–May (spring), where ambient snowmelt independently
+lowers VV backscatter and a stricter threshold is required to avoid false positives.
 
 See [DEMO_ARVIAT.md](DEMO_ARVIAT.md) for full step-by-step instructions, output
 descriptions, QGIS visualization guidance, and troubleshooting.
