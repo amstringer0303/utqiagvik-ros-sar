@@ -47,9 +47,22 @@ ARVIAT_CONFIG = {
     "max_events": 3,                    # how many ROS events to process
 }
 
-# Physical thresholds (C-band Sentinel-1 VV, dB)
-WET_SNOW_THRESHOLD_DB = -3.0    # delta_VV below this value = probable wet snow / ROS signal
+# Sub-season SAR thresholds (C-band Sentinel-1 VV, dB)
+# Spring threshold is stricter because ambient melt already lowers VV,
+# so a looser threshold would produce false positives (Nagler & Rott 2000;
+# Bartsch et al. 2010, Remote Sens. Environ. 114:2007-2016).
+WET_SNOW_THRESHOLD = {
+    "early_winter": -3.0,   # Oct–Nov: freeze-up, clean dry-snow baseline
+    "deep_winter":  -3.0,   # Dec–Feb: most stable, best SAR conditions
+    "spring":       -5.0,   # Mar–May: stricter — ambient melt mimics ROS signal
+}
 WINTER_MONTHS = [10, 11, 12, 1, 2, 3, 4, 5]   # Oct–May (snow-season months)
+
+def sub_season(month):
+    """Classify a winter month into its sub-season."""
+    if month in [10, 11]: return "early_winter"
+    if month in [12, 1, 2]: return "deep_winter"
+    return "spring"  # Mar–May
 
 # ── Derived bounding box ──────────────────────────────────────────────────────
 # At 61°N: 1° latitude ≈ 111 km; 1° longitude ≈ 54 km
@@ -193,13 +206,16 @@ def detect_ros_events(df, max_events=3):
         return events
 
     events = events.head(max_events).sort_values("date")
+
+    # Add sub-season label — drives the SAR threshold in process_ros_event
+    events["sub_season"] = events["month"].apply(sub_season)
+
     print(f"  [ROS] Top {len(events)} events selected (highest liquid precip):")
     for _, row in events.iterrows():
-        print(f"        {row['date'].date()}  "
-              f"rain={row['rain_mm']:.1f} mm  "
-              f"prcp={row['prcp_mm']:.1f} mm  "
-              f"tmax={row['tmax_c']:.1f}°C  "
-              f"snow_depth={row['snow_depth_m']:.2f} m")
+        thresh = WET_SNOW_THRESHOLD[row["sub_season"]]
+        print(f"        {row['date'].date()}  [{row['sub_season']}]  "
+              f"rain={row['rain_mm']:.1f} mm  tmax={row['tmax_c']:.1f}°C  "
+              f"snow_depth={row['snow_depth_m']:.2f} m  SAR threshold={thresh} dB")
     return events
 
 
@@ -364,9 +380,11 @@ def process_ros_event(event_row, bbox, out_dir, fig_dir):
 
     Returns a dict of event metadata, or None if SAR data is unavailable.
     """
-    event_date = event_row["date"].strftime("%Y-%m-%d")
-    tag        = event_date.replace("-", "")
-    print(f"\n  Processing SAR for event: {event_date}")
+    event_date  = event_row["date"].strftime("%Y-%m-%d")
+    tag         = event_date.replace("-", "")
+    season      = event_row.get("sub_season", "deep_winter")
+    threshold   = WET_SNOW_THRESHOLD[season]
+    print(f"\n  Processing SAR for event: {event_date}  [{season}]  threshold={threshold} dB")
 
     # ── 1. Post-event scene ──────────────────────────────────────────────────
     post_items = s1_search(bbox, event_date, orbit=None,
@@ -416,10 +434,10 @@ def process_ros_event(event_row, bbox, out_dir, fig_dir):
     # ── 4. Delta VV ──────────────────────────────────────────────────────────
     delta_vv = post_vv - baseline_vv
 
-    wet_pct    = float(np.nanmean(delta_vv < WET_SNOW_THRESHOLD_DB) * 100)
+    wet_pct    = float(np.nanmean(delta_vv < threshold) * 100)
     mean_delta = float(np.nanmean(delta_vv))
     print(f"  [SAR]   Mean ΔVV = {mean_delta:+.2f} dB  |  "
-          f"Pixels below {WET_SNOW_THRESHOLD_DB} dB threshold: {wet_pct:.1f}%")
+          f"Pixels below {threshold} dB ({season}): {wet_pct:.1f}%")
 
     # ── 5. Save GeoTIFFs ─────────────────────────────────────────────────────
     baseline_tif = out_dir / f"baseline_{baseline_date.replace('-','')}.tif"
@@ -455,15 +473,16 @@ def process_ros_event(event_row, bbox, out_dir, fig_dir):
     # Panel 3 — delta VV
     im2 = axes[2].imshow(delta_vv, cmap="RdBu", vmin=-8, vmax=8, origin="upper")
     axes[2].set_title(
-        f"ΔVV = Post − Baseline (dB)\nWet-snow area: {wet_pct:.1f}%",
+        f"ΔVV = Post − Baseline (dB)\n"
+        f"[{season}]  threshold={threshold} dB  "
+        f"wet-snow area={wet_pct:.1f}%",
         fontsize=9
     )
     axes[2].axis("off")
     plt.colorbar(im2, ax=axes[2], shrink=0.75, label="ΔdB")
-    # Overlay wet-snow contour
     try:
         axes[2].contour(
-            delta_vv < WET_SNOW_THRESHOLD_DB,
+            delta_vv < threshold,
             levels=[0.5], colors="red", linewidths=0.8
         )
     except Exception:
@@ -483,10 +502,12 @@ def process_ros_event(event_row, bbox, out_dir, fig_dir):
         "era5_prcp_mm":         round(event_row["prcp_mm"], 2),
         "era5_rain_mm":         round(event_row.get("rain_mm", np.nan), 2),
         "era5_tmax_c":          round(event_row["tmax_c"], 2),
-        "era5_snow_roll14_mm":  round(event_row["snow_roll14"], 1),
+        "era5_snow_depth_m":    round(event_row.get("snow_depth_m", np.nan), 3),
+        "sub_season":           season,
+        "wet_snow_threshold_db": threshold,
         "mean_delta_vv_db":     round(mean_delta, 3),
         "wet_snow_pct":         round(wet_pct, 2),
-        "ros_signal_detected":  wet_pct > 20,        # >20% pixels below threshold
+        "ros_signal_detected":  wet_pct > 20,
         "baseline_tif":         baseline_tif.name,
         "post_event_tif":       post_tif.name,
         "delta_vv_tif":         delta_tif.name,
