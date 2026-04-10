@@ -488,6 +488,43 @@ All GeoTIFFs: **EPSG:32605** (UTM Zone 5N) · **40 m/px** · LZW-compressed · C
 
 ---
 
+## Arviat Demo (Beginner-Friendly)
+
+A minimal, reproducible version of this pipeline for **Arviat, Nunavut, Canada**
+that requires no prior remote sensing experience and runs from a single command.
+
+```bash
+pip install requests pandas numpy matplotlib rasterio pystac-client planetary-computer pyproj
+python run_arviat_demo.py
+```
+
+**What it does:**
+- Downloads ERA5-Land daily weather for Arviat via the free Open-Meteo API
+- Detects Rain-on-Snow events using a simple 4-rule filter
+- Downloads Sentinel-1 RTC scenes from Microsoft Planetary Computer (free)
+- Computes same-orbit ΔVV change detection (wet-snow signal)
+- Outputs GeoTIFFs (baseline, post-event, delta), `events.csv`, and 3-panel figures
+
+**Outputs written to `demo_arviat/`:**
+```
+demo_arviat/
+├── data/era5_arviat.csv          ERA5 daily weather time series
+├── outputs/baseline_*.tif        Dry-snow baseline VV (dB)
+├── outputs/post_event_*.tif      Post-ROS event VV (dB)
+├── outputs/delta_vv_*.tif        ΔVV change map (negative = wet snow)
+├── outputs/events.csv            ROS event summary table
+└── figures/ros_event_*.png       3-panel summary figures
+```
+
+The location, spatial extent, date range, and number of events are all configurable
+via `ARVIAT_CONFIG` at the top of `run_arviat_demo.py`. The same-orbit constraint
+and −3 dB wet-snow threshold from the Utqiagvik pipeline are preserved.
+
+See [DEMO_ARVIAT.md](DEMO_ARVIAT.md) for full step-by-step instructions, output
+descriptions, QGIS visualization guidance, and troubleshooting.
+
+---
+
 ## Scripts
 
 | Script | Description |
