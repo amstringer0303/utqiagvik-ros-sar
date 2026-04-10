@@ -106,6 +106,7 @@ def fetch_era5_weather(lat, lon, start_date, end_date, cache_path=None):
             "precipitation_sum",
             "rain_sum",
             "snowfall_sum",
+            "snow_depth",           # metres of snow on ground (actual snowpack presence)
         ]),
         "timezone": "UTC",
         "models":   "era5",
@@ -131,6 +132,7 @@ def fetch_era5_weather(lat, lon, start_date, end_date, cache_path=None):
         "precipitation_sum":  "prcp_mm",
         "rain_sum":           "rain_mm",
         "snowfall_sum":       "snow_mm",
+        "snow_depth":         "snow_depth_m",   # metres of snow on ground
     })
 
     if cache_path:
@@ -146,33 +148,42 @@ def fetch_era5_weather(lat, lon, start_date, end_date, cache_path=None):
 
 def detect_ros_events(df, max_events=3):
     """
-    Apply a simple 4-rule ROS filter to daily ERA5 weather:
+    Improved ROS detection based on Rennert et al. (2009, J. Climate) and
+    Peeters et al. (2019, Climatic Change).  Five rules must all be true:
 
-      Rule 1 — Winter month       : month ∈ [Oct, Nov, Dec, Jan, Feb, Mar, Apr, May]
-      Rule 2 — Precipitation      : prcp_mm > 0  (any rain or snow)
-      Rule 3 — Above-freezing air : tmax_c > 0°C (liquid water possible)
-      Rule 4 — Snow on ground     : 14-day rolling snowfall sum > 5 mm
-                                    (proxy for "there is existing snowpack")
+      Rule 1 — Snowpack present   : snow_depth_m ≥ 0.01 m
+                                    (ERA5 actual snow depth — not a rolling proxy)
+      Rule 2 — Liquid precip      : rain_mm ≥ 1.0 mm
+                                    (Rennert et al. minimum threshold; eliminates
+                                     trace amounts that freeze before reaching snowpack)
+      Rule 3 — Dominant rain      : rain_mm / prcp_mm ≥ 0.5
+                                    (majority of precip is liquid, not mixed snow)
+      Rule 4 — Above-freezing air : tmax_c > 0°C
+      Rule 5 — Winter-adjacent month: month ∈ Oct–May
+                                    (belt-and-suspenders guard against summer events)
 
-    Events are sorted by precipitation (strongest first), then the top
-    `max_events` are returned.
-
-    Returns a DataFrame of selected events.
+    Events are sorted by rain_mm (strongest liquid input first).
     """
+    # Thresholds (change here if you want to experiment)
+    SNOW_DEPTH_MIN_M  = 0.01   # metres — snowpack must be present
+    RAIN_MIN_MM       = 1.0    # mm     — minimum liquid precipitation
+    RAIN_FRAC_MIN     = 0.5    # 0–1    — fraction of precip that is rain
+
     df = df.copy()
     df["month"] = df["date"].dt.month
 
-    # Rolling 14-day snowfall — simple proxy for "snow on the ground"
-    df["snow_roll14"] = df["snow_mm"].rolling(14, min_periods=1).sum()
+    # Rain fraction (guard against division by zero)
+    rain_frac = df["rain_mm"] / df["prcp_mm"].clip(lower=0.001)
 
     mask = (
-        df["month"].isin(WINTER_MONTHS) &
-        (df["prcp_mm"] > 0)            &
-        (df["tmax_c"]  > 0)            &
-        (df["snow_roll14"] > 5.0)
+        df["month"].isin(WINTER_MONTHS)            &   # Rule 5
+        (df["snow_depth_m"] >= SNOW_DEPTH_MIN_M)   &   # Rule 1
+        (df["rain_mm"]  >= RAIN_MIN_MM)             &   # Rule 2
+        (rain_frac      >= RAIN_FRAC_MIN)           &   # Rule 3
+        (df["tmax_c"]   > 0)                            # Rule 4
     )
 
-    events = df[mask].copy().sort_values("prcp_mm", ascending=False)
+    events = df[mask].copy().sort_values("rain_mm", ascending=False)
 
     yr0 = df["date"].min().year
     yr1 = df["date"].max().year
@@ -182,12 +193,13 @@ def detect_ros_events(df, max_events=3):
         return events
 
     events = events.head(max_events).sort_values("date")
-    print(f"  [ROS] Top {len(events)} events selected (strongest precipitation):")
+    print(f"  [ROS] Top {len(events)} events selected (highest liquid precip):")
     for _, row in events.iterrows():
         print(f"        {row['date'].date()}  "
+              f"rain={row['rain_mm']:.1f} mm  "
               f"prcp={row['prcp_mm']:.1f} mm  "
               f"tmax={row['tmax_c']:.1f}°C  "
-              f"14-day snow={row['snow_roll14']:.0f} mm")
+              f"snow_depth={row['snow_depth_m']:.2f} m")
     return events
 
 
